@@ -35,10 +35,3 @@ alias vi=nvim
 export FZF_DEFAULT_COMMAND='rg --files --ignore-vcs --hidden'
 export FZF_DEFAULT_OPTS='--height 20% --layout=reverse --inline-info'
 
-
-
-
-
-
-
-

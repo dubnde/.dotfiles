@@ -45,6 +45,9 @@ local function plugins(use)
   -- Packer can manage itself
   use { "wbthomason/packer.nvim" }
 
+  -- Follow symlins
+  use { 'aymericbeaumet/vim-symlink' }
+
   -- Performance
   use { "lewis6991/impatient.nvim" }
   use { "dstein64/vim-startuptime", cmd = "StartupTime" }
