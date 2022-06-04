@@ -5,10 +5,11 @@ if not indent then
 end
 
 vim.opt.list = true
--- vim.opt.listchars:append("eol:↴")
--- vim.opt.listchars:append("space:⋅")
+vim.opt.listchars:append("eol:↴")
 
-vim.g.indent_blankline_char = "┊"
+-- vim.g.indent_blankline_char = "┊"
+vim.g.indent_blankline_char_list = { '|', '¦', '┆', '┊' }
+vim.g.indent_blankline_char_list_blankline = { '|', '¦', '┆', '┊' }
 vim.g.indent_blankline_filetype_exclude = { "help", "packer" }
 vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
 vim.g.indent_blankline_show_trailinvim.g_blankline_indent = false
@@ -19,4 +20,3 @@ indent.setup({
   show_current_context_start = true,
   space_char_blankline = " ",
 })
-

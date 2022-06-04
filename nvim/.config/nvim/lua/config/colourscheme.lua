@@ -1,7 +1,7 @@
 local nightfox = prequire("nightfox")
 
-if not nightfox then 
-  return 
+if not nightfox then
+  return
 end
 
 nightfox.setup({
@@ -33,4 +33,9 @@ nightfox.setup({
   },
 })
 
-vim.cmd("colorscheme duskfox") -- Put your favorite colorscheme here
+vim.cmd("colorscheme duskfox")
+-- vim.cmd("colorscheme nightfox")
+-- vim.cmd("colorscheme dayfox")
+-- vim.cmd("colorscheme dawnfox")
+-- vim.cmd("colorscheme nordfox")
+-- vim.cmd("colorscheme terafox")

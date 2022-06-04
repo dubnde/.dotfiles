@@ -45,7 +45,7 @@ local function plugins(use)
   -- Packer can manage itself
   use { "wbthomason/packer.nvim" }
 
-  -- Follow symlins
+  -- Follow symlinks
   use { 'aymericbeaumet/vim-symlink' }
 
   -- Performance
@@ -65,6 +65,7 @@ local function plugins(use)
   use { "nvim-lua/popup.nvim" }
   use { "nvim-lua/plenary.nvim" }
 
+  -- Indentation guides
   use {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPre",
@@ -72,11 +73,12 @@ local function plugins(use)
     disable = false,
   }
 
-  use {
-    "christoomey/vim-tmux-navigator",
-    config = get_config("tmux"),
-    disable = not USE_TMUX,
-  }
+  if vim.fn.executable('fzf') then
+    use {
+      "christoomey/vim-tmux-navigator",
+      config = get_config("tmux"),
+    }
+  end
 
   use {
     "ahmedkhalf/project.nvim",
@@ -92,19 +94,19 @@ local function plugins(use)
     disable = false,
   }
 
+  use {
+    event = "BufReadPre",
+    "rcarriga/nvim-notify",
+    config = get_config("nvim-notify"),
+    disable = false,
+  }
 
-  if USE_FZF then
+  if vim.fn.executable('fzf') then
     use {
       'junegunn/fzf.vim',
-      requires = {
-        'junegunn/fzf',
-        -- run = "./install --bin",
-      },
-      disable = false,
+      requires = { 'junegunn/fzf' },
     }
-  end
-
-  if USE_TELESCOPE then
+  else
     use {
       "nvim-telescope/telescope.nvim",
       cmd = "Telescope",
@@ -114,13 +116,14 @@ local function plugins(use)
         { 'nvim-telescope/telescope-file-browser.nvim' },
       },
       config = get_config("telescope"),
-      disable = false,
     }
   end
 
+
   use {
     "EdenEast/nightfox.nvim",
-    config = get_config("nightfox"),
+    "folke/tokyonight.nvim",
+    config = get_config("colourscheme"),
     disable = false,
   }
 
