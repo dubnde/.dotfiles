@@ -1,4 +1,5 @@
-local project = prequire("neogit")
+local project = prequire("project_nvim")
+
 if not project then
   return
 end
@@ -9,6 +10,10 @@ project.setup({
   -- order matters: if one is not detected, the other is used as fallback. You
   -- can also delete or rearangne the detection methods.
   detection_methods = { "lsp", "pattern" },
+
+  -- When set to false, you will get a message when project.nvim changes your
+  -- directory.
+  silent_chdir = false,
 
   -- All the patterns used to detect root dir, when **"pattern"** is in detection_methods
   patterns = {

@@ -89,23 +89,31 @@ local function plugins(use)
     disable = false,
   }
 
-  use {
-    'junegunn/fzf.vim',
-    requires = { 'junegunn/fzf', run = "./install --bin" },
-    disable = not USE_FZF,
-  }
 
-  use {
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    requires = {
-      { 'nvim-telescope/telescope-ui-select.nvim' },
-      { 'nvim-telescope/telescope-project.nvim' },
-      { 'nvim-telescope/telescope-file-browser.nvim' },
-    },
-    config = get_config("telescope"),
-    disable = USE_TELESCOPE,
-  }
+  if USE_FZF then
+    use {
+      'junegunn/fzf.vim',
+      requires = {
+        'junegunn/fzf',
+        -- run = "./install --bin",
+      },
+      disable = false,
+    }
+  end
+
+  if USE_TELESCOPE then
+    use {
+      "nvim-telescope/telescope.nvim",
+      cmd = "Telescope",
+      requires = {
+        { 'nvim-telescope/telescope-ui-select.nvim' },
+        { 'nvim-telescope/telescope-project.nvim' },
+        { 'nvim-telescope/telescope-file-browser.nvim' },
+      },
+      config = get_config("telescope"),
+      disable = false,
+    }
+  end
 
   use {
     "EdenEast/nightfox.nvim",

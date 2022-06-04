@@ -180,9 +180,8 @@ local mappings = {
 
   ["t"] = {
     name = "toggle",
-    ["'"] = { "<cmd>ToggleTerm direction=float<cr>", "Terminal Horizontal" },
+    ["'"] = { "<cmd>ToggleTerm direction=horizontal<cr>", "Terminal Horizontal" },
     ["e"] = { "<cmd>NvimTreeToggle<cr><cr>", "Explorer" },
-    ["h"] = { "<cmd>ToggleTerm direction=horizontal<cr>", "Terminal Horizontal" },
     ["t"] = { "<cmd>ToggleTerm direction=horizontal<cr>", "Terminal Horizontal" },
     ["v"] = { "<cmd>ToggleTerm direction=vertical<cr>", "Terminal Vertical" },
   },
