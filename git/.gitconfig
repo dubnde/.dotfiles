@@ -1,18 +1,19 @@
+[user]
+	name = dubnde
+	email = dubnde@gmail.com
 [alias]
 	amend = commit --amend -a
-	co = checkout
-	cob = checkout -b
-  br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+  	br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
 	ci = commit
-	ci = commit -m
-  lg = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
+	co = checkout
+	dt = difftool --dir-diff --no-prompt --no-symlinks
+	edit = config --global --edit
+	lg = log --oneline --decorate --color
+	log = log --oneline --abbrev-commit --all --graph --decorate --color
 	st = status
-  up = pull --rebase
+  	up = pull --rebase
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore
 [init]
 	defaultBranch = main
-[user]
-	email = dubnde@gmail.com
-	name = dubnde

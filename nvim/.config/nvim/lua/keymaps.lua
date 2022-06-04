@@ -1,58 +1,64 @@
-local keymap = vim.api.nvim_set_keymap
-local default_opts = { noremap = true, silent = true }
-local expr_opts = { noremap = true, expr = true, silent = true }
+local expr_opts = { expr = true }
+
+-- Cancel search highlighting with ESC
+keymap("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>")
+
+-- Better window navigation
+keymap("n", "<C-h>", "<C-w>h")
+keymap("n", "<C-j>", "<C-w>j")
+keymap("n", "<C-k>", "<C-w>k")
+keymap("n", "<C-l>", "<C-w>l")
+keymap("t", "<C-h>", "<C-\\><C-n><C-w>h")
+keymap("t", "<C-j>", "<C-\\><C-n><C-w>j")
+keymap("t", "<C-k>", "<C-\\><C-n><C-w>k")
+keymap("t", "<C-l>", "<C-\\><C-n><C-w>l")
 
 -- Better escape using jk in insert and terminal mode
-keymap("i", "jk", "<ESC>", default_opts)
-keymap("t", "jk", "<C-\\><C-n>", default_opts)
-keymap("i", "JK", "<ESC>", default_opts)
-keymap("t", "JK", "<C-\\><C-n>", default_opts)
-keymap("t", "<C-h>", "<C-\\><C-n><C-w>h", default_opts)
-keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", default_opts)
-keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", default_opts)
-keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", default_opts)
+keymap("i", "jk", "<ESC>")
+keymap("t", "jk", "<C-\\><C-n>")
+keymap("i", "JK", "<ESC>")
+keymap("t", "JK", "<C-\\><C-n>")
+keymap("t", "<C-h>", "<C-\\><C-n><C-w>h")
+keymap("t", "<C-j>", "<C-\\><C-n><C-w>j")
+keymap("t", "<C-k>", "<C-\\><C-n><C-w>k")
+keymap("t", "<C-l>", "<C-\\><C-n><C-w>l")
 
 -- Center search results
-keymap("n", "n", "nzz", default_opts)
-keymap("n", "N", "Nzz", default_opts)
+keymap("n", "n", "nzz")
+keymap("n", "N", "Nzz")
 
 -- Visual line wraps
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", expr_opts)
 keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", expr_opts)
 
 -- -- Always center
--- keymap("n", "k", "kzz", default_opts)
--- keymap("n", "j", "jzz", default_opts)
--- keymap("n", "G", "Gzz", default_opts)
+-- keymap("n", "k", "kzz")
+-- keymap("n", "j", "jzz")
+-- keymap("n", "G", "Gzz")
 
 -- Better indent
-keymap("v", "<", "<gv", default_opts)
-keymap("v", ">", ">gv", default_opts)
+keymap("v", "<", "<gv")
+keymap("v", ">", ">gv")
 
 -- Paste over currently selected text without yanking it
-keymap("v", "p", '"_dP', default_opts)
+keymap("v", "p", '"_dP')
 
 -- Switch buffer
-keymap("n", "<S-h>", ":bnext<CR>", default_opts)
-keymap("n", "<S-l>", ":bprevious<CR>", default_opts)
+keymap("n", "<S-h>", ":bnext<CR>")
+keymap("n", "<S-l>", ":bprevious<CR>")
+keymap("n", "<Tab>", ":bnext<CR>")
+keymap("n", "<S-Tab>", ":bprevious<CR>")
 
 -- Cancel search highlighting with ESC
-keymap("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>", default_opts)
+keymap("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>")
 
 -- Move selected line / block of text in visual mode
-keymap("x", "K", ":move '<-2<CR>gv-gv", default_opts)
-keymap("x", "J", ":move '>+1<CR>gv-gv", default_opts)
+keymap("x", "K", ":move '<-2<CR>gv-gv")
+keymap("x", "J", ":move '>+1<CR>gv-gv")
 
 -- Resizing panes
-keymap("n", "<Left>", ":vertical resize +1<CR>", default_opts)
-keymap("n", "<Right>", ":vertical resize -1<CR>", default_opts)
-keymap("n", "<Up>", ":resize -1<CR>", default_opts)
-keymap("n", "<Down>", ":resize +1<CR>", default_opts)
+keymap("n", "<Left>", ":vertical resize -2<CR>")
+keymap("n", "<Right>", ":vertical resize +2<CR>")
+keymap("n", "<Up>", ":resize +2<CR>")
+keymap("n", "<Down>", ":resize -2<CR>")
 
--- Insert blank line - get these from vim-unimpared
--- keymap("n", "]<Space>", "o<Esc>", default_opts)
--- keymap("n", "[<Space>", "O<Esc>", default_opts)
-
-
-keymap("n", "<leader>fw", ":w", default_opts)
-keymap("n", "<leader>fw", ":wa", default_opts)

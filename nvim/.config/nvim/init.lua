@@ -1,6 +1,6 @@
-require "utils"
-require "defaults"
-require "keymaps"
-require "plugins"
-require "configs"
+require("utils")
+require("keymaps")
+require("defaults")
+require("autocmds")
+require("plugins")
 

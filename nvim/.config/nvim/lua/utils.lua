@@ -1,3 +1,12 @@
+_G.IS_MAC = vim.fn.has("mac")
+_G.IS_LINUX = vim.fn.has("linux")
+_G.IS_WINDOWS = vim.fn.has("win32") or vim.fn.has("win64")
+_G.IS_WSL = vim.fn.has("wsl")
+
+_G.USE_FZF = IS_LINUX or IS_WSL
+_G.USE_TELESCOPE = not USE_FZF
+_G.USE_TMUX = IS_LINUX and not IS_WSL
+
 _G.api = vim.api
 _G.g = vim.g
 _G.opt = vim.opt
@@ -13,6 +22,14 @@ _G.prequire = function(...)
     return lib
   end
   return nil
+end
+
+_G.keymap = function(mode, lhs, rhs, opts)
+  local options = { noremap = true, silent = true }
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
+  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 local M = {}
