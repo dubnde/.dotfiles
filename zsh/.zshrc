@@ -35,7 +35,5 @@ alias vi=nvim
 
 ####################################################
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export FZF_DEFAULT_COMMAND='rg --files --ignore-vcs --hidden'
-export FZF_DEFAULT_OPTS='--height 20% --layout=reverse --inline-info'
+[ -f ~/.fd.sh ] && source ~/.fd.sh
 
