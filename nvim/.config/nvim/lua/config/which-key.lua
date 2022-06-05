@@ -205,6 +205,21 @@ local mappings = {
     ["v"] = { "<cmd>ToggleTerm direction=vertical<cr>", "Terminal Vertical" },
   },
 
+  ["v"] = {
+    name = "vimwiki",
+    ["w"] = { "<cmd><cr>", "Open default wiki index file" },
+    ["t"] = { "<cmd><cr>", "Open default wiki index file in a new tab." },
+    ["s"] = { "<cmd><cr>", "Select and open wiki index file." },
+    ["d"] = { "<cmd><cr>", "Delete wiki file you are in." },
+    ["r"] = { "<cmd><cr>", "Rename wiki file you are in." },
+    ["f"] = { "<cmd><cr>", "Follow/Create wiki link." },
+    ["h"] = { "<cmd><cr>", "Split and follow/create wiki link." },
+    ["v"] = { "<cmd><cr>", "Vertical split and follow/create wiki link." },
+    ["g"] = { "<cmd><cr>", "Vertical split and follow/create wiki link." },
+    ["n"] = { "<cmd><cr>", "Find next wiki link." },
+    ["p"] = { "<cmd><cr>", "Find previous wiki link." },
+  },
+
   ["w"] = {
     name = "Windows",
     ["="] = { "<cmd>wincmd =<cr>", "Balance" },
