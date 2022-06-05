@@ -16,6 +16,10 @@ export EDITOR=nvim
 export VISUAL=${EDITOR}
 
 # PATH
+export PATH=~/.gem/rub/2.6/bin:${PATH}
+export PATH=~/.local/bin:${PATH}
+export PATH=~/.yarn/bin:${PATH}
+export PATH=~/.cargo/bin:${PATH}
 export PATH=/opt/homebrew/bin:${PATH}
 
 # Compiling/Linking/Finding packages
