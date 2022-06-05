@@ -6,14 +6,7 @@ if not ts then
 end
 
 ts.setup {
-  ensure_installed = {
-    "lua",
-    "c",
-    "cpp",
-    "python",
-    "rust",
-    "cmake",
-  },
+  ensure_installed = "all",
 
   indent = {
     enable = true,

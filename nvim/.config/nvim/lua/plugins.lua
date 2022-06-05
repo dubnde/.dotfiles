@@ -103,7 +103,27 @@ local function plugins(use)
 
   use {
     'sbdchd/neoformat',
+    cmd = "Neoformat",
     config = get_config("neoformat"),
+    disable = true,
+  }
+
+  use {
+    "ellisonleao/glow.nvim", branch = 'main',
+    config = get_config("glow"),
+    disable = true,
+  }
+
+  use {
+    'vimwiki/vimwiki',
+    config = get_config("vimwiki"),
+    disable = true,
+  }
+
+  use {
+    "nvim-neorg/neorg",
+    after = "nvim-treesitter",
+    config = get_config("neorg"),
     disable = true,
   }
 
