@@ -104,12 +104,14 @@ local function plugins(use)
   if vim.fn.executable('fzf') then
     use {
       'ibhagwan/fzf-lua',
+      config = get_config("fzf-lua"),
       disable = false,
     }
 
     use {
       'junegunn/fzf.vim',
       requires = { 'junegunn/fzf' },
+      config = get_config("fzf"),
       disable = true,
     }
   else

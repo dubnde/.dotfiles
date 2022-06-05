@@ -118,6 +118,7 @@ local mappings = {
   ["b"] = {
     name = "Buffers",
     ["b"] = { "<cmd>FzfLua buffers<cr>", "Buffers" },
+    ["n"] = { "<cmd>new<cr>", "Buffer New" },
     ["d"] = { "<cmd>bdelete<cr>", "Buffer Delete" },
     ["s"] = { "<cmd>FzfLua blines<cr>", "Search Buffer" },
     ["S"] = { "<cmd>FzfLua lines<cr>", "Search Buffers" },
