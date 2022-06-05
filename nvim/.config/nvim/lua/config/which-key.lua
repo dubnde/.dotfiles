@@ -80,10 +80,10 @@ local opts = {
 }
 
 local mappings = {
-  ["/"]     = { "<cmd>FZF grep<cr>", "Grep" },
-  -- ["*"]     = { "<cmd>Rg <C-R><C-W><cr>", "Grep under cursor" },
+  ["/"]     = { "<cmd>FzfLua grep<cr>", "Grep" },
+  ["*"]     = { "<cmd>FzfLua grep_cWORD<cr>", "Grep under cursor" },
   ["'"]     = { "<cmd>ToggleTerm direction=horizontal<cr>", "Commands" },
-  ["<tab>"] = { "<cmd>Commands<cr>", "Commands" },
+  ["<tab>"] = { "<cmd>FzfLua commands<cr>", "Commands" },
 
   ["<space>"] = {
     name = "Jumps",
@@ -117,10 +117,10 @@ local mappings = {
 
   ["b"] = {
     name = "Buffers",
-    ["b"] = { "<cmd>Buffers<cr>", "Buffers" },
+    ["b"] = { "<cmd>FzfLua buffers<cr>", "Buffers" },
     ["d"] = { "<cmd>bdelete<cr>", "Buffer Delete" },
-    ["s"] = { "<cmd>BLines<cr>", "Search Buffer" },
-    ["S"] = { "<cmd>Lines<cr>", "Search Buffers" },
+    ["s"] = { "<cmd>FzfLua blines<cr>", "Search Buffer" },
+    ["S"] = { "<cmd>FzfLua lines<cr>", "Search Buffers" },
   },
 
   ["e"] = {
@@ -131,12 +131,12 @@ local mappings = {
   ["f"] = {
     name = "Files",
     ["e"] = { "<cmd>:luafile %<cr>", "Evaluate File" },
-    ["f"] = { "<cmd>Files<cr>", "Find Files" },
-    ["g"] = { "<cmd>GFiles<cr>", "Find Files" },
-    ["r"] = { "<cmd>History<cr>", "Recent Files" },
+    ["f"] = { "<cmd>FzfLua files<cr>", "Find Files" },
+    ["g"] = { "<cmd>FzfLua git_files<cr>", "Find Git Files" },
+    ["r"] = { "<cmd>FzfLua oldfiles<cr>", "Recent Files" },
     ["w"] = { "<cmd>:write<cr>", "Save" },
     ["W"] = { "<cmd>:wall<cr>", "Save All" },
-    ["z"] = { "<cmd>FZF<cr>", "FZF" }
+    ["z"] = { "<cmd>FzfLua<cr>", "FZF" }
   },
 
   ["g"] = {
@@ -148,11 +148,21 @@ local mappings = {
 
   ["h"] = {
     name = "Help",
-    ["k"] = { "<cmd>FZF keymaps<cr>", "Keymap" },
+    ["k"] = { "<cmd>FzfLua keymaps<cr>", "Keymaps" },
+    ["m"] = { "<cmd>FzfLua man_pages<cr>", "Manual Pages" },
   },
 
   ["j"] = {
     name = "jump/join",
+    ["j"] = { "<cmd>FzfLua jumps<cr>", "Jumps" },
+    ["l"] = { "<cmd>HopLine<cr>", "Line" },
+    ["m"] = { "<cmd>FzfLua marks<cr>", "Marks" },
+    ["r"] = { "<cmd>FzfLua registers<cr>", "registers" },
+  },
+
+  ["k"] = {
+    name = "Keymaps",
+    ["k"] = { "<cmd>FzfLua keymaps<cr>", "Keymap" },
   },
 
   ["l"] = {
@@ -172,10 +182,12 @@ local mappings = {
 
   ["s"] = {
     name = "Search",
-    ["/"] = { "<cmd>:nohl<cr>", "Clear Highlight" },
+    ["/"] = { "<cmd>FzfLua blines<cr>", "Search current buffer" },
     ["c"] = { "<cmd>:nohl<cr>", "Clear Highlight" },
-    ["s"] = { "<cmd>BLines<cr>", "Search Buffer" },
-    ["S"] = { "<cmd>Lines<cr>", "Search Buffers" },
+    ["p"] = { "<cmd>FzfLua grep_project<cr>", "Search Project" },
+    ["r"] = { "<cmd>FzfLua resume<cr>", "Search Resume" },
+    ["s"] = { "<cmd>FzfLua blines<cr>", "Search Buffer" },
+    ["S"] = { "<cmd>FzfLua lines<cr>", "Search Buffers" },
   },
 
   ["t"] = {

@@ -73,7 +73,7 @@ local function plugins(use)
     disable = false,
   }
 
-  if vim.fn.executable('fzf') then
+  if vim.fn.executable('tmux') then
     use {
       "christoomey/vim-tmux-navigator",
       config = get_config("tmux"),
@@ -103,8 +103,14 @@ local function plugins(use)
 
   if vim.fn.executable('fzf') then
     use {
+      'ibhagwan/fzf-lua',
+      disable = false,
+    }
+
+    use {
       'junegunn/fzf.vim',
       requires = { 'junegunn/fzf' },
+      disable = true,
     }
   else
     use {
@@ -122,7 +128,6 @@ local function plugins(use)
 
   use {
     "EdenEast/nightfox.nvim",
-    "folke/tokyonight.nvim",
     config = get_config("colourscheme"),
     disable = false,
   }

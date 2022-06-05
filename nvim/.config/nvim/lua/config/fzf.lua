@@ -1,5 +1,8 @@
-local fzf = prequire("fzf")
+local fzf = prequire("fzf-lua")
+local actions = prequire("fzf-lua.actions")
 
-if fzf then
-  fzf.setup({})
+if not fzf or not actions then
+  return
 end
+
+fzf.setup({})

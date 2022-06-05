@@ -1,6 +1,5 @@
 # Compiled Lua sources
 luac.out
-nvim/.config/nvim/lua/plugins.lua
 
 # luarocks build files
 *.src.rock
@@ -46,6 +45,5 @@ __pycache__/
 
 /Session.vim
 
-plugin/packer_compiled.lua
-lua/packer_compiled.lua
+packer_compiled.lua
 .DS_Store

@@ -1,7 +1,7 @@
-_G.IS_MAC = vim.fn.has("mac")
-_G.IS_LINUX = vim.fn.has("linux")
-_G.IS_WINDOWS = vim.fn.has("win32") or vim.fn.has("win64")
-_G.IS_WSL = vim.fn.has("wsl")
+_G.IS_MAC = vim.fn.has("mac") == 1
+_G.IS_LINUX = vim.fn.has("linux") == 1
+_G.IS_WINDOWS = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
+_G.IS_WSL = vim.fn.has("wsl") == 1
 
 _G.api = vim.api
 _G.g = vim.g

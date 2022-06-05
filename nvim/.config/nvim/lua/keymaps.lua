@@ -24,14 +24,15 @@ keymap("t", "<C-k>", "<C-\\><C-n><C-w>k")
 keymap("t", "<C-l>", "<C-\\><C-n><C-w>l")
 
 -- Center search results
-keymap("n", "n", "nzz")
-keymap("n", "N", "Nzz")
+keymap("n", "n", "nzz", { desc = 'Search and center screen' })
+keymap("n", "N", "Nzz", { desc = 'Search and center screen' })
+keymap('n', '*', '*zz', { desc = 'Search and center screen' })
 
 -- Visual line wraps
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", expr_opts)
 keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", expr_opts)
 
--- -- Always center
+-- Always center
 -- keymap("n", "k", "kzz")
 -- keymap("n", "j", "jzz")
 -- keymap("n", "G", "Gzz")
@@ -61,4 +62,3 @@ keymap("n", "<Left>", ":vertical resize -2<CR>")
 keymap("n", "<Right>", ":vertical resize +2<CR>")
 keymap("n", "<Up>", ":resize +2<CR>")
 keymap("n", "<Down>", ":resize -2<CR>")
-
