@@ -5,3 +5,5 @@ if not fzf then
 end
 
 fzf.setup({})
+
+keymap("n", "<C-p>", "<cmd>Fzf files<cr>")

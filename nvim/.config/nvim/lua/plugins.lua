@@ -8,7 +8,7 @@ end
 local packer_bootstrap = false
 
 -- packer.nvim configuration
-local conf = {
+local config = {
   profile = {
     enable = true,
     threshold = 1,
@@ -101,6 +101,12 @@ local function plugins(use)
     disable = false,
   }
 
+  use {
+    'sbdchd/neoformat',
+    config = get_config("neoformat"),
+    disable = true,
+  }
+
   if vim.fn.executable('fzf') then
     use {
       'ibhagwan/fzf-lua',
@@ -119,6 +125,11 @@ local function plugins(use)
       "nvim-telescope/telescope.nvim",
       cmd = "Telescope",
       requires = {
+        {
+          'nvim-telescope/telescope-fzf-native.nvim',
+          run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+          disable = false,
+        },
         { 'nvim-telescope/telescope-ui-select.nvim' },
         { 'nvim-telescope/telescope-project.nvim' },
         { 'nvim-telescope/telescope-file-browser.nvim' },
@@ -147,7 +158,6 @@ local function plugins(use)
     require = {
       { "nvim-treesitter/nvim-treesitter-textobjects" },
       { "JoosepAlviste/nvim-ts-context-commentstring" },
-      { "nvim-treesitter/nvim-treesitter-context" },
       { "p00f/nvim-ts-rainbow" },
     },
     config = get_config("treesitter"),
@@ -232,5 +242,5 @@ local packer = require "packer"
 pcall(require, "impatient")
 -- pcall(require, "packer_compiled")
 
-packer.init(conf)
+packer.init(config)
 packer.startup(plugins)

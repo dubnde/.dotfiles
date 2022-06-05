@@ -1,0 +1,5 @@
+export FD_OPTIONS="--follow --exclude .git --exclude node_modules --color=always"
+# export FZF_DEFAULT_OPTS="--ansi"
+export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard | fd --type f --type 1 $FD_OPTIONS"
+export FZF_CTRL_T_COMMAND="fd $FD_OPTIONS"
+export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"

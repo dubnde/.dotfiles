@@ -13,7 +13,7 @@ project.setup({
 
   -- When set to false, you will get a message when project.nvim changes your
   -- directory.
-  silent_chdir = false,
+  silent_chdir = true,
 
   -- All the patterns used to detect root dir, when **"pattern"** is in detection_methods
   patterns = {

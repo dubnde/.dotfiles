@@ -4,7 +4,7 @@ g.mapleader = " "
 g.maplocalleader = " "
 
 opt.termguicolors = true -- Enable colors in terminal
--- opt.syntax = "on"
+opt.syntax = "on"
 opt.hlsearch = true --Set highlight on search
 opt.number = true --Make line numbers default
 opt.relativenumber = true --Make relative number default

@@ -105,14 +105,14 @@ local mappings = {
     ["l"] = { "<cmd>HopLineBC<cr>", "Hope Line Up" },
   },
 
-  ["a"] = {
-    name = "Align",
-  },
-
   ["="] = {
     name = "Format/Align",
     ["="] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format Buffer" },
     ["f"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format Buffer" },
+  },
+
+  ["a"] = {
+    name = "Align",
   },
 
   ["b"] = {
@@ -124,9 +124,15 @@ local mappings = {
     ["S"] = { "<cmd>FzfLua lines<cr>", "Search Buffers" },
   },
 
+  ["c"] = {
+    name = "Colours/Comments",
+    ["l"] = { "<cmd>FzfLua colorschemes<cr>", "Diagnostics" },
+  },
+
   ["e"] = {
     name = "Explorer/Errors",
     ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+    ["l"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics" },
   },
 
   ["f"] = {
@@ -137,7 +143,7 @@ local mappings = {
     ["r"] = { "<cmd>FzfLua oldfiles<cr>", "Recent Files" },
     ["w"] = { "<cmd>:write<cr>", "Save" },
     ["W"] = { "<cmd>:wall<cr>", "Save All" },
-    ["z"] = { "<cmd>FzfLua<cr>", "FZF" }
+    ["z"] = { "<cmd>FzfLua<cr>", "FzfLua" }
   },
 
   ["g"] = {
