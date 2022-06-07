@@ -1,5 +1,16 @@
-# Created by https://www.toptal.com/developers/gitignore/api/c,c++,cmake,python,lua,powershell,perl,vim,java,ninja
-# Edit at https://www.toptal.com/developers/gitignore?templates=c,c++,cmake,python,lua,powershell,perl,vim,java,ninja
+# Ignore all
+*
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
+# Unignore all scons file
+!SConscript
+!SConstruct
+
+### Above combination will ignore all files without extension ###
 
 build_*/
 deploy_*/
@@ -366,4 +377,3 @@ tags
 # Persistent undo
 [._]*.un~
 
-# End of https://www.toptal.com/developers/gitignore/api/c,c++,cmake,python,lua,powershell,perl,vim,java,ninja

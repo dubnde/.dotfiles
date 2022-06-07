@@ -19,10 +19,12 @@ telescope.setup({
       },
     },
     file_ignore_patterns = {
-      "/.git",
       "/build_*",
       "/deploy_*",
       "/tools",
+      ".kwps",
+      ".kwlp",
+      ".cache",
     },
     layout_config = {
       vertical = { width = 0.5 }
