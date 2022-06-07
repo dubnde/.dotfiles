@@ -8,6 +8,8 @@ end
 ts.setup {
   ensure_installed = "all",
 
+  ignore_install = { "php", "phpdoc" },
+
   indent = {
     enable = true,
   },

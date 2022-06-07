@@ -12,7 +12,7 @@
 	autocrlf = input
 [alias]
 	amend = commit --amend -a
-  	br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+  br = branch
 	ci = commit
 	co = checkout
 	dt = difftool --dir-diff --no-prompt --no-symlinks
@@ -20,7 +20,7 @@
 	lg = log --oneline --decorate --color
 	log = log --oneline --abbrev-commit --all --graph --decorate --color
 	st = status
-  	up = pull --rebase
+  up = pull --rebase
 [credential]
 	helper = cache --timeout=72000
 [branch]

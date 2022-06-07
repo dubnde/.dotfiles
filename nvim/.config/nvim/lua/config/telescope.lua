@@ -19,11 +19,10 @@ telescope.setup({
       },
     },
     file_ignore_patterns = {
-      ".git",
+      "/.git",
       "/build_*",
       "/deploy_*",
       "/tools",
-      "/cmake",
     },
     layout_config = {
       vertical = { width = 0.5 }
@@ -42,6 +41,7 @@ telescope.setup({
     find_files = {
       theme = "ivy",
       follow = true,
+      hidden = true,
     },
     git_files = {
       them = "ivy",
@@ -58,7 +58,7 @@ telescope.setup({
   },
   extensions = {
     project = {
-      hidden_files = false,
+      hidden_files = true,
       theme = "ivy",
     },
   }
