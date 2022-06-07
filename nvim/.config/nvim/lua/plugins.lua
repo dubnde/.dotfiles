@@ -64,6 +64,7 @@ local function plugins(use)
   -- These two are use all over the place
   use { "nvim-lua/popup.nvim" }
   use { "nvim-lua/plenary.nvim" }
+  use { 'ryanoasis/vim-devicons' }
 
   -- Indentation guides
   use {
@@ -77,13 +78,14 @@ local function plugins(use)
     use {
       "christoomey/vim-tmux-navigator",
       config = get_config("tmux"),
+      disable = false,
     }
   end
 
   use {
     "ahmedkhalf/project.nvim",
     config = get_config("project"),
-    disable = false,
+    disable = true,
   }
 
   use {
@@ -138,25 +140,21 @@ local function plugins(use)
       'junegunn/fzf.vim',
       requires = { 'junegunn/fzf' },
       config = get_config("fzf"),
-      disable = true,
-    }
-  else
-    use {
-      "nvim-telescope/telescope.nvim",
-      cmd = "Telescope",
-      requires = {
-        {
-          'nvim-telescope/telescope-fzf-native.nvim',
-          run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-          disable = false,
-        },
-        { 'nvim-telescope/telescope-ui-select.nvim' },
-        { 'nvim-telescope/telescope-project.nvim' },
-        { 'nvim-telescope/telescope-file-browser.nvim' },
-      },
-      config = get_config("telescope"),
+      disable = false,
     }
   end
+
+  use {
+    "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
+    requires = {
+      { 'nvim-telescope/telescope-ui-select.nvim' },
+      { 'nvim-telescope/telescope-project.nvim' },
+      { 'nvim-telescope/telescope-file-browser.nvim' },
+    },
+    config = get_config("telescope"),
+    disable = false,
+  }
 
 
   use {
@@ -194,7 +192,7 @@ local function plugins(use)
     "williamboman/nvim-lsp-installer",
     requires = {
       "neovim/nvim-lspconfig",
-      "jose-elias-alvarez/null-ls.nvim",
+      -- "jose-elias-alvarez/null-ls.nvim",
     },
     after = "nvim-cmp",
     config = get_config("lsp"),

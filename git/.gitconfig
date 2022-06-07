@@ -1,6 +1,15 @@
-[user]
-	name = dubnde
-	email = dubnde@gmail.com
+[color]
+	ui = auto
+	status = auto
+	branch = auto
+	diff = auto
+	interactive = auto
+[push]
+	default = matching
+[core]
+	editor = code --wait
+	excludesfile = ~/.gitignore
+	autocrlf = input
 [alias]
 	amend = commit --amend -a
   	br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
@@ -12,8 +21,13 @@
 	log = log --oneline --abbrev-commit --all --graph --decorate --color
 	st = status
   	up = pull --rebase
-[core]
-	editor = nvim
-	excludesfile = ~/.gitignore
+[credential]
+	helper = cache --timeout=72000
+[branch]
+	autosetuprebase = always
+[branch "*branch-name*"]
+	rebase = true
 [init]
 	defaultBranch = main
+[include]
+	path=~/.gitconfig.local

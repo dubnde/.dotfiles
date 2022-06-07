@@ -80,10 +80,10 @@ local opts = {
 }
 
 local mappings = {
-  ["/"]     = { "<cmd>FzfLua grep<cr>", "Grep" },
-  ["*"]     = { "<cmd>FzfLua grep_cWORD<cr>", "Grep under cursor" },
-  ["'"]     = { "<cmd>ToggleTerm direction=horizontal<cr>", "Commands" },
-  ["<tab>"] = { "<cmd>FzfLua commands<cr>", "Commands" },
+  ["/"]     = { "<cmd>Telescope live_grep<cr>", "Grep" },
+  ["*"]     = { "<cmd>Telescope grep_string<cr>", "Grep under cursor" },
+  ["'"]     = { "<cmd>ToggleTerm direction=horizontal<cr>", "Terminal" },
+  ["<tab>"] = { "<cmd>Telescope commands<cr>", "Commands" },
 
   ["<space>"] = {
     name = "Jumps",
@@ -117,16 +117,16 @@ local mappings = {
 
   ["b"] = {
     name = "Buffers",
-    ["b"] = { "<cmd>FzfLua buffers<cr>", "Buffers" },
+    ["b"] = { "<cmd>Telescope buffers<cr>", "Buffers" },
     ["n"] = { "<cmd>new<cr>", "Buffer New" },
     ["d"] = { "<cmd>bdelete<cr>", "Buffer Delete" },
-    ["s"] = { "<cmd>FzfLua blines<cr>", "Search Buffer" },
-    ["S"] = { "<cmd>FzfLua lines<cr>", "Search Buffers" },
+    ["s"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search Buffer" },
+    ["S"] = { "<cmd>Telescope lines<cr>", "Search Buffers" },
   },
 
   ["c"] = {
     name = "Colours/Comments",
-    ["l"] = { "<cmd>FzfLua colorschemes<cr>", "Diagnostics" },
+    ["l"] = { "<cmd>Telescope colorscheme<cr>", "Colour Schemes" },
   },
 
   ["e"] = {
@@ -137,13 +137,14 @@ local mappings = {
 
   ["f"] = {
     name = "Files",
+    ["b"] = { "<cmd>Telescope buffers<cr>", "Buffers" },
     ["e"] = { "<cmd>:luafile %<cr>", "Evaluate File" },
-    ["f"] = { "<cmd>FzfLua files<cr>", "Find Files" },
-    ["g"] = { "<cmd>FzfLua git_files<cr>", "Find Git Files" },
-    ["r"] = { "<cmd>FzfLua oldfiles<cr>", "Recent Files" },
+    ["f"] = { "<cmd>Telescope fd theme=ivy<cr>", "Find Files" },
+    ["h"] = { "<cmd>Telescope help_tags<cr>", "Tags" },
+    ["g"] = { "<cmd>Telescope git_files<cr>", "Find Git Files" },
+    ["r"] = { "<cmd>Telescope oldfiles theme=ivy<cr>", "Recent Files" },
     ["w"] = { "<cmd>:write<cr>", "Save" },
     ["W"] = { "<cmd>:wall<cr>", "Save All" },
-    ["z"] = { "<cmd>FzfLua<cr>", "FzfLua" }
   },
 
   ["g"] = {
@@ -155,21 +156,22 @@ local mappings = {
 
   ["h"] = {
     name = "Help",
-    ["k"] = { "<cmd>FzfLua keymaps<cr>", "Keymaps" },
-    ["m"] = { "<cmd>FzfLua man_pages<cr>", "Manual Pages" },
+    ["b"] = { "<cmd>Telescope builtin<cr>", "Builtins" },
+    ["k"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+    ["m"] = { "<cmd>Telescope man_pages<cr>", "Manual Pages" },
   },
 
   ["j"] = {
     name = "jump/join",
-    ["j"] = { "<cmd>FzfLua jumps<cr>", "Jumps" },
+    ["j"] = { "<cmd>Telescope jumplist<cr>", "Jumps" },
     ["l"] = { "<cmd>HopLine<cr>", "Line" },
-    ["m"] = { "<cmd>FzfLua marks<cr>", "Marks" },
-    ["r"] = { "<cmd>FzfLua registers<cr>", "registers" },
+    ["m"] = { "<cmd>Telescope marks<cr>", "Marks" },
+    ["r"] = { "<cmd>Telescope registers<cr>", "registers" },
   },
 
   ["k"] = {
     name = "Keymaps",
-    ["k"] = { "<cmd>FzfLua keymaps<cr>", "Keymap" },
+    ["k"] = { "<cmd>Telescope keymaps<cr>", "Keymap" },
   },
 
   ["l"] = {
@@ -189,12 +191,12 @@ local mappings = {
 
   ["s"] = {
     name = "Search",
-    ["/"] = { "<cmd>FzfLua blines<cr>", "Search current buffer" },
+    ["/"] = { "<cmd>Telescope blines<cr>", "Search current buffer" },
     ["c"] = { "<cmd>:nohl<cr>", "Clear Highlight" },
-    ["p"] = { "<cmd>FzfLua grep_project<cr>", "Search Project" },
-    ["r"] = { "<cmd>FzfLua resume<cr>", "Search Resume" },
-    ["s"] = { "<cmd>FzfLua blines<cr>", "Search Buffer" },
-    ["S"] = { "<cmd>FzfLua lines<cr>", "Search Buffers" },
+    ["p"] = { "<cmd>Telescope grep_project<cr>", "Search Project" },
+    ["r"] = { "<cmd>Telescope resume<cr>", "Search Resume" },
+    ["s"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search Buffer" },
+    ["S"] = { "<cmd>Telescope lines<cr>", "Search Buffers" },
   },
 
   ["t"] = {

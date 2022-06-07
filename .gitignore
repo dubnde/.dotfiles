@@ -47,3 +47,6 @@ __pycache__/
 
 packer_compiled.lua
 .DS_Store
+*.bk
+*.old
+.netrwhist

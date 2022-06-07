@@ -12,7 +12,7 @@ if not custom_gruvbox then
 end
 
 -- Change the background of lualine_c section for normal mode
--- custom_gruvbox.normal.c.bg = '#112233'
+custom_gruvbox.normal.c.bg = '#112233'
 
 lualine.setup {
   options = {

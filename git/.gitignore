@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/c,c++,cmake,python,lua,powershell,perl,vim,java,ninja
 # Edit at https://www.toptal.com/developers/gitignore?templates=c,c++,cmake,python,lua,powershell,perl,vim,java,ninja
 
+build_*/
+deploy_*/
+
 ### C ###
 # Prerequisites
 *.d
