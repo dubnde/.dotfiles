@@ -85,7 +85,7 @@ local function plugins(use)
   use {
     "ahmedkhalf/project.nvim",
     config = get_config("project"),
-    disable = true,
+    disable = false,
   }
 
   use {
@@ -159,7 +159,7 @@ local function plugins(use)
 
   use {
     "EdenEast/nightfox.nvim",
-    config = get_config("colourscheme"),
+    config = get_config("nightfox"),
     disable = false,
   }
 
