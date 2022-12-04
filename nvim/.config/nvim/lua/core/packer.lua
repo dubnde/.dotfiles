@@ -19,30 +19,34 @@ return require('packer').startup(function(use)
   use { "nvim-lua/plenary.nvim" } 
 
   -- Essentials
-  use { "tpope/vim-unimpaired" }
-  use { "tpope/vim-surround" }
-  use { "tpope/vim-commentary" }
-  -- use { "numToStr/Comment.nvim" }
+  use { 'tpope/vim-unimpaired' }
 
-  use { "ellisonleao/gruvbox.nvim" }
+  use { 'tpope/vim-surround' }
+  use { 'vim-scripts/ReplaceWithRegister' }
+
+  use { 'tpope/vim-commentary' }
+
+  use { 'ellisonleao/gruvbox.nvim' }
 
   -- vs-code like icons
-  use { "nvim-tree/nvim-web-devicons" }
+  use { 'nvim-tree/nvim-web-devicons' }
 
   -- file explorer
   use { 'nvim-tree/nvim-tree.lua' }
 
   -- statusline
-  use { "nvim-lualine/lualine.nvim" }
+  use { 'nvim-lualine/lualine.nvim' }
 
   -- treesitter configuration
   use { 'nvim-treesitter/nvim-treesitter' }
 
   -- fuzzy finding w/ telescope
   -- use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
-  use { "nvim-telescope/telescope.nvim", branch = "0.1.x" } 
+  use { 'nvim-telescope/telescope.nvim', branch = "0.1.x" } 
 
-  use { "akinsho/toggleterm.nvim", tag = '*' }
+  use { 'akinsho/toggleterm.nvim', tag = '*' }
+
+  use { "windwp/nvim-autopairs" }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
