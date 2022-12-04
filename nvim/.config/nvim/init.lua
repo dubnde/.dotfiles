@@ -1,6 +1,5 @@
-require("utils")
-require("keymaps")
-require("defaults")
-require("autocmds")
-require("plugins")
+require "core.options"     -- Default options
+require "core.keymaps"     -- Default key mappings
+require "core.packer"      -- Neovim package/plugin managers
+require "core.configs"     -- Plugin settings
 

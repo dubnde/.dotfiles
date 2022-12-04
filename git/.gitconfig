@@ -31,3 +31,6 @@
 	defaultBranch = main
 [include]
 	path=~/.gitconfig.local
+[user]
+	email = dubnde@gmail.com
+	name = dubnde
