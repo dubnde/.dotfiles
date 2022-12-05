@@ -1,13 +1,14 @@
-require "core.configs.colorscheme"
-require "core.configs.lualine"
-require "core.configs.nvim-tree"
-require "core.configs.treesitter"
-require "core.configs.telescope"
-require "core.configs.indentline"
-require "core.configs.toggleterm"
-require "core.configs.nvim-cmp"
--- require "core.configs.lsp"
+require 'core.configs.colorscheme'
+require 'core.configs.lualine'
+require 'core.configs.nvim-tree'
+require 'core.configs.treesitter'
+require 'core.configs.telescope'
+require 'core.configs.toggleterm'
+require 'core.configs.nvim-cmp'
+require 'core.configs.lsp.mason'
+require 'core.configs.lsp.lspsaga'
+require 'core.configs.lsp.lspconfig'
+require 'core.configs.lsp.null-ls'
+require 'core.configs.autopairs'
+require 'core.configs.gitsigns'
 -- require "core.configs.autocommands"
--- require "core.configs.autopairs"
--- require "core.configs.bufferline"
--- require "core.configs.alpha"

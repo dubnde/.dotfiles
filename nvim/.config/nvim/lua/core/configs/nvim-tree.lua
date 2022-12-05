@@ -1,15 +1,15 @@
-local status_ok, nvim_tree = pcall(require, "nvim-tree")
+local status_ok, nvim_tree = pcall(require, 'nvim-tree')
 if not status_ok then
   return
 end
 
-nvim_tree.setup({
-  sort_by = "case_sensitive",
+nvim_tree.setup {
+  sort_by = 'case_sensitive',
   view = {
     adaptive_size = true,
     mappings = {
       list = {
-        { key = "u", action = "dir_up" },
+        { key = 'u', action = 'dir_up' },
       },
     },
   },
@@ -19,7 +19,7 @@ nvim_tree.setup({
   filters = {
     dotfiles = true,
   },
-})
+}
 local opts = { silent = true }
 
-vim.keymap.set("n", "<c-n>", ":NvimTreeFindFileToggle<CR>", opts)
+vim.keymap.set('n', '<c-n>', ':NvimTreeFindFileToggle<CR>', opts)
