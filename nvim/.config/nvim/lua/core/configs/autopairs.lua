@@ -1,5 +1,5 @@
-local autopairs_setup, autopairs = pcall(require, 'nvim-autopairs')
-if not autopairs_setup then
+local autopairs = Prequire 'nvim-autopairs'
+if not autopairs then
   return
 end
 
@@ -14,14 +14,14 @@ autopairs.setup {
 }
 
 -- import nvim-autopairs completion functionality safely
-local cmp_autopairs_setup, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
-if not cmp_autopairs_setup then
+local cmp_autopairs = Prequire 'nvim-autopairs.completion.cmp'
+if not cmp_autopairs then
   return
 end
 
 -- import nvim-cmp plugin safely (completions plugin)
-local cmp_setup, cmp = pcall(require, 'cmp')
-if not cmp_setup then
+local cmp = Prequire 'cmp'
+if not cmp then
   return
 end
 

@@ -20,11 +20,10 @@ return require('packer').startup(function(use)
 
   -- Essentials
   use { 'tpope/vim-unimpaired' }
-
-  use { 'tpope/vim-surround' }
-  use { 'vim-scripts/ReplaceWithRegister' }
-
   use { 'tpope/vim-commentary' }
+  use { 'tpope/vim-surround' }
+  use { 'ggandor/leap.nvim' }
+  use { 'vim-scripts/ReplaceWithRegister' }
 
   use { 'ellisonleao/gruvbox.nvim' }
 

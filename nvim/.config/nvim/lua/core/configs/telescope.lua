@@ -1,10 +1,10 @@
-local status_ok, telescope = pcall(require, 'telescope')
-if not status_ok then
+local telescope = Prequire 'telescope'
+if not telescope then
   return
 end
 
-local telescope_status_ok, builtin = pcall(require, 'telescope.builtin')
-if not telescope_status_ok then
+local builtin = Prequire 'telescope.builtin'
+if not builtin then
   return
 end
 
@@ -17,8 +17,8 @@ vim.keymap.set('n', '<leader>fr', builtin.oldfiles, opts)
 vim.keymap.set('n', '<leader>/', '<cmd>Telescope live_grep<cr>') -- find string in current working directory as you type
 vim.keymap.set('n', '<leader>*', '<cmd>Telescope grep_string<cr>') -- find string under cursor in current working directory
 
-local actions_status_ok, actions = pcall(require, 'telescope.actions')
-if not actions_status_ok then
+local actions = Prequire 'telescope.actions'
+if not actions then
   return
 end
 

@@ -1,10 +1,10 @@
-local status_ok, lualine = pcall(require, 'lualine')
+local lualine = Prequire 'lualine'
 
-if not status_ok then
+if not lualine then
   return
 end
 
-local custom_gruvbox = pcall(require, 'lualine.themes.gruvbox')
+local custom_gruvbox = Prequire 'lualine.themes.gruvbox'
 
 if not custom_gruvbox then
   return

@@ -1,5 +1,5 @@
-local setup, gitsigns = pcall(require, 'gitsigns')
-if not setup then
+local gitsigns = Prequire 'gitsigns'
+if not gitsigns then
   return
 end
 

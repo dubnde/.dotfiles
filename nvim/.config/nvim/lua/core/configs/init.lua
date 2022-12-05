@@ -1,3 +1,4 @@
+require 'core.configs.leap'
 require 'core.configs.colorscheme'
 require 'core.configs.lualine'
 require 'core.configs.nvim-tree'
@@ -11,4 +12,4 @@ require 'core.configs.lsp.lspconfig'
 require 'core.configs.lsp.null-ls'
 require 'core.configs.autopairs'
 require 'core.configs.gitsigns'
--- require "core.configs.autocommands"
+require 'core.configs.autocommands'

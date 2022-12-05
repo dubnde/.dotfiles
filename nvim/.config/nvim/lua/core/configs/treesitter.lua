@@ -1,5 +1,5 @@
-local status, treesitter = pcall(require, 'nvim-treesitter.configs')
-if not status then
+local treesitter = Prequire 'nvim-treesitter.configs'
+if not treesitter then
   return
 end
 
@@ -16,7 +16,6 @@ treesitter.setup {
   -- ensure these language parsers are installed
   ensure_installed = {
     'lua',
-    'vim',
     'rust',
     'python',
     'c',
@@ -24,9 +23,7 @@ treesitter.setup {
     'cmake',
     'json',
     'yaml',
-    'bash',
     'dockerfile',
-    'gitignore',
   },
   -- auto install above language parsers
   auto_install = true,

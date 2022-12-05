@@ -1,5 +1,5 @@
-local setup, null_ls = pcall(require, 'null-ls')
-if not setup then
+local null_ls = Prequire 'null-ls'
+if not null_ls then
   return
 end
 
@@ -16,10 +16,7 @@ null_ls.setup {
     formatting.stylua,
     formatting.clang_format,
     formatting.rustfmt,
-    formatting.taplo, -- For TOML
     formatting.yamlfmt,
-    diagnostics.cmake_lint,
-    diagnostics.dotenv_linter,
   },
   -- configure format on save
   on_attach = function(current_client, bufnr)

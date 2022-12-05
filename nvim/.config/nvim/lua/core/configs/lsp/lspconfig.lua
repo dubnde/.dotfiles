@@ -1,12 +1,5 @@
--- import lspconfig plugin safely
-local lspconfig_status, lspconfig = pcall(require, 'lspconfig')
-if not lspconfig_status then
-  return
-end
-
--- import cmp-nvim-lsp plugin safely
-local cmp_nvim_lsp_status, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if not cmp_nvim_lsp_status then
+local lspconfig = Prequire 'lspconfig'
+if not lspconfig then
   return
 end
 
@@ -37,9 +30,6 @@ local on_attach = function(_, bufnr)
   keymap.set('n', '<leader>o', '<cmd>LSoutlineToggle<CR>', bufopts) -- see outline on right hand side
 end
 
--- used to enable autocompletion (assign to every lsp server config)
-local capabilities = cmp_nvim_lsp.default_capabilities()
-
 -- Change the Diagnostic symbols in the sign column (gutter)
 -- (not in youtube nvim video)
 local signs = { Error = ' ', Warn = ' ', Hint = 'ﴞ ', Info = ' ' }
@@ -48,18 +38,25 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
 end
 
+local cmp_nvim_lsp = Prequire 'cmp_nvim_lsp'
+if not cmp_nvim_lsp then
+  return
+end
+
+-- used to enable autocompletion (assign to every lsp server config)
+local capabilities = cmp_nvim_lsp.default_capabilities()
+
 ---@diagnostic disable-next-line: unused-local
 local default_servers = {
   'bashls',
   'clangd',
-  'html',
   'cmake',
   'dockerls',
   'jsonls',
   'pyright',
   'rust_analyzer',
-  'taplo',
   'yamlls',
+  'taplo',
 }
 
 lspconfig['pyright'].setup {
