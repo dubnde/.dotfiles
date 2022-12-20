@@ -16,10 +16,12 @@ local on_attach = function(_, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
   -- set keybinds
+  keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts) -- got to declaration
+  keymap.set('n', '<leader>==', vim.lsp.buf.format, bufopts) -- show diagnostics for cursor
+  keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts) -- go to implementation
+  keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   keymap.set('n', 'gf', '<cmd>Lspsaga lsp_finder<CR>', bufopts) -- show definition, references
-  keymap.set('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', bufopts) -- got to declaration
   keymap.set('n', 'gd', '<cmd>Lspsaga peek_definition<CR>', bufopts) -- see definition and make edits in window
-  keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', bufopts) -- go to implementation
   keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', bufopts) -- see available code actions
   keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', bufopts) -- smart rename
   keymap.set('n', '<leader>D', '<cmd>Lspsaga show_line_diagnostics<CR>', bufopts) -- show  diagnostics for line
@@ -47,7 +49,7 @@ end
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
 ---@diagnostic disable-next-line: unused-local
-local default_servers = {
+local servers = {
   'bashls',
   'clangd',
   'cmake',
@@ -56,28 +58,14 @@ local default_servers = {
   'pyright',
   'rust_analyzer',
   'yamlls',
-  'taplo',
 }
 
-lspconfig['pyright'].setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-lspconfig['clangd'].setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-lspconfig['cmake'].setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-lspconfig['rust_analyzer'].setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
+for _, lsp in pairs(servers) do
+  require('lspconfig')[lsp].setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+  }
+end
 
 -- configure lua server (with special settings)
 lspconfig['sumneko_lua'].setup {
@@ -85,6 +73,10 @@ lspconfig['sumneko_lua'].setup {
   on_attach = on_attach,
   settings = { -- custom settings for lua
     Lua = {
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
       -- make the language server recognize "vim" global
       diagnostics = {
         globals = { 'vim' },

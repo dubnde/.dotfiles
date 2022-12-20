@@ -13,7 +13,12 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
   -- packer can manage itself
-  use 'wbthomason/packer.nvim'
+  use { 'wbthomason/packer.nvim' }
+  use { 'nathom/filetype.nvim' }
+
+  -- Is using a standard Neovim install, i.e. built from source or using a
+  -- provided appimage.
+  use 'lewis6991/impatient.nvim'
 
   -- lua functions that many plugins use
   use { 'nvim-lua/plenary.nvim' }
@@ -22,10 +27,32 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-unimpaired' }
   use { 'tpope/vim-commentary' }
   use { 'tpope/vim-surround' }
+  use { 'tpope/vim-repeat' }
   use { 'ggandor/leap.nvim' }
   use { 'vim-scripts/ReplaceWithRegister' }
 
   use { 'ellisonleao/gruvbox.nvim' }
+  use { 'p00f/nvim-ts-rainbow' }
+
+  -- statusline
+  use { 'nvim-lualine/lualine.nvim' }
+
+  -- indent lines
+  use { 'lukas-reineke/indent-blankline.nvim' }
+
+  -- Automagically cd to project directory
+  -- use { 'ahmedkhalf/project.nvim' }
+  use { 'notjedi/nvim-rooter.lua' }
+
+  -- undotree
+  use {
+    'mbbill/undotree',
+    cmd = { 'UndotreeShow', 'UndotreeToggle', 'UndotreeHide', 'UndotreeFocus' },
+    disable = true,
+  }
+
+  -- highlight and search for todo comments like TODO, HACK, BUG, o
+  use { 'folke/todo-comments.nvim' }
 
   -- vs-code like icons
   use { 'nvim-tree/nvim-web-devicons' }
@@ -33,16 +60,13 @@ return require('packer').startup(function(use)
   -- file explorer
   use { 'nvim-tree/nvim-tree.lua' }
 
-  -- statusline
-  use { 'nvim-lualine/lualine.nvim' }
-
   -- treesitter configuration
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = function()
-      require('nvim-treesitter.install').update { with_sync = true }
-    end,
-  }
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
+  -- For some text objects
+  use { 'wellle/targets.vim', event = 'BufWinEnter' }
+  -- use { 'nvim-treesitter/nvim-treesitter-textobjects' }
+  -- use { 'RRethy/nvim-treesitter-textsubjects' }
 
   -- fuzzy finding w/ telescope
   -- use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance

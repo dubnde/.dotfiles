@@ -44,6 +44,7 @@ export PATH=/opt/homebrew/bin:${PATH}
 export GOPATH=$HOME/go
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+export PATH="/opt/homebrew/sbin:$PATH"
 
 # Compiling/Linking/Finding packages
 export LDFLAGS="-L/opt/homebrew/lib"

@@ -12,15 +12,20 @@
 	autocrlf = input
 [alias]
 	amend = commit --amend -a
-  br = branch
+  ; br = branch
+  br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
 	ci = commit
 	co = checkout
+	cob = checkout -b
 	dt = difftool --dir-diff --no-prompt --no-symlinks
 	edit = config --global --edit
-	lg = log --oneline --decorate --color
+	; lg = log --oneline --decorate --color
 	log = log --oneline --abbrev-commit --all --graph --decorate --color
+  lg = !git log --graph --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
 	st = status
   up = pull --rebase
+	unstage = reset HEAD --
+	last = log -1 HEAD --stat
 [credential]
 	helper = cache --timeout=72000
 [branch]
@@ -34,3 +39,8 @@
 [user]
 	email = dubnde@gmail.com
 	name = dubnde
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

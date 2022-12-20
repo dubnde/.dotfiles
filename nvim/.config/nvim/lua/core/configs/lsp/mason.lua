@@ -19,6 +19,7 @@ mason.setup()
 mason_lspconfig.setup {
   -- list of servers for mason to install
   ensure_installed = {
+    'bashls',
     'clangd',
     'cmake',
     'dockerls',
@@ -36,6 +37,7 @@ mason_null_ls.setup {
   -- list of formatters & linters for mason to install
   ensure_installed = {
     'stylua', -- lua formatter
+    'shfmt',
     'clang_format',
     'yamllint',
     'shellcheck',

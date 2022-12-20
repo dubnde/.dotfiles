@@ -1,7 +1,8 @@
 -- Shorten function name
 local keymap = vim.keymap.set
+
 -- Silent keymap option
-local opts = { silent = true }
+local opts = { noremap = true, silent = true }
 
 --Remap space as leader key
 keymap('', '<Space>', '<Nop>', opts)
@@ -46,6 +47,7 @@ keymap('n', '<leader>bD', '<cmd>Bdelete!<CR>', opts)
 
 -- Write file
 keymap('n', '<leader>fw', '<cmd>:write<CR>', opts)
+keymap('n', '<leader>fW', '<cmd>:wa<CR>', opts)
 
 -- Safe quit
 keymap('n', '<Leader>qq', ':quitall<CR>', opts)
@@ -59,6 +61,7 @@ keymap('v', 'p', '"_dP', opts)
 -- Insert --
 -- Press jk fast to enter
 keymap('i', 'jk', '<ESC>', opts)
+keymap('v', 'jk', '<ESC>', opts)
 
 -- Visual --
 -- Stay in indent mode

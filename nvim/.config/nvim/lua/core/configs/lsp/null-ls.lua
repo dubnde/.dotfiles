@@ -17,6 +17,7 @@ null_ls.setup {
     formatting.clang_format,
     formatting.rustfmt,
     formatting.yamlfmt,
+    formatting.shfmt,
   },
   -- configure format on save
   on_attach = function(current_client, bufnr)

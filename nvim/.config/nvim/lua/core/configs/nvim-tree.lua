@@ -4,14 +4,10 @@ if not nvim_tree then
 end
 
 nvim_tree.setup {
+  sync_root_with_cwd = true,
   sort_by = 'case_sensitive',
   view = {
     adaptive_size = true,
-    mappings = {
-      list = {
-        { key = 'u', action = 'dir_up' },
-      },
-    },
   },
   renderer = {
     group_empty = true,
@@ -20,6 +16,6 @@ nvim_tree.setup {
     dotfiles = true,
   },
 }
-local opts = { silent = true }
+local opts = { noremap = true, silent = true }
 
 vim.keymap.set('n', '<c-n>', ':NvimTreeFindFileToggle<CR>', opts)
