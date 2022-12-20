@@ -6,6 +6,8 @@ end
 -- Treesitter folding
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.wo.foldnestmax = 10
+vim.wo.foldenable = false
 
 -- configure treesitter
 treesitter.setup {
