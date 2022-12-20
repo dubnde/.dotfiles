@@ -1,10 +1,3 @@
--- disable netrw at the very start of your init.lua (strongly advised)
-vim.g.loaded_netrw = 1 -- Will use some other plugins
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_perl_provider = 0
-vim.g.loaded_ruby_provider = 0
-
-vim.opt.backup = false -- creates a backup file
 -- vim.opt.clipboard = "unnamedplus"               -- allows neovim to access the system clipboard
 vim.opt.clipboard:append 'unnamedplus' -- use system clipboard as default register
 vim.opt.cmdheight = 1 -- more space in the neovim command line for displaying messages
@@ -51,28 +44,44 @@ vim.opt.iskeyword:append '-' -- treats words with `-` as single words
 vim.opt.formatoptions:remove { 'c', 'r', 'o' } -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true
 vim.opt.backspace = 'indent,eol,start' -- allow backspace on indent, end of line or insert mode start position
+vim.opt.backup = false -- creates a backup file
 
 local disabled_built_ins = {
-  'netrw',
-  'netrwPlugin',
-  'netrwSettings',
-  'netrwFileHandlers',
-  'gzip',
-  'zip',
-  'zipPlugin',
-  'tar',
-  'tarPlugin',
+  '2html_plugin',
   'getscript',
   'getscriptPlugin',
-  'vimball',
-  'vimballPlugin',
-  '2html_plugin',
+  'gzip',
   'logipat',
+  'loaded_netrw',
+  'loaded_netrwPlugin',
+  'loaded_remote_plugins',
+  'loaded_tutor_mode_plugin',
+  'matchit',
+  'matchparen',
+  'netrw',
+  'netrwFileHandlers',
+  'netrwPlugin',
+  'netrwSettings',
   'rrhelper',
   'spellfile_plugin',
-  'matchit',
+  'tar',
+  'tarPlugin',
+  'vimball',
+  'vimballPlugin',
+  'zip',
+  'zipPlugin',
 }
 
 for _, plugin in pairs(disabled_built_ins) do
   vim.g['loaded_' .. plugin] = 1
+end
+
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
+if vim.fn.executable 'rg' then
+  -- if ripgrep installed, use that as a grepper
+  vim.opt.grepprg = 'rg --vimgrep --no-heading --smart-case'
+  vim.opt.grepformat = '%f:%l:%c:%m,%f:%l:%m'
 end

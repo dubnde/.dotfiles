@@ -41,7 +41,7 @@ return require('packer').startup(function(use)
   use { 'lukas-reineke/indent-blankline.nvim' }
 
   -- Automagically cd to project directory
-  -- use { 'ahmedkhalf/project.nvim' }
+  use { 'ahmedkhalf/project.nvim' }
   use { 'notjedi/nvim-rooter.lua' }
 
   -- undotree

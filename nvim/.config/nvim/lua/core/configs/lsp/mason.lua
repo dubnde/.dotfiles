@@ -20,6 +20,7 @@ mason_lspconfig.setup {
   -- list of servers for mason to install
   ensure_installed = {
     'bashls',
+    -- 'bufls',
     'clangd',
     'cmake',
     'dockerls',
@@ -43,6 +44,8 @@ mason_null_ls.setup {
     'shellcheck',
     'jq', -- json
     'yamlls',
+    -- 'buf',
+    -- 'protolint',
   },
   -- auto-install configured formatters & linters (with null-ls)
   automatic_installation = true,

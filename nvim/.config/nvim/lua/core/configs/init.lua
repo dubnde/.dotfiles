@@ -1,11 +1,17 @@
+if vim.g.vscode then
+  vim.notify 'Neovim VSCode extension'
+else
+  vim.notify 'Neovim'
+  require 'core.configs.colorscheme'
+  require 'core.configs.treesitter'
+end
+
 require 'core.configs.impatient'
 require 'core.configs.leap'
-require 'core.configs.colorscheme'
 require 'core.configs.lualine'
 require 'core.configs.indent'
 require 'core.configs.nvim-tree'
 require 'core.configs.todo'
-require 'core.configs.treesitter'
 require 'core.configs.telescope'
 require 'core.configs.toggleterm'
 require 'core.configs.nvim-cmp'
@@ -16,5 +22,5 @@ require 'core.configs.lsp.null-ls'
 require 'core.configs.autopairs'
 require 'core.configs.gitsigns'
 require 'core.configs.autocommands'
--- require 'core.configs.nvim-rooter'
--- require 'core.configs.project'
+require 'core.configs.nvim-rooter'
+require 'core.configs.project'
