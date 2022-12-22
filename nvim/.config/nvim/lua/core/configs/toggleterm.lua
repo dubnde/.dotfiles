@@ -9,18 +9,18 @@ toggleterm.setup {
   open_mapping = [[<c-'>]],
   hide_numbers = true,
   autochdir = true,
-  shade_terminals = true,
-  shading_factor = 2,
-  start_in_insert = true,
-  insert_mappings = true,
+  -- shade_terminals = true,
+  -- shading_factor = 2,
+  -- start_in_insert = true,
+  -- insert_mappings = true,
   persist_size = true,
   direction = 'horizontal',
   -- direction = 'float',
-  close_on_exit = true,
-  shell = vim.o.shell,
-  float_bufopts = {
-    border = 'curved',
-  },
+  -- close_on_exit = true,
+  -- shell = vim.o.shell,
+  -- float_bufopts = {
+  --   border = 'curved',
+  -- },
 }
 
 ---@diagnostic disable-next-line: duplicate-set-field

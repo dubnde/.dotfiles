@@ -15,8 +15,9 @@ end
 
 lualine.setup {
   options = {
-    -- theme = custom_gruvbox,
-    icons_enabled = true,
+    icons_enabled = false,
+    component_separators = '|',
+    section_separators = '',
     disabled_filetypes = {},
     always_divide_middle = true,
     globalstatus = false,

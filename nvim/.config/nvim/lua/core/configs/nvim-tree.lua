@@ -12,9 +12,9 @@ nvim_tree.setup {
   renderer = {
     group_empty = true,
   },
-  filters = {
-    dotfiles = true,
-  },
+  -- filters = {
+  --   dotfiles = true,
+  -- },
 }
 local opts = { noremap = true, silent = true }
 

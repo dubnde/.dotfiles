@@ -30,6 +30,11 @@ local on_attach = function(_, bufnr)
   keymap.set('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<CR>', bufopts) -- jump to next diagnostic in buffer
   keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>', bufopts) -- show documentation for what is under cursor
   keymap.set('n', '<leader>o', '<cmd>LSoutlineToggle<CR>', bufopts) -- see outline on right hand side
+
+  -- Create a command `:Format` local to the LSP buffer
+  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    vim.lsp.buf.format()
+  end, { desc = 'Format current buffer with LSP' })
 end
 
 -- Change the Diagnostic symbols in the sign column (gutter)
