@@ -68,8 +68,8 @@ if [ ! -f $HOME/.zfunc/_docker-compose ]; then
 fi
 
 ####################################################
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# [ -f ~/.fd.sh ] && source ~/.fd.sh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fd.sh ] && source ~/.fd.sh
 
 # configure rust environment
 #
