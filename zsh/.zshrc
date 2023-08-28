@@ -52,9 +52,10 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/pkgconfig"
 export CPPFLAGS="-I/opt/homebrew/include"
 
 # TMUX Setup
-if [ -f ~/.tmux/plugins/tmuxifier/bin ]; then
-  export PATH=~/.tmux/plugins/tmuxifier/bin:${PATH}
-  export TMUXIFIER_LAYOUT_PATH="$HOME/.dotfiles/tmux/.tmuxifier-layouts"
+if [[ ! $PATH == *~/.tmux/plugins/tmuxifier/bin* ]]; then
+  export PATH=${PATH:+${PATH}:}~/.tmux/plugins/tmuxifier/bin
+  # So we can add them to git
+  export TMUXIFIER_LAYOUT_PATH=~/.dotfiles/tmux/tmuxifier/layouts
   eval "$(tmuxifier init -)"
 fi
 

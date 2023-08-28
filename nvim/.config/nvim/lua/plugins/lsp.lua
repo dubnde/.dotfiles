@@ -3,40 +3,32 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = { 'hrsh7th/cmp-nvim-lsp' },
     event = { 'BufReadPre', 'BufNewFile' },
+
     config = function()
       -- Setting up on_attach
       local on_attach = function(_, bufnr)
-        local opts = { noremap = true, silent = true, buffer = bufnr }
-        opts.desc = 'Go to declaration'
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-        opts.desc = 'Show LSP definitions'
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-        opts.desc = 'Show documentation for what is under cursor'
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-        opts.desc = 'Show LSP implementations'
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-        opts.desc = 'Smart rename'
-        vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-        opts.desc = 'Smart rename'
-        vim.keymap.set('n', '<space>mv', vim.lsp.buf.rename, opts)
-        opts.desc = 'See available code actions'
-        vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-        opts.desc = 'Show LSP references'
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-        opts.desc = 'Restart LSP'
-        vim.keymap.set('n', '<leader>rs', ':LspRestart<CR>', opts) -- mapping to restart lsp if necessary
+        local function opts(desc)
+          return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        end
+
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts 'Go to declaration')
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts 'Show LSP definitions')
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts 'Show documentation for what is under cursor')
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts 'Show LSP implementations')
+        vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts 'Smart rename')
+        vim.keymap.set('n', '<space>mv', vim.lsp.buf.rename, opts 'Smart rename')
+        vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts 'See available code actions')
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts 'Show LSP references')
+        vim.keymap.set('n', '<leader>rs', ':LspRestart<CR>', opts 'Restart LSP') -- mapping to restart lsp if necessary
 
         vim.keymap.set('n', '<space>==', function()
           vim.lsp.buf.format { async = true }
         end, opts)
 
-        vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-        opts.desc = 'Show line diagnostics'
-        opts.desc = 'Go to previous diagnostic'
-        vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-        opts.desc = 'Go to next diagnostic'
-        vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-        vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+        vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts 'Show line diagnostics')
+        vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts 'Go to previous diagnostic')
+        vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts 'Go to next diagnostic')
+        vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts 'Set local list diagnostics')
       end
 
       local lsp_ok, lspconfig = pcall(require, 'lspconfig')

@@ -13,15 +13,9 @@ return {
     require('mini.pairs').setup()
     require('mini.splitjoin').setup()
     require('mini.surround').setup()
-    require('mini.statusline').setup()
-
-    -- require('mini.basics').setup {
-    --   mappings = {
-    --     option_toggle_prefix = [[<Space>t]],
-    --   },
-    --
-    --   silent = false,
-    -- }
+    require('mini.statusline').setup {
+      use_icons = true,
+    }
 
     local miniclue = require 'mini.clue'
 
