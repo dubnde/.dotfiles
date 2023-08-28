@@ -14,12 +14,18 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- Default settings
 require 'defaults'
 
 -- Load the plugins
-require('lazy').setup 'plugins'
+require('lazy').setup({
+  { import = 'plugins' },
+}, {
+  checker = {
+    enabled = true,
+    notify = false,
+  },
+  change_detection = {
+    notify = false,
+  },
+})

@@ -2,6 +2,7 @@ return {
   'akinsho/toggleterm.nvim',
   version = '*',
   keys = {
+    { "<leader>t'", '<cmd>ToggleTerm<CR>', desc = 'ToggleTerm' },
     { '<leader>tt', '<cmd>ToggleTerm<CR>', desc = 'ToggleTerm' },
   },
   config = function()

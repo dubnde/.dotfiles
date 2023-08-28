@@ -13,7 +13,6 @@ M.servers = {
 }
 
 M.linters = {
-  'prettier',
   'stylua',
   'clang_format',
 }
@@ -24,6 +23,7 @@ M.parsers = {
   'cmake',
   'cpp',
   'dockerfile',
+  'gitignore',
   'html',
   'java',
   'json',
@@ -33,6 +33,7 @@ M.parsers = {
   'python',
   'rust',
   'toml',
+  'vim',
   'yaml',
 }
 

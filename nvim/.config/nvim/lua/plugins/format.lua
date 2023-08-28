@@ -12,7 +12,7 @@ return {
       dependencies = 'nvim-lua/plenary.nvim',
       keys = {
         { '<leader>==', '<cmd>lua vim.lsp.buf.format{ async = true }<cr>', desc = 'Format' },
-        { '<leader>ln', '<cmd>NullLsInfo<cr>',                             desc = 'NullLsInfo' },
+        { '<leader>ln', '<cmd>NullLsInfo<cr>', desc = 'NullLsInfo' },
       },
       config = function()
         -- Using protected call
@@ -35,6 +35,9 @@ return {
             },
             formatting.clang_format,
             formatting.stylua,
+            formatting.shfmt,
+            -- diagnostics.ruff,
+            -- formatting.black,
             formatting.black.with { extra_args = { '--fast' } },
             diagnostics.flake8,
           },

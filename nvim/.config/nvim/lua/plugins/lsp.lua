@@ -1,12 +1,44 @@
 return {
   {
     'neovim/nvim-lspconfig',
-    dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-    },
-    event = 'BufReadPre',
+    dependencies = { 'hrsh7th/cmp-nvim-lsp' },
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
-      -- Using protected call
+      -- Setting up on_attach
+      local on_attach = function(_, bufnr)
+        local opts = { noremap = true, silent = true, buffer = bufnr }
+        opts.desc = 'Go to declaration'
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+        opts.desc = 'Show LSP definitions'
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+        opts.desc = 'Show documentation for what is under cursor'
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        opts.desc = 'Show LSP implementations'
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+        opts.desc = 'Smart rename'
+        vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+        opts.desc = 'Smart rename'
+        vim.keymap.set('n', '<space>mv', vim.lsp.buf.rename, opts)
+        opts.desc = 'See available code actions'
+        vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+        opts.desc = 'Show LSP references'
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+        opts.desc = 'Restart LSP'
+        vim.keymap.set('n', '<leader>rs', ':LspRestart<CR>', opts) -- mapping to restart lsp if necessary
+
+        vim.keymap.set('n', '<space>==', function()
+          vim.lsp.buf.format { async = true }
+        end, opts)
+
+        vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+        opts.desc = 'Show line diagnostics'
+        opts.desc = 'Go to previous diagnostic'
+        vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+        opts.desc = 'Go to next diagnostic'
+        vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+        vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+      end
+
       local lsp_ok, lspconfig = pcall(require, 'lspconfig')
       if not lsp_ok then
         return
@@ -15,32 +47,9 @@ return {
       if not cmp_nvim_ok then
         return
       end
+
       -- Setting up capabilities
       local capabilities = cmp_nvim_lsp.default_capabilities()
-
-      -- Global mappings.
-      -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-      vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-      vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-      vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-      vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-
-      -- Setting up on_attach
-      local on_attach = function(client, bufnr)
-        local opts = { silent = true, buffer = bufnr }
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-        vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-        vim.keymap.set('n', '<space>mv', vim.lsp.buf.rename, opts)
-        vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-        vim.keymap.set('n', '<space>==', function()
-          vim.lsp.buf.format { async = true }
-        end, opts)
-      end
 
       -- Setting up servers
       for _, server in pairs(require('utils').servers) do
@@ -62,15 +71,10 @@ return {
       -- Setting up border for LspInfo
       require('lspconfig.ui.windows').default_options.border = 'rounded'
 
-      -- Setting up icons for diagnostics
-      local signs = {
-        { name = 'DiagnosticSignError', text = '' },
-        { name = 'DiagnosticSignWarn', text = '' },
-        { name = 'DiagnosticSignHint', text = '' },
-        { name = 'DiagnosticSignInfo', text = '󰋽' },
-      }
-      for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
+      local signs = { Error = 'E', Warn = 'W', Hint = 'H', Info = 'I' }
+      for type, icon in pairs(signs) do
+        local hl = 'DiagnosticSign' .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
       end
 
       vim.diagnostic.config {

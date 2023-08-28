@@ -1,33 +1,81 @@
 return {
-  'nvim-treesitter/nvim-treesitter',
-  event = 'BufReadPre',
-  config = function()
-    -- Using protected call
-    local status_ok, treesitter_config = pcall(require, 'nvim-treesitter.configs')
-    if not status_ok then
-      return
-    end
+  {
+    'nvim-treesitter/nvim-treesitter',
+    event = { 'BufReadPre', 'BufNewFile' },
+    build = ':TSUpdate',
+    config = function()
+      -- Using protected call
+      local status_ok, treesitter_config = pcall(require, 'nvim-treesitter.configs')
+      if not status_ok then
+        return
+      end
 
-    treesitter_config.setup {
-      ensure_installed = require('utils').parsers,
-      sync_install = false,
+      treesitter_config.setup {
+        ensure_installed = require('utils').parsers,
+        auto_install = true,
+        highlight = { enable = true },
+        indent = { enable = true },
+        autopairs = { enable = true },
+      }
+    end,
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    event = { 'BufReadPost', 'BufNewFile' },
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
+    config = function()
+      -- Using protected call
+      local status_ok, treesitter_config = pcall(require, 'nvim-treesitter.configs')
+      if not status_ok then
+        return
+      end
 
-      highlight = {
-        enable = true,
-      },
-      indent = { enable = true, disable = { 'python', 'css' } },
+      treesitter_config.setup {
+        textobjects = {
+          select = {
+            enable = true,
 
-      -- Integration with other plugins
-      autopairs = { -- require autopairs plugin
-        enable = true,
-      },
-      autotag = { -- require autotag plugin
-        enable = true,
-      },
-      context_commentstring = { -- require ts-comment string plugin
-        enable = true,
-        enable_autocmd = false,
-      },
-    }
-  end,
+            -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
+
+            keymaps = {
+              -- You can use the capture groups defined in textobjects.scm
+              ['a='] = { query = '@assignment.outer', desc = 'Select outer part of an assignment region' },
+              ['i='] = { query = '@assignment.inner', desc = 'Select inner part of an assignment region' },
+
+              ['a:'] = { query = '@parameter.outer', desc = 'Select outer part of a parameter/field region' },
+              ['i:'] = { query = '@parameter.inner', desc = 'Select inner part of a parameter/field region' },
+
+              ['ai'] = { query = '@conditional.outer', desc = 'Select outer part of a conditional region' },
+              ['ii'] = { query = '@conditional.inner', desc = 'Select inner part of a conditional region' },
+
+              ['al'] = { query = '@loop.outer', desc = 'Select outer part of a loop region' },
+              ['il'] = { query = '@loop.inner', desc = 'Select inner part of a loop region' },
+
+              ['ab'] = { query = '@block.outer', desc = 'Select outer part of a block region' }, -- overrides default text object block of parenthesis to parenthesis
+              ['ib'] = { query = '@block.inner', desc = 'Select inner part of a block region' }, -- overrides default text object block of parenthesis to parenthesis
+
+              ['af'] = { query = '@function.outer', desc = 'Select outer part of a function region' },
+              ['if'] = { query = '@function.inner', desc = 'Select inner part of a function region' },
+
+              ['ac'] = { query = '@class.outer', desc = 'Select outer part of a class region' },
+              ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
+            },
+            include_surrounding_whitespace = true,
+          },
+          swap = {
+            enable = true,
+            swap_next = {
+              ['<leader>on'] = '@parameter.inner', -- swap object under cursor with next
+            },
+            swap_previous = {
+              ['<leader>op'] = '@parameter.inner', -- swap object under cursor with previous
+            },
+          },
+        },
+      }
+    end,
+  },
 }

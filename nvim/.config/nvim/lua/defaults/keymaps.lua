@@ -7,8 +7,8 @@ local opts = { noremap = true, silent = true }
 --Remap space as leader key
 keymap('', '<Space>', '<Nop>', opts)
 
--- vim.g.mapleader = ' '
--- vim.g.maplocalleader = ' '
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- Modes
 --   normal_mode = "n",
@@ -83,12 +83,18 @@ keymap('n', '<leader>+', '<C-a>', opts) -- increment
 keymap('n', '<leader>-', '<C-x>', opts) -- decrement
 
 -- window management
-keymap('n', '<leader>wv', '<C-w>v', opts)        -- split window vertically
-keymap('n', '<leader>wh', '<C-w>s', opts)        -- split window horizontally
-keymap('n', '<leader>w-', '<C-w>s', opts)        -- split window horizontally
-keymap('n', '<leader>wd', ':close<CR>', opts)    -- close current split window
+keymap('n', '<leader>w=', '<C-w>=', opts) -- Equalise
+keymap('n', '<leader>w|', '<C-w>v', opts) -- split vertically
+keymap('n', '<leader>w-', '<C-w>s', opts) -- split horizontally
+keymap('n', '<leader>wv', '<C-w>v', opts) -- split vertically
+keymap('n', '<leader>wh', '<C-w>s', opts) -- split horizontally
+keymap('n', '<leader>wd', '<C-w>c', opts) -- close window
+keymap('n', '<leader>wn', '<C-w>n', opts) -- New window
+keymap('n', '<leader>wo', '<C-w>o', opts) -- Only window
+keymap('n', '<leader>wp', '<C-w>p', opts) -- Previous window
+keymap('n', '<leader>wq', '<C-w>q', opts) -- Quit
 
-keymap('n', '<leader>to', ':tabnew<CR>', opts)   -- open new tab
+keymap('n', '<leader>to', ':tabnew<CR>', opts) -- open new tab
 keymap('n', '<leader>tx', ':tabclose<CR>', opts) -- close current tab
-keymap('n', '<leader>tn', ':tabn<CR>', opts)     --  go to next tab
-keymap('n', '<leader>tp', ':tabp<CR>', opts)     --  go to previous tab
+keymap('n', '<leader>tn', ':tabn<CR>', opts) --  go to next tab
+keymap('n', '<leader>tp', ':tabp<CR>', opts) --  go to previous tab

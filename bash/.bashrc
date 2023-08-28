@@ -114,6 +114,11 @@ fi
 export PATH=${HOME}/.local/bin:${PATH}
 export PATH=${HOME}/.gem/ruby/2.7.0/bin:${PATH}
 
+if [ -f ~/.tmux/plugins/tmuxifier/bin ]; then
+  export PATH=~/.tmux/plugins/tmuxifier/bin:${PATH}
+  export TMUXIFIER_LAYOUT_PATH="$HOME/.dotfiles/tmux/.tmuxifier-layouts"
+  eval "$(tmuxifier init -)"
+fi
 
 # Virtualenvwrapper settings:
 export WORKON_HOME=$HOME/.virtualenvs
