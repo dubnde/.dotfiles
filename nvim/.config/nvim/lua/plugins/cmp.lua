@@ -6,6 +6,7 @@ return {
     { 'hrsh7th/cmp-buffer' },
     { 'hrsh7th/cmp-path' },
     { 'saadparwaiz1/cmp_luasnip' },
+    {'Saecki/crates.nvim', event = { 'BufRead Cargo.toml' },},
   },
   event = 'InsertEnter',
   config = function()
@@ -19,6 +20,7 @@ return {
       return
     end
 
+    ---@diagnostic disable-next-line: missing-fields
     cmp.setup {
       snippet = {
         expand = function(args)
@@ -29,6 +31,7 @@ return {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },
+      ---@diagnostic disable-next-line: missing-fields
       formatting = {
         fields = { 'menu', 'abbr', 'kind' },
         format = function(entry, item)
@@ -37,7 +40,7 @@ return {
             nvim_lua = 'LUA',
             luasnip = 'SNIP',
             buffer = 'BUF',
-            path = 'BUF',
+            path = 'PATH',
           }
           item.menu = menu_icon[entry.source.name]
           return item
@@ -59,6 +62,7 @@ return {
         { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
+        { name = 'crates' },
       },
       experimental = {
         ghost_text = false,

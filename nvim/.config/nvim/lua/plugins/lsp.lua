@@ -35,12 +35,10 @@ return {
         bufmapn('<leader>ls', ':LspRestart<CR>', 'Restart LSP', bufnr)
         bufmapn('<leader>lf', ':Format<CR>', 'Format', bufnr)
         bufmapn('<leader>==', ':Format<CR>', 'Format', bufnr)
-
-        -- use trouble.nvim for diganostics
-        -- bufmapn('<space>dd', vim.diagnostic.open_float, 'Show line diagnostics', bufnr)
-        -- bufmapn('[d', vim.diagnostic.goto_prev, 'Go to previous diagnostic', bufnr)
-        -- bufmapn(']d', vim.diagnostic.goto_next, 'Go to next diagnostic', bufnr)
-        -- bufmapn('<space>dq', vim.diagnostic.setloclist, 'Set local list diagnostics', bufnr)
+        bufmapn('<space>dd', vim.diagnostic.open_float, 'Show line diagnostics', bufnr)
+        bufmapn('[d', vim.diagnostic.goto_prev, 'Go to previous diagnostic', bufnr)
+        bufmapn(']d', vim.diagnostic.goto_next, 'Go to next diagnostic', bufnr)
+        bufmapn('<space>dq', vim.diagnostic.setloclist, 'Set local list diagnostics', bufnr)
       end
 
       -- Setting up capabilities
@@ -105,8 +103,6 @@ return {
 
       -- Setting up lua server
       lspconfig.lua_ls.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
         settings = {
           Lua = {
             workspace = { checkThirdParty = false },
@@ -114,6 +110,51 @@ return {
           },
         },
       }
+
+      lspconfig.rust_analyzer.setup {
+        -- keys = {
+        --   { 'K', '<cmd>RustHoverActions<cr>', desc = 'Hover Actions (Rust)' },
+        --   { '<leader>ca', '<cmd>RustCodeAction<cr>', desc = 'Code Action (Rust)' },
+        -- },
+        settings = {
+          ['rust-analyzer'] = {
+            cargo = {
+              allFeatures = true,
+              loadOutDirsFromCheck = true,
+              runBuildScripts = true,
+            },
+            -- Add clippy lints for Rust.
+            checkOnSave = {
+              allFeatures = true,
+              command = 'clippy',
+              extraArgs = { '--no-deps' },
+            },
+            procMacro = {
+              enable = true,
+              ignored = {
+                ['async-trait'] = { 'async_trait' },
+                ['napi-derive'] = { 'napi' },
+                ['async-recursion'] = { 'async_recursion' },
+              },
+            },
+          },
+        },
+      }
+      -- lspconfig.taplo.setup {
+      --   keys = {
+      --     {
+      --       'K',
+      --       function()
+      --         if vim.fn.expand '%:t' == 'Cargo.toml' and require('crates').popup_available() then
+      --           require('crates').show_popup()
+      --         else
+      --           vim.lsp.buf.hover()
+      --         end
+      --       end,
+      --       desc = 'Show Crate Documentation',
+      --     },
+      --   },
+      -- }
     end,
   },
 }
