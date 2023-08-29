@@ -1,5 +1,6 @@
 return {
   'junegunn/fzf.vim',
+  enabled = IS_LINUX,
   dependencies = { 'junegunn/fzf' },
   keys = {
     { '<leader><leader>', '<cmd>Commands<CR>', desc = 'Commands' },

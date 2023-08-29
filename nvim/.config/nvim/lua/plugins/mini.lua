@@ -2,65 +2,50 @@ return {
   'echasnovski/mini.nvim',
   version = false,
   event = 'VeryLazy',
+  -- stylua: ignore
+  keys = {
+    { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
+    { "<leader>bD", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
+  },
   config = function()
     require('mini.ai').setup()
     require('mini.align').setup()
     require('mini.animate').setup()
-    require('mini.bufremove').setup()
+    require('mini.bufremove').setup {}
     require('mini.comment').setup()
     require('mini.cursorword').setup()
+
+    -- Active indent guide and indent text objects. When you're browsing
+    -- code, this highlights the current level of indentation, and animates
+    -- the highlighting.
+    require('mini.indentscope').setup {
+      opts = {
+        symbol = '│',
+        options = { try_as_border = true },
+      },
+      init = function()
+        vim.api.nvim_create_autocmd('FileType', {
+          pattern = {
+            'help',
+            'neo-tree',
+            'Trouble',
+            'lazy',
+            'mason',
+            'toggleterm',
+          },
+          callback = function()
+            vim.b.miniindentscope_disable = true
+          end,
+        })
+      end,
+    }
+
     require('mini.operators').setup()
     require('mini.pairs').setup()
     require('mini.splitjoin').setup()
     require('mini.surround').setup()
     require('mini.statusline').setup {
       use_icons = true,
-    }
-
-    local miniclue = require 'mini.clue'
-
-    miniclue.setup {
-      triggers = {
-        -- Leader triggers
-        { mode = 'n', keys = '<Leader>' },
-        { mode = 'x', keys = '<Leader>' },
-
-        -- Built-in completion
-        { mode = 'i', keys = '<C-x>' },
-
-        -- `g` key
-        { mode = 'n', keys = 'g' },
-        { mode = 'x', keys = 'g' },
-
-        -- Marks
-        { mode = 'n', keys = "'" },
-        { mode = 'n', keys = '`' },
-        { mode = 'x', keys = "'" },
-        { mode = 'x', keys = '`' },
-
-        -- Registers
-        { mode = 'n', keys = '"' },
-        { mode = 'x', keys = '"' },
-        { mode = 'i', keys = '<C-r>' },
-        { mode = 'c', keys = '<C-r>' },
-
-        -- Window commands
-        { mode = 'n', keys = '<C-w>' },
-
-        -- `z` key
-        { mode = 'n', keys = 'z' },
-        { mode = 'x', keys = 'z' },
-      },
-
-      clues = {
-        -- Enhance this by adding descriptions for <Leader> mapping groups
-        miniclue.gen_clues.builtin_completion(),
-        miniclue.gen_clues.g(),
-        miniclue.gen_clues.marks(),
-        miniclue.gen_clues.registers(),
-        miniclue.gen_clues.windows(),
-        miniclue.gen_clues.z(),
-      },
     }
   end,
 }

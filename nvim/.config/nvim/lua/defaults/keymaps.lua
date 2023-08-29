@@ -43,9 +43,9 @@ keymap('n', '<leader>nh', '<cmd>nohlsearch<CR>', opts)
 -- delete single character without copying into register
 keymap('n', 'x', '"_x', opts)
 
--- Close buffers
-keymap('n', '<leader>bd', '<cmd>:bd<CR>', opts)
-keymap('n', '<leader>bD', '<cmd>Bdelete!<CR>', opts)
+-- Close buffers - use mini.bufremove
+-- keymap('n', '<leader>bd', '<cmd>:bd<CR>', opts)
+-- keymap('n', '<leader>bD', '<cmd>Bdelete!<CR>', opts)
 
 -- Write file
 keymap('n', '<leader>fs', '<cmd>:write<CR>', opts)
