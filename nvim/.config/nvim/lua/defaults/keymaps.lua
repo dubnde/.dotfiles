@@ -1,11 +1,56 @@
--- Shorten function name
-local keymap = vim.keymap.set
+_G.bufmap = function(modes, lhs, rhs, desc, bufnr)
+  vim.keymap.set(modes, lhs, rhs, {
+    desc = desc,
+    buffer = bufnr,
+    noremap = true,
+    silent = true,
+    nowait = true,
+  })
+end
 
--- Silent keymap option
-local opts = { noremap = true, silent = true }
+_G.bufmapn = function(lhs, rhs, desc, bufnr)
+  bufmap('n', lhs, rhs, desc, bufnr)
+end
+
+_G.bufmapv = function(lhs, rhs, desc, bufnr)
+  bufmap('v', lhs, rhs, desc, bufnr)
+end
+
+_G.bufmapi = function(lhs, rhs, desc, bufnr)
+  bufmap('i', lhs, rhs, desc, bufnr)
+end
+
+_G.bufmapx = function(lhs, rhs, desc, bufnr)
+  bufmap('x', lhs, rhs, desc, bufnr)
+end
+
+_G.map = function(modes, lhs, rhs, desc)
+  vim.keymap.set(modes, lhs, rhs, {
+    desc = desc,
+    noremap = true,
+    silent = true,
+    nowait = true,
+  })
+end
+
+_G.mapn = function(lhs, rhs, desc)
+  map('n', lhs, rhs, desc)
+end
+
+_G.mapv = function(lhs, rhs, desc)
+  map('v', lhs, rhs, desc)
+end
+
+_G.mapi = function(lhs, rhs, desc)
+  map('i', lhs, rhs, desc)
+end
+
+_G.mapx = function(lhs, rhs, desc)
+  map('x', lhs, rhs, desc)
+end
 
 --Remap space as leader key
-keymap('', '<Space>', '<Nop>', opts)
+map('', '<Space>', '<Nop>', '')
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -20,81 +65,73 @@ vim.g.maplocalleader = ' '
 
 -- Normal --
 -- Better window navigation
-keymap('n', '<C-h>', '<C-w>h', opts)
-keymap('n', '<C-j>', '<C-w>j', opts)
-keymap('n', '<C-k>', '<C-w>k', opts)
-keymap('n', '<C-l>', '<C-w>l', opts)
+mapn('<C-h>', '<C-w>h', 'Left Window')
+mapn('<C-j>', '<C-w>j', 'Lower Window')
+mapn('<C-k>', '<C-w>k', 'Upper Window')
+mapn('<C-l>', '<C-w>l', 'Right Window')
 
 -- Resize with arrows
-keymap('n', '<C-Up>', ':resize -2<CR>', opts)
-keymap('n', '<C-Down>', ':resize +2<CR>', opts)
-keymap('n', '<C-Left>', ':vertical resize -2<CR>', opts)
-keymap('n', '<C-Right>', ':vertical resize +2<CR>', opts)
+mapn('<C-Up>', ':resize -2<CR>', '')
+mapn('<C-Down>', ':resize +2<CR>', '')
+mapn('<C-Left>', ':vertical resize -2<CR>', '')
+mapn('<C-Right>', ':vertical resize +2<CR>', '')
 
 -- Navigate buffers
-keymap('n', '<S-l>', ':bnext<CR>', opts)
-keymap('n', '<S-h>', ':bprevious<CR>', opts)
-keymap('n', '<TAB>', ':bnext<CR>', opts)
-keymap('n', '<S-TAB>', ':bprevious<CR>', opts)
+mapn('<S-l>', ':bnext<CR>', 'Next Buffer')
+mapn('<S-h>', ':bprevious<CR>', 'Previous Buffer')
+mapn('<TAB>', ':bnext<CR>', 'Next Buffer')
+mapn('<S-TAB>', ':bprevious<CR>', 'Previous Buffer')
 
 -- Clear highlights
-keymap('n', '<leader>nh', '<cmd>nohlsearch<CR>', opts)
+mapn('<leader>nh', '<cmd>nohlsearch<CR>', 'Clear Highlight')
 
 -- delete single character without copying into register
-keymap('n', 'x', '"_x', opts)
-
--- Close buffers - use mini.bufremove
--- keymap('n', '<leader>bd', '<cmd>:bd<CR>', opts)
--- keymap('n', '<leader>bD', '<cmd>Bdelete!<CR>', opts)
+map({ 'x' }, '"_x', 'Delete Single Character')
 
 -- Write file
-keymap('n', '<leader>fs', '<cmd>:write<CR>', opts)
-keymap('n', '<leader>fw', '<cmd>:write<CR>', opts)
-keymap('n', '<leader>fS', '<cmd>:wa<CR>', opts)
-keymap('n', '<leader>fW', '<cmd>:wa<CR>', opts)
+mapn('<leader>fs', '<cmd>:write<CR>', 'Write File')
+mapn('<leader>fw', '<cmd>:write<CR>', 'Write File')
+mapn('<leader>fS', '<cmd>:wa<CR>', 'Write all files')
+mapn('<leader>fW', '<cmd>:wa<CR>', 'Write all files')
 
--- Safe quit
-keymap('n', '<Leader>qq', ':quitall<CR>', opts)
-
--- Force quit
-keymap('n', '<Leader>Q', ':quitall!<CR>', opts)
+mapn('<Leader>qq', ':quitall<CR>', 'Safe Quit')
+mapn('<Leader>Q', ':quitall!<CR>', 'Force Quit')
 
 -- Better paste
-keymap('v', 'p', '"_dP', opts)
+mapv('p', '"_dP', 'Better Paste')
 
 -- Insert --
 -- Press jk fast to enter
-keymap('i', 'jk', '<ESC>', opts)
-keymap('v', 'jk', '<ESC>', opts)
+map({ 'i', 'v', 'x' }, 'jk', '<ESC>', 'Escape')
 
 -- Visual --
 -- Stay in indent mode
-keymap('v', '<', '<gv', opts)
-keymap('v', '>', '>gv', opts)
+mapv('<', '<gv', 'Shift left visual')
+mapv('>', '>gv', 'Shift right visual')
 
 -- Search will center on the line it's found in
-keymap('n', 'n', 'nzzzv', opts)
-keymap('n', 'N', 'Nzzzv', opts)
-keymap('n', '#', '#zz', opts)
-keymap('n', '*', '*zz', opts)
+mapn('n', 'nzzzv', '')
+mapn('N', 'Nzzzv', '')
+mapn('#', '#zz', '')
+mapn('*', '*zz', '')
 
 -- increment/decrement numbers
-keymap('n', '<leader>+', '<C-a>', opts) -- increment
-keymap('n', '<leader>-', '<C-x>', opts) -- decrement
+mapn('<leader>+', '<C-a>', 'increment')
+mapn('<leader>-', '<C-x>', 'decrement')
 
 -- window management
-keymap('n', '<leader>w=', '<C-w>=', opts) -- Equalise
-keymap('n', '<leader>w|', '<C-w>v', opts) -- split vertically
-keymap('n', '<leader>w-', '<C-w>s', opts) -- split horizontally
-keymap('n', '<leader>wv', '<C-w>v', opts) -- split vertically
-keymap('n', '<leader>wh', '<C-w>s', opts) -- split horizontally
-keymap('n', '<leader>wd', '<C-w>c', opts) -- close window
-keymap('n', '<leader>wn', '<C-w>n', opts) -- New window
-keymap('n', '<leader>wo', '<C-w>o', opts) -- Only window
-keymap('n', '<leader>wp', '<C-w>p', opts) -- Previous window
-keymap('n', '<leader>wq', '<C-w>q', opts) -- Quit
+mapn('<leader>w=', '<C-w>=', 'Equalise')
+mapn('<leader>w|', '<C-w>v', 'split vertically')
+mapn('<leader>w-', '<C-w>s', 'split horizontally')
+mapn('<leader>wv', '<C-w>v', 'split vertically')
+mapn('<leader>wh', '<C-w>s', 'split horizontally')
+mapn('<leader>wd', '<C-w>c', 'close window')
+mapn('<leader>wn', '<C-w>n', 'New window')
+mapn('<leader>wo', '<C-w>o', 'Only window')
+mapn('<leader>wp', '<C-w>p', 'Previous window')
+mapn('<leader>wq', '<C-w>q', 'Quit')
 
-keymap('n', '<leader>to', ':tabnew<CR>', opts) -- open new tab
-keymap('n', '<leader>tx', ':tabclose<CR>', opts) -- close current tab
-keymap('n', '<leader>tn', ':tabn<CR>', opts) --  go to next tab
-keymap('n', '<leader>tp', ':tabp<CR>', opts) --  go to previous tab
+mapn('<leader>to', ':tabnew<CR>', 'New tab')
+mapn('<leader>tx', ':tabclose<CR>', 'Close tab')
+mapn('<leader>tn', ':tabnext<CR>', 'Next tab')
+mapn('<leader>tp', ':tabprevious<CR>', 'Previous tab')

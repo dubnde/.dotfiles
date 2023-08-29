@@ -1,5 +1,10 @@
 return {
   'nvim-tree/nvim-tree.lua',
+  keys = {
+    { '<leader>et', '<cmd>NvimTreeToggle<CR>', desc = 'Toggle file explorer' },
+    { '<leader>ef', '<cmd>NvimTreeFocus<CR>', desc = 'Focus file explorer' },
+    { '<leader>ee', '<cmd>NvimTreeFindFileToggle<CR>', desc = 'Toggle file explorer on current file' },
+  },
   config = function()
     local nvimtree = require 'nvim-tree'
 
@@ -51,12 +56,5 @@ return {
         },
       },
     }
-
-    -- set keymaps
-    local keymap = vim.keymap -- for conciseness
-
-    keymap.set('n', '<leader>et', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle file explorer' }) -- toggle file explorer
-    keymap.set('n', '<leader>ef', '<cmd>NvimTreeFocus<CR>', { desc = 'Focus file explorer' }) -- toggle file explorer
-    keymap.set('n', '<leader>ee', '<cmd>NvimTreeFindFileToggle<CR>', { desc = 'Toggle file explorer on current file' }) -- toggle file explorer on current file
   end,
 }
