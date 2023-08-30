@@ -3,7 +3,24 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       { 'hrsh7th/cmp-nvim-lsp' },
-      { 'folke/neodev.nvim', opts = {} },
+      {
+        'folke/neodev.nvim',
+        opts = {
+          library = {
+            enabled = true,
+            runtime = true,
+            types = true,
+            plugins = {
+              'nvim-treesitter',
+              'plenary.nvim',
+              'telescope.nvim',
+            },
+          },
+          setup_jsonls = true,
+          lspconfig = true,
+          plugins = true,
+        },
+      },
     },
     event = { 'BufReadPre', 'BufNewFile' },
 
@@ -34,6 +51,7 @@ return {
         bufmapn('gr', vim.lsp.buf.references, 'Show LSP references', bufnr)
         bufmapn('<leader>ls', ':LspRestart<CR>', 'Restart LSP', bufnr)
         bufmapn('<leader>lf', ':Format<CR>', 'Format', bufnr)
+        bufmapn('<leader>l=', ':Format<CR>', 'Format', bufnr)
         bufmapn('<leader>==', ':Format<CR>', 'Format', bufnr)
         bufmapn('<space>dd', vim.diagnostic.open_float, 'Show line diagnostics', bufnr)
         bufmapn('[d', vim.diagnostic.goto_prev, 'Go to previous diagnostic', bufnr)
@@ -103,6 +121,8 @@ return {
 
       -- Setting up lua server
       lspconfig.lua_ls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
         settings = {
           Lua = {
             workspace = { checkThirdParty = false },
@@ -112,6 +132,8 @@ return {
       }
 
       lspconfig.rust_analyzer.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
         -- keys = {
         --   { 'K', '<cmd>RustHoverActions<cr>', desc = 'Hover Actions (Rust)' },
         --   { '<leader>ca', '<cmd>RustCodeAction<cr>', desc = 'Code Action (Rust)' },
