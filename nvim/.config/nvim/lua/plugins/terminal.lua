@@ -2,8 +2,11 @@ return {
   'akinsho/toggleterm.nvim',
   version = '*',
   keys = {
-    { "<leader>'", '<cmd>ToggleTerm<CR>', desc = 'ToggleTerm' },
-    { '<leader>tt', '<cmd>ToggleTerm<CR>', desc = 'ToggleTerm' },
+    { "<leader>'",  '<cmd>ToggleTerm<CR>',                      desc = 'ToggleTerm' },
+    { '<leader>tt', '<cmd>ToggleTerm<CR>',                      desc = 'ToggleTerm' },
+    { '<leader>tf', '<cmd>ToggleTerm direction=float<CR>',      desc = 'ToggleTerm Float' },
+    { '<leader>th', '<cmd>ToggleTerm direction=horizontal<CR>', desc = 'ToggleTerm horizontal' },
+    { '<leader>tv', '<cmd>ToggleTerm direction=vertical<CR>',   desc = 'ToggleTerm vertical' },
   },
   config = function()
     local terminal = require 'toggleterm'
@@ -19,6 +22,7 @@ return {
       end,
 
       start_in_insert = true,
+      close_on_exit = true,
     }
 
     function _G.set_terminal_keymaps()
