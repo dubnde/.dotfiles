@@ -140,6 +140,7 @@ mapn('<leader>wm', '<Cmd>wincmd o<CR>', 'Only window')
 mapn('<leader>wp', '<Cmd>wincmd p<CR>', 'Previous window')
 mapn('<leader>wq', '<Cmd>wincmd q<CR>', 'Quit')
 mapn('<leader>ww', '<Cmd>wincmd p<CR>', 'Previous window')
+mapn('<leader>wt', '<Cmd>wincmd T<CR>', 'Move to tab')
 
 mapn('<leader>to', ':tabnew<CR>', 'New tab')
 mapn('<leader>tx', ':tabclose<CR>', 'Close tab')

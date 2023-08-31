@@ -10,9 +10,6 @@ return {
     {
       'jose-elias-alvarez/null-ls.nvim',
       dependencies = 'nvim-lua/plenary.nvim',
-      -- keys = {
-      --   { '<leader>==', '<cmd>lua vim.lsp.buf.format{ async = true }<cr>', desc = 'Format' },
-      -- },
       config = function()
         local null_ls = require 'null-ls'
 

@@ -1,10 +1,7 @@
 return {
   {
     'neovim/nvim-lspconfig',
-    dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      { 'folke/neodev.nvim', opts = {} },
-    },
+    dependencies = { 'hrsh7th/cmp-nvim-lsp' },
     event = { 'BufReadPre', 'BufNewFile' },
 
     config = function()
@@ -29,10 +26,10 @@ return {
         bufmapn('<leader>lf', ':Format<CR>', 'Format', bufnr)
         bufmapn('<leader>l=', ':Format<CR>', 'Format', bufnr)
         bufmapn('<leader>==', ':Format<CR>', 'Format', bufnr)
-        bufmapn('<space>dd', vim.diagnostic.open_float, 'Show line diagnostics', bufnr)
-        bufmapn('[d', vim.diagnostic.goto_prev, 'Go to previous diagnostic', bufnr)
-        bufmapn(']d', vim.diagnostic.goto_next, 'Go to next diagnostic', bufnr)
-        bufmapn('<space>dq', vim.diagnostic.setloclist, 'Set local list diagnostics', bufnr)
+        bufmapn('<space>xe', vim.diagnostic.open_float, 'Show line diagnostics', bufnr)
+        bufmapn('[x', vim.diagnostic.goto_prev, 'Go to previous diagnostic', bufnr)
+        bufmapn(']x', vim.diagnostic.goto_next, 'Go to next diagnostic', bufnr)
+        bufmapn('<space>xq', vim.diagnostic.setloclist, 'Set local list diagnostics', bufnr)
       end
 
       -- Setting up capabilities
@@ -103,28 +100,28 @@ return {
         },
       }
 
-      lspconfig.rust_analyzer.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = {
-          ['rust-analyzer'] = {
-            cargo = { allFeatures = true, loadOutDirsFromCheck = true, runBuildScripts = true },
-            checkOnSave = {
-              allFeatures = true,
-              command = 'clippy',
-              extraArgs = { '--no-deps' },
-            },
-            procMacro = {
-              enable = true,
-              ignored = {
-                ['async-trait'] = { 'async_trait' },
-                ['napi-derive'] = { 'napi' },
-                ['async-recursion'] = { 'async_recursion' },
-              },
-            },
-          },
-        },
-      }
+      -- lspconfig.rust_analyzer.setup {
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   settings = {
+      --     ['rust-analyzer'] = {
+      --       cargo = { allFeatures = true, loadOutDirsFromCheck = true, runBuildScripts = true },
+      --       checkOnSave = {
+      --         allFeatures = true,
+      --         command = 'clippy',
+      --         extraArgs = { '--no-deps' },
+      --       },
+      --       procMacro = {
+      --         enable = true,
+      --         ignored = {
+      --           ['async-trait'] = { 'async_trait' },
+      --           ['napi-derive'] = { 'napi' },
+      --           ['async-recursion'] = { 'async_recursion' },
+      --         },
+      --       },
+      --     },
+      --   },
+      -- }
     end,
   },
 }

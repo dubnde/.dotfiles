@@ -14,6 +14,8 @@ return {
       ['<leader><tab>'] = { name = '+tabs' },
       ['<leader>b'] = { name = '+buffer' },
       ['<leader>c'] = { name = '+code' },
+      ['<leader>d'] = { name = '+debug' },
+      ['<leader>da'] = { name = '+adapters' },
       ['<leader>e'] = { name = '+explorer' },
       ['<leader>f'] = { name = '+file/find' },
       ['<leader>g'] = { name = '+git' },
