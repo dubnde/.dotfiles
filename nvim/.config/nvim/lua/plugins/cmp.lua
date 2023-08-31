@@ -6,19 +6,13 @@ return {
     { 'hrsh7th/cmp-buffer' },
     { 'hrsh7th/cmp-path' },
     { 'saadparwaiz1/cmp_luasnip' },
-    {'Saecki/crates.nvim', event = { 'BufRead Cargo.toml' },},
+    { 'Saecki/crates.nvim',      event = { 'BufRead Cargo.toml' } },
   },
   event = 'InsertEnter',
   config = function()
     -- Using protected call
-    local cmp_ok, cmp = pcall(require, 'cmp')
-    if not cmp_ok then
-      return
-    end
-    local luasnip_ok, luasnip = pcall(require, 'luasnip')
-    if not luasnip_ok then
-      return
-    end
+    local cmp = require 'cmp'
+    local luasnip = require 'luasnip'
 
     ---@diagnostic disable-next-line: missing-fields
     cmp.setup {

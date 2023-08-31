@@ -2,38 +2,14 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      { 'hrsh7th/cmp-nvim-lsp' },
-      {
-        'folke/neodev.nvim',
-        opts = {
-          library = {
-            enabled = true,
-            runtime = true,
-            types = true,
-            plugins = {
-              'nvim-treesitter',
-              'plenary.nvim',
-              'telescope.nvim',
-            },
-          },
-          setup_jsonls = true,
-          lspconfig = true,
-          plugins = true,
-        },
-      },
+      'hrsh7th/cmp-nvim-lsp',
+      { 'folke/neodev.nvim', opts = {} },
     },
     event = { 'BufReadPre', 'BufNewFile' },
 
     config = function()
-      local lsp_ok, lspconfig = pcall(require, 'lspconfig')
-      if not lsp_ok then
-        return
-      end
-
-      local cmp_nvim_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-      if not cmp_nvim_ok then
-        return
-      end
+      local lspconfig = require 'lspconfig'
+      local cmp_nvim_lsp = require 'cmp_nvim_lsp'
 
       -- Setting up on_attach
       local on_attach = function(_, bufnr)
@@ -64,17 +40,12 @@ return {
 
       -- Setting up servers
       for _, server in pairs(require('utils').servers) do
-        Opts = {
+        local Opts = {
           on_attach = on_attach,
           capabilities = capabilities,
         }
 
         server = vim.split(server, '@')[1]
-
-        local require_ok, conf_opts = pcall(require, 'settings.' .. server)
-        if require_ok then
-          Opts = vim.tbl_deep_extend('force', conf_opts, Opts)
-        end
 
         lspconfig[server].setup(Opts)
       end
@@ -127,6 +98,7 @@ return {
           Lua = {
             workspace = { checkThirdParty = false },
             telemetry = { enable = false },
+            completion = { callSnippet = 'Replace' },
           },
         },
       }
@@ -134,18 +106,9 @@ return {
       lspconfig.rust_analyzer.setup {
         on_attach = on_attach,
         capabilities = capabilities,
-        -- keys = {
-        --   { 'K', '<cmd>RustHoverActions<cr>', desc = 'Hover Actions (Rust)' },
-        --   { '<leader>ca', '<cmd>RustCodeAction<cr>', desc = 'Code Action (Rust)' },
-        -- },
         settings = {
           ['rust-analyzer'] = {
-            cargo = {
-              allFeatures = true,
-              loadOutDirsFromCheck = true,
-              runBuildScripts = true,
-            },
-            -- Add clippy lints for Rust.
+            cargo = { allFeatures = true, loadOutDirsFromCheck = true, runBuildScripts = true },
             checkOnSave = {
               allFeatures = true,
               command = 'clippy',
@@ -162,21 +125,6 @@ return {
           },
         },
       }
-      -- lspconfig.taplo.setup {
-      --   keys = {
-      --     {
-      --       'K',
-      --       function()
-      --         if vim.fn.expand '%:t' == 'Cargo.toml' and require('crates').popup_available() then
-      --           require('crates').show_popup()
-      --         else
-      --           vim.lsp.buf.hover()
-      --         end
-      --       end,
-      --       desc = 'Show Crate Documentation',
-      --     },
-      --   },
-      -- }
     end,
   },
 }

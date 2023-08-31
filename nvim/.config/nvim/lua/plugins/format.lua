@@ -10,16 +10,11 @@ return {
     {
       'jose-elias-alvarez/null-ls.nvim',
       dependencies = 'nvim-lua/plenary.nvim',
-      keys = {
-        { '<leader>==', '<cmd>lua vim.lsp.buf.format{ async = true }<cr>', desc = 'Format' },
-        { '<leader>ln', '<cmd>NullLsInfo<cr>', desc = 'NullLsInfo' },
-      },
+      -- keys = {
+      --   { '<leader>==', '<cmd>lua vim.lsp.buf.format{ async = true }<cr>', desc = 'Format' },
+      -- },
       config = function()
-        -- Using protected call
-        local null_ls_status_ok, null_ls = pcall(require, 'null-ls')
-        if not null_ls_status_ok then
-          return
-        end
+        local null_ls = require 'null-ls'
 
         local formatting = null_ls.builtins.formatting
         local diagnostics = null_ls.builtins.diagnostics
@@ -36,8 +31,6 @@ return {
             formatting.clang_format,
             formatting.stylua,
             formatting.shfmt,
-            -- diagnostics.ruff,
-            -- formatting.black,
             formatting.black.with { extra_args = { '--fast' } },
             diagnostics.flake8,
           },

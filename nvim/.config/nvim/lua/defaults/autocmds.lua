@@ -37,3 +37,11 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
   end,
 })
+
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = augroup 'Format',
+  pattern = '*.rs',
+  callback = function()
+    vim.lsp.buf.format { timeout_ms = 200 }
+  end,
+})

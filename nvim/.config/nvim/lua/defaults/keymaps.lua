@@ -24,6 +24,10 @@ _G.bufmapx = function(lhs, rhs, desc, bufnr)
   bufmap('x', lhs, rhs, desc, bufnr)
 end
 
+_G.bufmapt = function(lhs, rhs, desc, bufnr)
+  bufmap('t', lhs, rhs, desc, bufnr)
+end
+
 _G.map = function(modes, lhs, rhs, desc)
   vim.keymap.set(modes, lhs, rhs, {
     desc = desc,
@@ -47,6 +51,10 @@ end
 
 _G.mapx = function(lhs, rhs, desc)
   map('x', lhs, rhs, desc)
+end
+
+_G.mapt = function(lhs, rhs, desc)
+  map('t', lhs, rhs, desc)
 end
 
 --Remap space as leader key
@@ -102,7 +110,7 @@ mapv('p', '"_dP', 'Better Paste')
 
 -- Insert --
 -- Press jk fast to enter
-map({ 'i', 'v', 'x' }, 'jk', '<ESC>', 'Escape')
+map({ 'i', 'v', 'x', 't' }, 'jk', '<ESC>', 'Escape')
 
 -- Visual --
 -- Stay in indent mode
@@ -120,16 +128,18 @@ mapn('<leader>+', '<C-a>', 'increment')
 mapn('<leader>-', '<C-x>', 'decrement')
 
 -- window management
-mapn('<leader>w=', '<C-w>=', 'Equalise')
-mapn('<leader>w|', '<C-w>v', 'split vertically')
-mapn('<leader>w-', '<C-w>s', 'split horizontally')
-mapn('<leader>wv', '<C-w>v', 'split vertically')
-mapn('<leader>wh', '<C-w>s', 'split horizontally')
-mapn('<leader>wd', '<C-w>c', 'close window')
-mapn('<leader>wn', '<C-w>n', 'New window')
-mapn('<leader>wo', '<C-w>o', 'Only window')
-mapn('<leader>wp', '<C-w>p', 'Previous window')
-mapn('<leader>wq', '<C-w>q', 'Quit')
+mapn('<leader>w=', '<Cmd>wincmd =<CR>', 'Equalise')
+mapn('<leader>w|', '<Cmd>wincmd v<CR>', 'split vertically')
+mapn('<leader>w-', '<Cmd>wincmd s<CR>', 'split horizontally')
+mapn('<leader>wv', '<Cmd>wincmd v<CR>', 'split vertically')
+mapn('<leader>wh', '<Cmd>wincmd s<CR>', 'split horizontally')
+mapn('<leader>wd', '<Cmd>wincmd c<CR>', 'close window')
+mapn('<leader>wn', '<Cmd>wincmd n<CR>', 'New window')
+mapn('<leader>wo', '<Cmd>wincmd o<CR>', 'Only window')
+mapn('<leader>wm', '<Cmd>wincmd o<CR>', 'Only window')
+mapn('<leader>wp', '<Cmd>wincmd p<CR>', 'Previous window')
+mapn('<leader>wq', '<Cmd>wincmd q<CR>', 'Quit')
+mapn('<leader>ww', '<Cmd>wincmd p<CR>', 'Previous window')
 
 mapn('<leader>to', ':tabnew<CR>', 'New tab')
 mapn('<leader>tx', ':tabclose<CR>', 'Close tab')

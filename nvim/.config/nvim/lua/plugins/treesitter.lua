@@ -4,11 +4,7 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     build = ':TSUpdate',
     config = function()
-      -- Using protected call
-      local status_ok, treesitter_config = pcall(require, 'nvim-treesitter.configs')
-      if not status_ok then
-        return
-      end
+      local treesitter_config = require 'nvim-treesitter.configs'
 
       ---@diagnostic disable-next-line: missing-fields
       treesitter_config.setup {
@@ -28,10 +24,7 @@ return {
     },
     config = function()
       -- Using protected call
-      local status_ok, treesitter_config = pcall(require, 'nvim-treesitter.configs')
-      if not status_ok then
-        return
-      end
+      local treesitter_config = require 'nvim-treesitter.configs'
 
       ---@diagnostic disable-next-line: missing-fields
       treesitter_config.setup {
