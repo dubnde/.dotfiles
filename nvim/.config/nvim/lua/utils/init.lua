@@ -14,9 +14,9 @@ M.servers = {
   'cmake',
   'html',
   'jsonls',
-  -- 'lua_ls',
+  'lua_ls',
   'pyright',
-  -- 'rust_analyzer',
+  'rust_analyzer',
   'taplo',
   'yamlls',
 }
@@ -28,7 +28,7 @@ M.linters = {
   'hadolint',
   'shellcheck',
   'shfmt',
-  -- 'stylua',
+  'stylua',
 }
 
 M.parsers = {

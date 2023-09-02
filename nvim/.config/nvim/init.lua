@@ -14,6 +14,9 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+-- Utitilities
+require('utils')
+
 -- Default settings
 require 'defaults'
 

@@ -12,12 +12,9 @@ return {
     require('mini.align').setup()
     require('mini.animate').setup()
     require('mini.bufremove').setup {}
-    require('mini.comment').setup()
     require('mini.cursorword').setup()
 
-    -- Active indent guide and indent text objects. When you're browsing
-    -- code, this highlights the current level of indentation, and animates
-    -- the highlighting.
+    -- Highlights current level of indentation, and animates the highlighting.
     require('mini.indentscope').setup {
       opts = {
         symbol = '│',
@@ -41,9 +38,7 @@ return {
     }
 
     require('mini.operators').setup()
-    require('mini.pairs').setup()
     require('mini.splitjoin').setup()
-    require('mini.surround').setup()
     require('mini.statusline').setup {
       use_icons = true,
     }
