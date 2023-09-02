@@ -21,39 +21,4 @@ M.servers = {
   'yamlls',
 }
 
-M.linters = {
-  'clang_format',
-  'cmake_lint',
-  'flake8',
-  'hadolint',
-  'shellcheck',
-  'shfmt',
-  'stylua',
-}
-
-M.parsers = {
-  'bash',
-  'c',
-  'cmake',
-  'cpp',
-  'dockerfile',
-  'gitignore',
-  'html',
-  'java',
-  'json',
-  'json5',
-  'jsonc',
-  'lua',
-  'markdown',
-  'markdown_inline',
-  'ninja',
-  'python',
-  'ron',
-  'rust',
-  'toml',
-  'vim',
-  'vimdoc',
-  'yaml',
-}
-
 return M
