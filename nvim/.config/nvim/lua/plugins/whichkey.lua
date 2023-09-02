@@ -12,6 +12,7 @@ return {
       [']'] = { name = '+next' },
       ['['] = { name = '+prev' },
       ['<leader><tab>'] = { name = '+tabs' },
+      ['<leader>='] = { name = 'Format' },
       ['<leader>b'] = { name = '+buffer' },
       ['<leader>c'] = { name = '+code' },
       ['<leader>d'] = { name = '+debug' },

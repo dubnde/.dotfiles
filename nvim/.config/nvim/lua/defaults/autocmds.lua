@@ -38,14 +38,6 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
   end,
 })
 
-vim.api.nvim_create_autocmd('BufWritePre', {
-  group = augroup 'Format',
-  pattern = '*.rs',
-  callback = function()
-    vim.lsp.buf.format { timeout_ms = 200 }
-  end,
-})
-
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = { '*.mdx' },
   command = 'set filetype=markdown',
