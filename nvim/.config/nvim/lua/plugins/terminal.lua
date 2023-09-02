@@ -2,11 +2,11 @@ return {
   'akinsho/toggleterm.nvim',
   version = '*',
   keys = {
-    { "<leader>'",  '<cmd>ToggleTerm<CR>',                      desc = 'ToggleTerm' },
-    { '<leader>tt', '<cmd>ToggleTerm<CR>',                      desc = 'ToggleTerm' },
-    { '<leader>tf', '<cmd>ToggleTerm direction=float<CR>',      desc = 'ToggleTerm Float' },
+    { "<leader>'", '<cmd>ToggleTerm<CR>', desc = 'ToggleTerm' },
+    { '<leader>tt', '<cmd>ToggleTerm<CR>', desc = 'ToggleTerm' },
+    { '<leader>tf', '<cmd>ToggleTerm direction=float<CR>', desc = 'ToggleTerm Float' },
     { '<leader>th', '<cmd>ToggleTerm direction=horizontal<CR>', desc = 'ToggleTerm horizontal' },
-    { '<leader>tv', '<cmd>ToggleTerm direction=vertical<CR>',   desc = 'ToggleTerm vertical' },
+    { '<leader>tv', '<cmd>ToggleTerm direction=vertical<CR>', desc = 'ToggleTerm vertical' },
   },
   config = function()
     local terminal = require 'toggleterm'
@@ -26,12 +26,13 @@ return {
     }
 
     function _G.set_terminal_keymaps()
-      bufmapt('<C-h>', [[<Cmd>wincmd h<CR>]], 0)
-      bufmapt('<C-j>', [[<Cmd>wincmd j<CR>]], 0)
-      bufmapt('<C-k>', [[<Cmd>wincmd k<CR>]], 0)
-      bufmapt('<C-l>', [[<Cmd>wincmd l<CR>]], 0)
-      bufmapt("<leader>'", [[<Cmd>ToggleTerm<CR>]], 0)
-      bufmapt('<leader>tt', [[<Cmd>ToggleTerm<CR>]], 0)
+      local opts = { buffer = 0 }
+      vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+      vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+      vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+      vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+      vim.keymap.set('t', "<leader>'", [[<Cmd>ToggleTerm<CR>]], opts)
+      vim.keymap.set('t', '<leader>tt', [[<Cmd>ToggleTerm<CR>]], opts)
     end
 
     -- if you only want these mappings for toggle term use term://*toggleterm#* instead
