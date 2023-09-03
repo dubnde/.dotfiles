@@ -1,4 +1,4 @@
-vim.opt.lazyredraw = true                      -- Faster scrolling
+-- vim.opt.lazyredraw = true                      -- Faster scrolling
 vim.opt.clipboard:append 'unnamedplus'         -- use system clipboard as default register
 vim.opt.cmdheight = 1                          -- more space in the neovim command line for displaying messages
 vim.opt.completeopt = 'menu,menuone,noselect'  -- cmp needs this
@@ -18,7 +18,7 @@ vim.opt.splitright = true                      -- force all vertical splits to g
 vim.opt.swapfile = false                       -- creates a swapfile
 vim.opt.termguicolors = true                   -- set term gui colors (most terminals support this)
 vim.opt.background = 'dark'                    --
-vim.opt.timeoutlen = 1000                      -- time to wait for a mapped sequence to complete (in milliseconds)
+-- vim.opt.timeoutlen = 1000                      -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.undofile = true                        -- enable persistent undo
 vim.opt.updatetime = 250                       -- faster completion (4000ms default)
 vim.opt.expandtab = true                       -- convert tabs to spaces
@@ -72,6 +72,10 @@ local disabled_built_ins = {
   'vimballPlugin',
   'zip',
   'zipPlugin',
+  'tohtml',
+  'tutor',
+  'rplugin',
+  'editorconfig',
 }
 
 for _, plugin in pairs(disabled_built_ins) do

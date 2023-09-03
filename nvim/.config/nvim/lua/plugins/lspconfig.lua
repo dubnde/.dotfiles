@@ -1,14 +1,20 @@
 return {
+  -- nvim-lightbulb
+  {
+    'kosayoda/nvim-lightbulb',
+    event = 'LspAttach',
+    enabled = false,
+    opts = {
+      autocmd = { enabled = true }
+    }
+  },
+
   {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       {
         "folke/neodev.nvim",
-        opts = {},
-        config = function()
-          require("neodev").setup()
-        end
       },
       'hrsh7th/cmp-nvim-lsp',
       "ahmedkhalf/project.nvim",
@@ -22,6 +28,9 @@ return {
       local lspconfig = require 'lspconfig'
       local cmp_nvim_lsp = require 'cmp_nvim_lsp'
       local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+      -- Load neodev.nvim before loading everything else
+      require("neodev").setup()
 
       -- Setting up on_attach
       local on_attach = function(client, bufnr)
@@ -64,18 +73,19 @@ return {
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts 'Show LSP definitions')
         vim.keymap.set('n', 'K', show_documentation, opts 'Show documentation under cursor')
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts 'Show LSP implementations')
-        vim.keymap.set('n', '<space>lm', vim.lsp.buf.rename, opts 'Smart rename')
-        vim.keymap.set('n', '<space>lr', vim.lsp.buf.rename, opts 'Smart rename')
-        vim.keymap.set('n', '<space>la', vim.lsp.buf.code_action, opts 'See available code actions')
+        vim.keymap.set('n', '<leader>lm', vim.lsp.buf.rename, opts 'Smart rename')
+        vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, opts 'Smart rename')
+        vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, opts 'See available code actions')
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts 'Show LSP references')
         vim.keymap.set('n', '<leader>ls', ':LspRestart<CR>', opts 'Restart LSP')
         vim.keymap.set('n', '<leader>lf', ':Format<CR>', opts 'Format buffer')
         vim.keymap.set('n', '<leader>l=', ':Format<CR>', opts 'Format buffer')
         vim.keymap.set('n', '<leader>==', ':Format<CR>', opts 'Format buffer')
-        vim.keymap.set('n', '<space>xe', vim.diagnostic.open_float, opts 'Show line diagnostics')
+        vim.keymap.set('n', '<leader>xa', vim.lsp.buf.code_action, opts 'See available code actions')
+        -- vim.keymap.set('n', '<leader>xx', vim.diagnostic.open_float, opts 'Show line diagnostics')
         vim.keymap.set('n', '[x', vim.diagnostic.goto_prev, opts 'Go to previous diagnostic')
         vim.keymap.set('n', ']x', vim.diagnostic.goto_next, opts 'Go to next diagnostic')
-        vim.keymap.set('n', '<space>xq', vim.diagnostic.setloclist, opts 'Set local list diagnostics')
+        -- vim.keymap.set('n', '<leader>xq', vim.diagnostic.setloclist, opts 'Set local list diagnostics')
       end
 
       -- used to enable autocompletion (assign to every lsp server config)
@@ -143,6 +153,14 @@ return {
         capabilities = capabilities,
         on_attach = on_attach,
         cmd = { "rustup", "run", "stable", "rust-analyzer" },
+      }
+
+      -- Fix clangd offset encoding
+      lspconfig.clangd.setup {
+        capabilities = {
+          offsetEncoding = { 'utf-16' }
+        },
+        on_attach = on_attach,
       }
     end,
   },

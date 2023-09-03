@@ -43,13 +43,13 @@ vim.keymap.set('n', '<leader>nh', '<cmd>nohlsearch<CR>', opts 'Clear search high
 vim.keymap.set("n", "x", '"_x')
 
 -- Write file
-vim.keymap.set('n', '<leader>fs', '<cmd>:write<CR>', opts 'Write File')
-vim.keymap.set('n', '<leader>fw', '<cmd>:write<CR>', opts 'Write File')
-vim.keymap.set('n', '<leader>fS', '<cmd>:wa<CR>', opts 'Write all files')
-vim.keymap.set('n', '<leader>fW', '<cmd>:wa<CR>', opts 'Write all files')
+vim.keymap.set('n', '<leader>fs', '<cmd>write<CR>', opts 'Write File')
+vim.keymap.set('n', '<leader>fw', '<cmd>write<CR>', opts 'Write File')
+vim.keymap.set('n', '<leader>fS', '<cmd>wa<CR>', opts 'Write all files')
+vim.keymap.set('n', '<leader>fW', '<cmd>wa<CR>', opts 'Write all files')
 
-vim.keymap.set('n', '<Leader>qq', ':quitall<CR>', opts 'Safe Quit')
-vim.keymap.set('n', '<Leader>Q', ':quitall!<CR>', opts 'Force Quit')
+vim.keymap.set('n', '<Leader>qq', '<CMD>quitall<CR>', opts 'Safe quit current file')
+vim.keymap.set('n', '<Leader>Q', '<CMD>quitall!<CR>', opts 'Force Quit')
 
 -- Better paste
 vim.keymap.set('v', 'p', '"_dP')

@@ -1,12 +1,14 @@
 return {
+
+  -- nvim-treesitter
   {
     'nvim-treesitter/nvim-treesitter',
     event = { 'BufReadPre', 'BufNewFile' },
     build = ':TSUpdate',
     config = function()
       -- Treesitter folding
-      vim.wo.foldmethod = 'manual'
-      vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+      -- vim.wo.foldmethod = 'manual'
+      -- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 
       local treesitter_config = require 'nvim-treesitter.configs'
 
@@ -50,6 +52,16 @@ return {
       }
     end,
   },
+
+  -- nvim-treesitter-context
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+    event = { 'BufReadPost', 'BufNewFile' },
+    config = true,
+  },
+
+  -- nvim-treesitter-textobjects
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
     event = { 'BufReadPost', 'BufNewFile' },
@@ -57,6 +69,7 @@ return {
     config = function()
       local configs = require 'nvim-treesitter.configs'
 
+      ---@diagnostic disable-next-line: missing-fields
       configs.setup {
         textobjects = {
           select = {

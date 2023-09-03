@@ -40,5 +40,6 @@ return {
     require('mini.operators').setup()
     require('mini.splitjoin').setup()
     require('mini.statusline').setup()
+    require('mini.tabline').setup()
   end,
 }

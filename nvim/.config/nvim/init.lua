@@ -24,11 +24,11 @@ require 'defaults'
 require('lazy').setup({
   { import = 'plugins' },
 }, {
-  checker = {
-    enabled = true,
-    notify = false,
-  },
-  change_detection = {
-    notify = false,
-  },
+  checker = { enabled = true },
+  change_detection = { notify = false },
+  git = { log = { '--since=3 days ago' } },
+  ui = { custom_keys = { false } },
 })
+
+-- Lazy keymap
+vim.keymap.set('n', '<leader>L', '<CMD>Lazy<CR>', { desc = 'Open Lazy' })

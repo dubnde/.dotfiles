@@ -2,13 +2,22 @@
 -- with the active keybindings of the command you started typing.
 return {
   'folke/which-key.nvim',
+  keys = { '<leader>', '"', "'", '`', 'c', 'g', 'y', 'd', 'z', 'g' },
   event = 'VeryLazy',
   opts = {
     plugins = { spelling = true },
+    operators = {
+      gc = 'Comments',
+      gb = 'Block comments',
+      ys = 'Add surroundings',
+      cs = 'Change surroundings',
+    },
     defaults = {
       mode = { 'n', 'v' },
       ['g'] = { name = '+goto' },
-      ['gz'] = { name = '+surround' },
+      ['gb'] = { name = '+Block comments' },
+      ['gc'] = { name = '+Comments' },
+      ['gz'] = { name = '+Surround' },
       [']'] = { name = '+next' },
       ['['] = { name = '+prev' },
       ['<leader><tab>'] = { name = '+tabs' },
@@ -31,6 +40,7 @@ return {
       ['<leader>w'] = { name = '+windows' },
       ['<leader>x'] = { name = '+diagnostics/quickfix' },
       ['<leader>y'] = { name = '+yank/paste' },
+      ['<leader>z'] = { name = '+zane' },
     },
   },
   config = function(_, opts)

@@ -20,8 +20,10 @@ return {
     -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
     require('luasnip.loaders.from_vscode').lazy_load()
 
+    ---@diagnostic disable-next-line: missing-fields
     cmp.setup {
 
+      ---@diagnostic disable-next-line: missing-fields
       completion = {
         completeopt = 'menu,menuone,preview,noselect',
       },
@@ -32,6 +34,7 @@ return {
         end,
       },
 
+      ---@diagnostic disable-next-line: missing-fields
       formatting = {
         fields = { 'menu', 'abbr', 'kind' },
         format = function(entry, item)
