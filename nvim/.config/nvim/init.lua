@@ -31,4 +31,4 @@ require('lazy').setup({
 })
 
 -- Lazy keymap
-vim.keymap.set('n', '<leader>L', '<CMD>Lazy<CR>', { desc = 'Open Lazy' })
+vim.keymap.set('n', '<localleader>l', '<CMD>Lazy<CR>', { desc = 'Open Lazy' })

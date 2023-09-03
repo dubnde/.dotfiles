@@ -31,8 +31,8 @@ return {
       vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
       vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
       vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-      vim.keymap.set('t', "<leader>'", [[<Cmd>ToggleTerm<CR>]], opts)
-      vim.keymap.set('t', '<leader>tt', [[<Cmd>ToggleTerm<CR>]], opts)
+      vim.keymap.set('t', "<localleader>'", [[<Cmd>ToggleTerm<CR>]], opts)
+      vim.keymap.set('t', "<localleader>t", [[<Cmd>ToggleTerm<CR>]], opts)
     end
 
     -- if you only want these mappings for toggle term use term://*toggleterm#* instead

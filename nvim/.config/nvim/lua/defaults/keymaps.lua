@@ -1,12 +1,13 @@
---Remap space as leader key
-vim.keymap.set('', '<Space>', '<Nop>')
-
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 local function opts(desc)
   return { desc = desc, noremap = true, silent = true }
 end
+
+--Remap space as leader key
+vim.keymap.set('', '<Space>', '<Nop>', opts 'Remap space as leader')
+vim.keymap.set('', '\\', '<Nop>', opts 'Remap space as leader')
+
+vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
 
 
 -- Modes
