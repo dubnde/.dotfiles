@@ -1,7 +1,7 @@
 return {
   'echasnovski/mini.nvim',
   version = false,
-  event = 'VeryLazy',
+  event = { "BufReadPre", "BufNewFile" },
   -- stylua: ignore
   keys = {
     { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
@@ -39,8 +39,6 @@ return {
 
     require('mini.operators').setup()
     require('mini.splitjoin').setup()
-    require('mini.statusline').setup {
-      use_icons = true,
-    }
+    require('mini.statusline').setup()
   end,
 }

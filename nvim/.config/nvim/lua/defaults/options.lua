@@ -1,4 +1,4 @@
--- vim.opt.clipboard = "unnamedplus"               -- allows neovim to access the system clipboard
+vim.opt.lazyredraw = true                      -- Faster scrolling
 vim.opt.clipboard:append 'unnamedplus'         -- use system clipboard as default register
 vim.opt.cmdheight = 1                          -- more space in the neovim command line for displaying messages
 vim.opt.completeopt = 'menu,menuone,noselect'  -- cmp needs this
@@ -20,7 +20,7 @@ vim.opt.termguicolors = true                   -- set term gui colors (most term
 vim.opt.background = 'dark'                    --
 vim.opt.timeoutlen = 1000                      -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.undofile = true                        -- enable persistent undo
-vim.opt.updatetime = 300                       -- faster completion (4000ms default)
+vim.opt.updatetime = 250                       -- faster completion (4000ms default)
 vim.opt.expandtab = true                       -- convert tabs to spaces
 vim.opt.shiftwidth = 2                         -- the number of spaces inserted for each indentation
 vim.opt.shiftround = true                      --
@@ -32,7 +32,8 @@ vim.opt.laststatus = 3                         -- only the last window will alwa
 vim.opt.showcmd = false                        -- hide (partial) command in the last line of the screen (for performance)
 vim.opt.ruler = false                          -- hide the line and column number of the cursor position
 vim.opt.numberwidth = 4                        -- minimal number of columns to use for the line number {default 4}
-vim.opt.signcolumn = 'yes'                     -- always show the sign column, otherwise it would shift the text each time
+vim.opt.signcolumn =
+'yes'                                          -- always show the sign column, otherwise it would shift the text each time
 vim.opt.wrap = false                           -- display lines as one long line
 vim.opt.scrolloff = 8                          -- minimal number of screen lines to keep above and below the cursor
 vim.opt.sidescrolloff = 8                      -- minimal number of screen columns to keep to the left and right of the cursor if wrap is `false`

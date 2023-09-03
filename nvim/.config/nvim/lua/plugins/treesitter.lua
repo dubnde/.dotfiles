@@ -18,6 +18,7 @@ return {
           'cpp',
           'dockerfile',
           'gitignore',
+          'git_config',
           'html',
           'java',
           'json',

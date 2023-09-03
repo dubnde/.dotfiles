@@ -4,7 +4,7 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
-      'ahmedkhalf/project.nvim',
+      "ahmedkhalf/project.nvim",
       {
         'antosha417/nvim-lsp-file-operations',
         config = true
@@ -13,12 +13,26 @@ return {
     config = function()
       local lspconfig = require 'lspconfig'
       local cmp_nvim_lsp = require 'cmp_nvim_lsp'
+      local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
       -- Setting up on_attach
-      local on_attach = function(_, bufnr)
-        vim.api.nvim_buf_create_user_command(bufnr, 'FormatLSP', function(_)
-          vim.lsp.buf.format()
-        end, {})
+      local on_attach = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+          vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+
+          vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+            vim.lsp.buf.format { async = false }
+          end, { desc = "Format buffer" })
+
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+              vim.lsp.buf.format { async = false }
+              -- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+              -- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+            end
+          })
+        end
 
         local function opts(desc)
           return { desc = 'LSP: ' .. desc, buffer = bufnr, noremap = true, silent = true }
@@ -33,9 +47,9 @@ return {
         vim.keymap.set('n', '<space>la', vim.lsp.buf.code_action, opts 'See available code actions')
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts 'Show LSP references')
         vim.keymap.set('n', '<leader>ls', ':LspRestart<CR>', opts 'Restart LSP')
-        vim.keymap.set('n', '<leader>lf', ':Format<CR>', opts 'FormatLSP')
-        vim.keymap.set('n', '<leader>l=', ':Format<CR>', opts 'FormatLSP')
-        vim.keymap.set('n', '<leader>==', ':Format<CR>', opts 'FormatLSP')
+        vim.keymap.set('n', '<leader>lf', ':Format<CR>', opts 'Format buffer')
+        vim.keymap.set('n', '<leader>l=', ':Format<CR>', opts 'Format buffer')
+        vim.keymap.set('n', '<leader>==', ':Format<CR>', opts 'Format buffer')
         vim.keymap.set('n', '<space>xe', vim.diagnostic.open_float, opts 'Show line diagnostics')
         vim.keymap.set('n', '[x', vim.diagnostic.goto_prev, opts 'Go to previous diagnostic')
         vim.keymap.set('n', ']x', vim.diagnostic.goto_next, opts 'Go to next diagnostic')
@@ -43,7 +57,9 @@ return {
       end
 
       -- used to enable autocompletion (assign to every lsp server config)
-      local capabilities = cmp_nvim_lsp.default_capabilities()
+      -- local capabilities = cmp_nvim_lsp.default_capabilities()
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
       -- Setting up servers
       for _, server in pairs(require('utils').servers) do

@@ -5,10 +5,10 @@ return {
   dependencies = {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lua',
-    'hrsh7th/cmp-buffer', -- text in buffer
-    'hrsh7th/cmp-path', -- file system paths
-    'L3MON4D3/LuaSnip', -- snippet engine
-    'saadparwaiz1/cmp_luasnip', -- autocompletion
+    'hrsh7th/cmp-buffer',           -- text in buffer
+    'hrsh7th/cmp-path',             -- file system paths
+    'L3MON4D3/LuaSnip',             -- snippet engine
+    'saadparwaiz1/cmp_luasnip',     -- autocompletion
     'rafamadriz/friendly-snippets', -- snippets
   },
 
@@ -47,13 +47,33 @@ return {
       },
 
       mapping = cmp.mapping.preset.insert {
-        ['<C-k>'] = cmp.mapping.select_prev_item(), -- previous suggestion
-        ['<C-j>'] = cmp.mapping.select_next_item(), -- next suggestion
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(), -- show completion suggestions
-        ['<C-e>'] = cmp.mapping.abort(), -- close completion window
-        ['<CR>'] = cmp.mapping.confirm { select = true },
+        ['<C-k>'] = cmp.mapping.select_prev_item(),       -- previous suggestion
+        ['<C-j>'] = cmp.mapping.select_next_item(),       -- next suggestion
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),          --
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),           --
+        ['<C-Space>'] = cmp.mapping.complete(),           -- show completion suggestions
+        ['<C-e>'] = cmp.mapping.abort(),                  -- close completion window
+        ['<CR>'] = cmp.mapping.confirm { select = true }, --
+
+        -- Tab mapping
+        ['<Tab>'] = function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            fallback()
+          end
+        end,
+        ['<S-Tab>'] = function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end
       },
 
       sources = cmp.config.sources {
@@ -62,6 +82,7 @@ return {
         { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
+        { name = "crates" },
       },
     }
   end,
