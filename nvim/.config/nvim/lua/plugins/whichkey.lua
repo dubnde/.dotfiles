@@ -21,7 +21,7 @@ return {
       ['<leader>f'] = { name = '+file/find' },
       ['<leader>g'] = { name = '+git' },
       ['<leader>l'] = { name = '+lsp' },
-      ['<leader>l'] = { name = '+Lazy' },
+      ['<leader>L'] = { name = '+Lazy' },
       ['<leader>p'] = { name = '+project' },
       ['<leader>q'] = { name = '+quit/session' },
       ['<leader>s'] = { name = '+search' },

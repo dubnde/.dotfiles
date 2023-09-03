@@ -3,20 +3,22 @@ return {
   cmd = 'Telescope',
   dependencies = {
     'nvim-telescope/telescope-fzf-native.nvim',
-    build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+    build =
+    'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
   },
   keys = {
-    { '<leader><leader>', '<cmd>Telescope commands theme=ivy<CR>', desc = 'Commands' },
-    { '<leader>/', '<cmd>Telescope live_grep theme=ivy<CR>', desc = 'Find a string' },
-    { '<leader>*', '<cmd>Telescope grep_string theme=ivy<CR>', desc = 'Find cursor string' },
-    { '<leader>bb', '<cmd>Telescope buffers theme=ivy<CR>', desc = 'Find buffers' },
-    { '<leader>ff', '<cmd>Telescope find_files theme=ivy<CR>', desc = 'Find Files' },
-    { '<leader>fr', '<cmd>Telescope oldfiles theme=ivy<CR>', desc = 'History' },
-    { '<leader>fg', '<cmd>Telescope git_files theme=ivy<CR>', desc = 'Git Files' },
-    { '<leader>gc', '<cmd>Telescope git_commits theme=ivy<CR>', desc = 'Git Commits' },
-    { '<leader>gs', '<cmd>Telescope git_status theme=ivy<CR>', desc = 'Git Status' },
-    { '<leader>sr', '<cmd>Telescope resume theme=ivy<CR>', desc = 'Resume' },
-    { '<leader>ss', '<cmd>Telescope current_buffer_fuzzy_find theme=ivy<CR>', desc = 'Search buffer' },
+    { '<leader><leader>', '<cmd>Telescope commands theme=ivy<CR>',                  desc = 'Commands' },
+    { '<leader>/',        '<cmd>Telescope live_grep theme=ivy<CR>',                 desc = 'Find a string' },
+    { '<leader>*',        '<cmd>Telescope grep_string theme=ivy<CR>',               desc = 'Find cursor string' },
+    { '<leader>bb',       '<cmd>Telescope buffers theme=ivy<CR>',                   desc = 'Find buffers' },
+    { '<leader>ff',       '<cmd>Telescope find_files theme=ivy<CR>',                desc = 'Find Files' },
+    { '<leader>fr',       '<cmd>Telescope oldfiles theme=ivy<CR>',                  desc = 'History' },
+    { '<leader>fg',       '<cmd>Telescope git_files theme=ivy<CR>',                 desc = 'Git Files' },
+    { '<leader>gc',       '<cmd>Telescope git_commits theme=ivy<CR>',               desc = 'Git Commits' },
+    { '<leader>gs',       '<cmd>Telescope git_status theme=ivy<CR>',                desc = 'Git Status' },
+    { '<leader>pp',       '<cmd>Telescope projects theme=ivy<CR>',                  desc = 'Projects' },
+    { '<leader>sr',       '<cmd>Telescope resume theme=ivy<CR>',                    desc = 'Resume' },
+    { '<leader>ss',       '<cmd>Telescope current_buffer_fuzzy_find theme=ivy<CR>', desc = 'Search buffer' },
   },
   config = function()
     local telescope = require 'telescope'
@@ -32,7 +34,7 @@ return {
             -- <Esc> to quit in insert mode
             ['<esc>'] = actions.close,
             ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-            ["<C-j>"] = actions.move_selection_next, -- move to next result
+            ["<C-j>"] = actions.move_selection_next,     -- move to next result
             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
           },
         },
@@ -40,5 +42,6 @@ return {
     }
 
     telescope.load_extension 'fzf'
+    telescope.load_extension 'projects'
   end,
 }

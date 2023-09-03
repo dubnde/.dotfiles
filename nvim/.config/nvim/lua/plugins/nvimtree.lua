@@ -1,8 +1,8 @@
 return {
   'nvim-tree/nvim-tree.lua',
   keys = {
-    { '<leader>et', '<cmd>NvimTreeToggle<CR>', desc = 'Toggle file explorer' },
-    { '<leader>ef', '<cmd>NvimTreeFocus<CR>', desc = 'Focus file explorer' },
+    { '<leader>et', '<cmd>NvimTreeToggle<CR>',         desc = 'Toggle file explorer' },
+    { '<leader>ef', '<cmd>NvimTreeFocus<CR>',          desc = 'Focus file explorer' },
     { '<leader>ee', '<cmd>NvimTreeFindFileToggle<CR>', desc = 'Toggle file explorer on current file' },
   },
   config = function()
@@ -10,6 +10,13 @@ return {
 
     -- configure nvim-tree
     nvimtree.setup {
+      sync_root_with_cwd = true,
+      respect_buf_cwd = true,
+      update_focused_file = {
+        enable = false,
+        update_root = true
+      },
+
       sort_by = 'case_sensitive',
 
       view = {
@@ -49,10 +56,10 @@ return {
         enable = true,
         show_on_dirs = true,
         icons = {
-          hint = 'h',
-          info = 'i',
-          warning = 'w',
-          error = 'e',
+          hint = 'H',
+          info = 'I',
+          warning = 'W',
+          error = 'E',
         },
       },
     }

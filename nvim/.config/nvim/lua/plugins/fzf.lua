@@ -9,7 +9,6 @@ return {
     { '<leader>fr',       '<cmd>History<CR>',  desc = 'History' },
     { '<leader>sw',       '<cmd>Windows<CR>',  desc = 'Windows' },
     { '<leader>bb',       '<cmd>Buffers<CR>',  desc = 'Buffers' },
-    { '<leader>pf',       '<cmd>GFiles<CR>',   desc = 'Git Files' },
     { '<leader>gs',       '<cmd>GFiles?<CR>',  desc = 'Git Status' },
     { '<leader>ss',       '<cmd>BLines<CR>',   desc = 'Search Loaded Buffers' },
     { '<leader>sS',       '<cmd>Lines<CR>',    desc = 'Search Current Buffer' },
