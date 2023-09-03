@@ -10,6 +10,7 @@ return {
     'L3MON4D3/LuaSnip',             -- snippet engine
     'saadparwaiz1/cmp_luasnip',     -- autocompletion
     'rafamadriz/friendly-snippets', -- snippets
+    'saecki/crates.nvim',           -- Rust crates
   },
 
   config = function()

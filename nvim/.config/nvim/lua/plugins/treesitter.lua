@@ -5,11 +5,12 @@ return {
     build = ':TSUpdate',
     config = function()
       -- Treesitter folding
-      -- vim.wo.foldmethod = 'expr'
-      -- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+      vim.wo.foldmethod = 'manual'
+      vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 
       local treesitter_config = require 'nvim-treesitter.configs'
 
+      ---@diagnostic disable-next-line: missing-fields
       treesitter_config.setup {
         ensure_installed = {
           'bash',

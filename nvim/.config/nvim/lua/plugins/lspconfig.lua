@@ -3,8 +3,16 @@ return {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
+      {
+        "folke/neodev.nvim",
+        opts = {},
+        config = function()
+          require("neodev").setup()
+        end
+      },
       'hrsh7th/cmp-nvim-lsp',
       "ahmedkhalf/project.nvim",
+      'saecki/crates.nvim',
       {
         'antosha417/nvim-lsp-file-operations',
         config = true
@@ -24,12 +32,13 @@ return {
             vim.lsp.buf.format { async = false }
           end, { desc = "Format buffer" })
 
+          -- Auto format on save
           vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
+            pattern = { "*.lua", "*.rs" },
+            -- buffer = bufnr,
             callback = function()
+              -- vim.cmd [[Format]]
               vim.lsp.buf.format { async = false }
-              -- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
-              -- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
             end
           })
         end
@@ -38,9 +47,22 @@ return {
           return { desc = 'LSP: ' .. desc, buffer = bufnr, noremap = true, silent = true }
         end
 
+        local function show_documentation()
+          local filetype = vim.bo.filetype
+          if vim.tbl_contains({ 'vim', 'help' }, filetype) then
+            vim.cmd('h ' .. vim.fn.expand('<cword>'))
+          elseif vim.tbl_contains({ 'man' }, filetype) then
+            vim.cmd('Man ' .. vim.fn.expand('<cword>'))
+          elseif vim.fn.expand('%:t') == 'Cargo.toml' and require('crates').popup_available() then
+            require('crates').show_popup()
+          else
+            vim.lsp.buf.hover()
+          end
+        end
+
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts 'Go to declaration')
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts 'Show LSP definitions')
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts 'Show documentation for what is under cursor')
+        vim.keymap.set('n', 'K', show_documentation, opts 'Show documentation under cursor')
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts 'Show LSP implementations')
         vim.keymap.set('n', '<space>lm', vim.lsp.buf.rename, opts 'Smart rename')
         vim.keymap.set('n', '<space>lr', vim.lsp.buf.rename, opts 'Smart rename')
@@ -115,6 +137,12 @@ return {
             completion = { callSnippet = 'Replace' },
           },
         },
+      }
+
+      lspconfig.rust_analyzer.setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        cmd = { "rustup", "run", "stable", "rust-analyzer" },
       }
     end,
   },
