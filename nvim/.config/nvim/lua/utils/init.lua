@@ -10,13 +10,13 @@ local M = {}
 
 M.servers = {
   'bashls',
-  'clangd',
+  -- 'clangd',
   'cmake',
   'html',
   'jsonls',
   'lua_ls',
   'pyright',
-  'rust_analyzer',
+  -- 'rust_analyzer',
   'taplo',
   'yamlls',
 }
