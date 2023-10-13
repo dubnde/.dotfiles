@@ -3,7 +3,6 @@ return {
   {
     'kosayoda/nvim-lightbulb',
     event = 'LspAttach',
-    enabled = false,
     opts = {
       autocmd = { enabled = true }
     }
@@ -13,24 +12,20 @@ return {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      {
-        "folke/neodev.nvim",
-      },
       'hrsh7th/cmp-nvim-lsp',
-      "ahmedkhalf/project.nvim",
       'saecki/crates.nvim',
+      { 'antosha417/nvim-lsp-file-operations', config = true },
+      { "folke/neodev.nvim",                   opts = {} },
       {
-        'antosha417/nvim-lsp-file-operations',
-        config = true
+        "folke/neoconf.nvim",
+        cmd = "Neoconf",
+        dependencies = { "nvim-lspconfig" }
       },
     },
     config = function()
       local lspconfig = require 'lspconfig'
       local cmp_nvim_lsp = require 'cmp_nvim_lsp'
       local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-      -- Load neodev.nvim before loading everything else
-      require("neodev").setup()
 
       -- Setting up on_attach
       local on_attach = function(client, bufnr)
@@ -145,6 +140,7 @@ return {
         settings = {
           Lua = {
             completion = { callSnippet = 'Replace' },
+            workspace = { checkThirdParty = false },
           },
         },
       }

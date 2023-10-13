@@ -116,7 +116,7 @@ export PATH=~/.gem/ruby/2.7.0/bin:${PATH}
 
 if [ -d ~/.tmux/plugins/tmuxifier/bin ]; then
   export PATH=~/.tmux/plugins/tmuxifier/bin:${PATH}
-  export TMUXIFIER_LAYOUT_PATH="~/.dotfiles/tmux/tmuxifier/layouts"
+  export TMUXIFIER_LAYOUT_PATH="$HOME/.dotfiles/tmux/tmuxifier/layouts"
   eval "$(tmuxifier init -)"
 fi
 
@@ -125,11 +125,11 @@ export WORKON_HOME=~/.virtualenvs
 VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 # . /usr/local/bin/virtualenvwrapper.sh
 
-PATH="~/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="~/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="~/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"~/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=~/perl5"; export PERL_MM_OPT;
+PATH="$HOME/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-[ -f ~/.fd.sh ] && source ~/.fd.sh
+[ -f ~/.fzf.bash ] && source "$HOME/.fzf.bash"
+[ -f ~/.fd.sh ] && source "$HOME/.fd.sh"

@@ -4,7 +4,6 @@ end
 
 --Remap space as leader key
 vim.keymap.set('', '<Space>', '<Nop>', opts 'Remap space as leader')
-vim.keymap.set('', '\\', '<Nop>', opts 'Remap space as leader')
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
@@ -80,14 +79,18 @@ vim.keymap.set('n', '<leader>w|', '<Cmd>wincmd v<CR>', opts 'split vertically')
 vim.keymap.set('n', '<leader>w-', '<Cmd>wincmd s<CR>', opts 'split horizontally')
 vim.keymap.set('n', '<leader>wv', '<Cmd>wincmd v<CR>', opts 'split vertically')
 vim.keymap.set('n', '<leader>wh', '<Cmd>wincmd s<CR>', opts 'split horizontally')
-vim.keymap.set('n', '<leader>wd', '<Cmd>wincmd c<CR>', opts 'close window')
+vim.keymap.set('n', '<leader>wc', '<Cmd>wincmd c<CR>', opts 'close window')
+vim.keymap.set('n', '<leader>wd', '<Cmd>wincmd d<CR>', opts 'close window')
 vim.keymap.set('n', '<leader>wn', '<Cmd>wincmd n<CR>', opts 'New window')
 vim.keymap.set('n', '<leader>wo', '<Cmd>wincmd o<CR>', opts 'Only window')
 vim.keymap.set('n', '<leader>wm', '<Cmd>wincmd o<CR>', opts 'Only window')
 vim.keymap.set('n', '<leader>wp', '<Cmd>wincmd p<CR>', opts 'Previous window')
 vim.keymap.set('n', '<leader>wq', '<Cmd>wincmd q<CR>', opts 'Quit')
+vim.keymap.set('n', '<leader>wr', '<Cmd>wincmd r<CR>', opts 'Rotate down/right')
+vim.keymap.set('n', '<leader>wR', '<Cmd>wincmd R<CR>', opts 'Rotate up/left')
 vim.keymap.set('n', '<leader>ww', '<Cmd>wincmd p<CR>', opts 'Previous window')
 vim.keymap.set('n', '<leader>wt', '<Cmd>wincmd T<CR>', opts 'Move to tab')
+vim.keymap.set('n', '<leader>wx', '<Cmd>wincmd X<CR>', opts 'Exchange window')
 
 vim.keymap.set('n', '<leader>to', ':tabnew<CR>', opts 'New tab')
 vim.keymap.set('n', '<leader>tx', ':tabclose<CR>', opts 'Close tab')
