@@ -12,7 +12,7 @@ return {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
+      -- 'hrsh7th/cmp-nvim-lsp',
       'saecki/crates.nvim',
       { 'antosha417/nvim-lsp-file-operations', config = true },
       { "folke/neodev.nvim",                   opts = {} },
@@ -24,7 +24,7 @@ return {
     },
     config = function()
       local lspconfig = require 'lspconfig'
-      local cmp_nvim_lsp = require 'cmp_nvim_lsp'
+      -- local cmp_nvim_lsp = require 'cmp_nvim_lsp'
       local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
       -- Setting up on_attach
@@ -86,7 +86,7 @@ return {
       -- used to enable autocompletion (assign to every lsp server config)
       -- local capabilities = cmp_nvim_lsp.default_capabilities()
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+      -- capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
       -- Setting up servers
       for _, server in pairs(require('utils').servers) do

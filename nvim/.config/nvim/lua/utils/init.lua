@@ -9,16 +9,16 @@ _G.IS_WSL = IS_LINUX and uname.release:find 'Microsoft' and true or false
 local M = {}
 
 M.servers = {
-  'bashls',
+  -- 'bashls',
   -- 'clangd',
-  'cmake',
-  'html',
-  'jsonls',
+  -- 'cmake',
+  -- 'html',
+  -- 'jsonls',
   'lua_ls',
-  'pyright',
+  -- 'pyright',
   -- 'rust_analyzer',
-  'taplo',
-  'yamlls',
+  -- 'taplo',
+  -- 'yamlls',
 }
 
 return M

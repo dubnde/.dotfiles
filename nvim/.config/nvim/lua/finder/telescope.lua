@@ -1,11 +1,6 @@
 return {
   'nvim-telescope/telescope.nvim',
   cmd = 'Telescope',
-  dependencies = {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    build =
-    'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-  },
   keys = {
     { '<leader><leader>', '<cmd>Telescope commands theme=ivy<CR>',                  desc = 'Commands' },
     { '<leader>/',        '<cmd>Telescope live_grep theme=ivy<CR>',                 desc = 'Find a string' },
@@ -16,7 +11,6 @@ return {
     { '<leader>fg',       '<cmd>Telescope git_files theme=ivy<CR>',                 desc = 'Git Files' },
     { '<leader>gc',       '<cmd>Telescope git_commits theme=ivy<CR>',               desc = 'Git Commits' },
     { '<leader>gs',       '<cmd>Telescope git_status theme=ivy<CR>',                desc = 'Git Status' },
-    { '<leader>pp',       '<cmd>Telescope projects theme=ivy<CR>',                  desc = 'Projects' },
     { '<leader>sr',       '<cmd>Telescope resume theme=ivy<CR>',                    desc = 'Resume' },
     { '<leader>ss',       '<cmd>Telescope current_buffer_fuzzy_find theme=ivy<CR>', desc = 'Search buffer' },
   },
@@ -40,8 +34,5 @@ return {
         },
       },
     }
-
-    telescope.load_extension 'fzf'
-    telescope.load_extension 'projects'
   end,
 }

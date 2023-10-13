@@ -1,3 +1,9 @@
+-- Utitilities
+require('utils')
+
+-- Default settings
+require 'defaults'
+
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -14,19 +20,24 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
--- Utitilities
-require('utils')
-
--- Default settings
-require 'defaults'
-
 -- Load the plugins
 require('lazy').setup({
-  { import = 'plugins' },
+  { import = 'core' },
+  { import = 'ui' },
+  { import = 'mini' },
+  { import = 'finder' },
+  { import = 'editor' },
+  { import = 'explorer' },
+  { import = 'terminal' },
+  { import = 'git' },
+  { import = 'cmp' },
+  { import = 'lsp' },
+  -- { import = 'lint' },
+  -- { import = 'fmt' },
+  { import = 'lang' },
 }, {
-  checker = { enabled = true },
+  checker = { enabled = false },
   change_detection = { notify = false },
-  git = { log = { '--since=3 days ago' } },
   ui = { custom_keys = { false } },
 })
 

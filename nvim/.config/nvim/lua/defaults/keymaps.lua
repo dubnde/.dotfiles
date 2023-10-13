@@ -1,9 +1,17 @@
-local function opts(desc)
-  return { desc = desc, noremap = true, silent = true }
+
+-- Functional wrapper mapping keys
+
+function map(mode, lhs, rhs, opts)
+    local options = { noremap = true, silent = true }
+    if opts then
+        options = vim.tbl_extend("force", options, opts)
+    end
+    -- vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    vim.keymap.set(mode, lhs, rhs, options)
 end
 
 --Remap space as leader key
-vim.keymap.set('', '<Space>', '<Nop>', opts 'Remap space as leader')
+map('', '<Space>', '<Nop>')
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
@@ -19,80 +27,81 @@ vim.g.maplocalleader = '\\'
 
 -- Normal --
 -- Better window navigation
-vim.keymap.set('n', '<C-h>', '<C-w>h', opts 'Left Window')
-vim.keymap.set('n', '<C-j>', '<C-w>j', opts 'Lower Window')
-vim.keymap.set('n', '<C-k>', '<C-w>k', opts 'Upper Window')
-vim.keymap.set('n', '<C-l>', '<C-w>l', opts 'Right Window')
+map('n', '<C-h>', '<C-w>h', { desc = 'Left Window' })
+map('n', '<C-j>', '<C-w>j', { desc = 'Lower Window' })
+map('n', '<C-k>', '<C-w>k', { desc = 'Upper Window' })
+map('n', '<C-l>', '<C-w>l', { desc = 'Right Window' })
 
 -- Resize with arrows
-vim.keymap.set('n', '<C-Up>', ':resize -2<CR>')
-vim.keymap.set('n', '<C-Down>', ':resize +2<CR>')
-vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>')
-vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>')
+map('n', '<C-Up>', ':resize -2<CR>')
+map('n', '<C-Down>', ':resize +2<CR>')
+map('n', '<C-Left>', ':vertical resize -2<CR>')
+map('n', '<C-Right>', ':vertical resize +2<CR>')
 
 -- Navigate buffers
-vim.keymap.set('n', '<S-l>', ':bnext<CR>', opts 'Next Buffer')
-vim.keymap.set('n', '<S-h>', ':bprevious<CR>', opts 'Previous Buffer')
-vim.keymap.set('n', '<TAB>', ':bnext<CR>', opts 'Next Buffer')
-vim.keymap.set('n', '<S-TAB>', ':bprevious<CR>', opts 'Previous Buffer')
+map('n', '<S-l>', ':bnext<CR>', { desc = 'Next Buffer' })
+map('n', '<S-h>', ':bprevious<CR>', { desc = 'Previous Buffer' })
+map('n', '<TAB>', ':bnext<CR>', { desc = 'Next Buffer' })
+map('n', '<S-TAB>', ':bprevious<CR>', { desc = 'Previous Buffer' })
 
 -- Clear highlights
-vim.keymap.set('n', '<leader>nh', '<cmd>nohlsearch<CR>', opts 'Clear search highlights')
+map('n', '<leader>nh', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlights' })
 
 -- delete single character without copying into register
-vim.keymap.set("n", "x", '"_x')
+map("n", "x", '"_x')
 
 -- Write file
-vim.keymap.set('n', '<leader>fs', '<cmd>write<CR>', opts 'Write File')
-vim.keymap.set('n', '<leader>fw', '<cmd>write<CR>', opts 'Write File')
-vim.keymap.set('n', '<leader>fS', '<cmd>wa<CR>', opts 'Write all files')
-vim.keymap.set('n', '<leader>fW', '<cmd>wa<CR>', opts 'Write all files')
+map('n', '<leader>fs', '<cmd>write<CR>', { desc = 'Write File' })
+map('n', '<leader>fw', '<cmd>write<CR>', { desc = 'Write File' })
+map('n', '<leader>fS', '<cmd>wa<CR>', { desc = 'Write all files' })
+map('n', '<leader>fW', '<cmd>wa<CR>', { desc = 'Write all files' })
 
-vim.keymap.set('n', '<Leader>qq', '<CMD>quitall<CR>', opts 'Safe quit current file')
-vim.keymap.set('n', '<Leader>Q', '<CMD>quitall!<CR>', opts 'Force Quit')
+map('n', '<Leader>qq', '<CMD>quitall<CR>', { desc = 'Safe quit current file' })
+map('n', '<Leader>Q', '<CMD>quitall!<CR>', { desc = 'Force Quit' })
 
 -- Better paste
-vim.keymap.set('v', 'p', '"_dP')
+map('v', 'p', '"_dP')
 
 -- Insert --
 -- Press jk fast to enter
-vim.keymap.set({ 'i', 'v', 'x', 't' }, 'jk', '<ESC>', opts 'Escape')
+map({ 'i', 'v', 'x', 't' }, 'jk', '<ESC>', { desc = 'Escape' })
+map({ 'i', 'v', 'x', 't' }, 'kj', '<ESC>', { desc = 'Escape' })
 
 -- Visual --
 -- Stay in indent mode
-vim.keymap.set('v', '<', '<gv', opts 'Shift left visual')
-vim.keymap.set('v', '>', '>gv', opts 'Shift right visual')
+map('v', '<', '<gv', { desc = 'Shift left visual' })
+map('v', '>', '>gv', { desc = 'Shift right visual' })
 
 -- Search will center on the line it's found in
-vim.keymap.set('n', 'n', 'nzzzv')
-vim.keymap.set('n', 'N', 'Nzzzv')
-vim.keymap.set('n', '#', '#zz')
-vim.keymap.set('n', '*', '*zz')
+map('n', 'n', 'nzzzv')
+map('n', 'N', 'Nzzzv')
+map('n', '#', '#zz')
+map('n', '*', '*zz')
 
 -- increment/decrement numbers
-vim.keymap.set('n', '<leader>+', '<C-a>', opts 'increment')
-vim.keymap.set('n', '<leader>-', '<C-x>', opts 'decrement')
+map('n', '<leader>+', '<C-a>', { desc = 'increment' })
+map('n', '<leader>-', '<C-x>', { desc = 'decrement' })
 
 -- window management
-vim.keymap.set('n', '<leader>w=', '<Cmd>wincmd =<CR>', opts 'Equalise')
-vim.keymap.set('n', '<leader>w|', '<Cmd>wincmd v<CR>', opts 'split vertically')
-vim.keymap.set('n', '<leader>w-', '<Cmd>wincmd s<CR>', opts 'split horizontally')
-vim.keymap.set('n', '<leader>wv', '<Cmd>wincmd v<CR>', opts 'split vertically')
-vim.keymap.set('n', '<leader>wh', '<Cmd>wincmd s<CR>', opts 'split horizontally')
-vim.keymap.set('n', '<leader>wc', '<Cmd>wincmd c<CR>', opts 'close window')
-vim.keymap.set('n', '<leader>wd', '<Cmd>wincmd d<CR>', opts 'close window')
-vim.keymap.set('n', '<leader>wn', '<Cmd>wincmd n<CR>', opts 'New window')
-vim.keymap.set('n', '<leader>wo', '<Cmd>wincmd o<CR>', opts 'Only window')
-vim.keymap.set('n', '<leader>wm', '<Cmd>wincmd o<CR>', opts 'Only window')
-vim.keymap.set('n', '<leader>wp', '<Cmd>wincmd p<CR>', opts 'Previous window')
-vim.keymap.set('n', '<leader>wq', '<Cmd>wincmd q<CR>', opts 'Quit')
-vim.keymap.set('n', '<leader>wr', '<Cmd>wincmd r<CR>', opts 'Rotate down/right')
-vim.keymap.set('n', '<leader>wR', '<Cmd>wincmd R<CR>', opts 'Rotate up/left')
-vim.keymap.set('n', '<leader>ww', '<Cmd>wincmd p<CR>', opts 'Previous window')
-vim.keymap.set('n', '<leader>wt', '<Cmd>wincmd T<CR>', opts 'Move to tab')
-vim.keymap.set('n', '<leader>wx', '<Cmd>wincmd X<CR>', opts 'Exchange window')
+map('n', '<leader>w=', '<Cmd>wincmd =<CR>', { desc = 'Equalise' })
+map('n', '<leader>w|', '<Cmd>wincmd v<CR>', { desc = 'split vertically' })
+map('n', '<leader>w-', '<Cmd>wincmd s<CR>', { desc = 'split horizontally' })
+map('n', '<leader>wv', '<Cmd>wincmd v<CR>', { desc = 'split vertically' })
+map('n', '<leader>wh', '<Cmd>wincmd s<CR>', { desc = 'split horizontally' })
+map('n', '<leader>wc', '<Cmd>wincmd c<CR>', { desc = 'close window' })
+map('n', '<leader>wd', '<Cmd>wincmd c<CR>', { desc = 'close window' })
+map('n', '<leader>wn', '<Cmd>wincmd n<CR>', { desc = 'New window' })
+map('n', '<leader>wo', '<Cmd>wincmd o<CR>', { desc = 'Only window' })
+map('n', '<leader>wm', '<Cmd>wincmd o<CR>', { desc = 'Only window' })
+map('n', '<leader>wp', '<Cmd>wincmd p<CR>', { desc = 'Previous window' })
+map('n', '<leader>wq', '<Cmd>wincmd q<CR>', { desc = 'Quit' })
+map('n', '<leader>wr', '<Cmd>wincmd r<CR>', { desc = 'Rotate down/right' })
+map('n', '<leader>wR', '<Cmd>wincmd R<CR>', { desc = 'Rotate up/left' })
+map('n', '<leader>ww', '<Cmd>wincmd p<CR>', { desc = 'Previous window' })
+map('n', '<leader>wt', '<Cmd>wincmd T<CR>', { desc = 'Move to tab' })
+map('n', '<leader>wx', '<Cmd>wincmd X<CR>', { desc = 'Exchange window' })
 
-vim.keymap.set('n', '<leader>to', ':tabnew<CR>', opts 'New tab')
-vim.keymap.set('n', '<leader>tx', ':tabclose<CR>', opts 'Close tab')
-vim.keymap.set('n', '<leader>tn', ':tabnext<CR>', opts 'Next tab')
-vim.keymap.set('n', '<leader>tp', ':tabprevious<CR>', opts 'Previous tab')
+map('n', '<leader>to', ':tabnew<CR>', { desc = 'New tab' })
+map('n', '<leader>tx', ':tabclose<CR>', { desc = 'Close tab' })
+map('n', '<leader>tn', ':tabnext<CR>', { desc = 'Next tab' })
+map('n', '<leader>tp', ':tabprevious<CR>', { desc = 'Previous tab' })
