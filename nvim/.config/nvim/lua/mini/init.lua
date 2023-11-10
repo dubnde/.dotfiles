@@ -1,6 +1,5 @@
 return {
   'echasnovski/mini.nvim',
-  version = false,
   event = { "BufReadPre", "BufNewFile" },
   -- stylua: ignore
   keys = {
@@ -20,21 +19,6 @@ return {
         symbol = '│',
         options = { try_as_border = true },
       },
-      init = function()
-        vim.api.nvim_create_autocmd('FileType', {
-          pattern = {
-            'help',
-            'neo-tree',
-            'Trouble',
-            'lazy',
-            'mason',
-            'toggleterm',
-          },
-          callback = function()
-            vim.b.miniindentscope_disable = true
-          end,
-        })
-      end,
     }
 
     require('mini.operators').setup()

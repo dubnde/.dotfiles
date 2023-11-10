@@ -1,5 +1,6 @@
 return {
   'nvim-telescope/telescope.nvim',
+  enabled = not IS_LINUX,
   cmd = 'Telescope',
   keys = {
     { '<leader><leader>', '<cmd>Telescope commands theme=ivy<CR>',                  desc = 'Commands' },

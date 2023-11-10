@@ -1,23 +1,16 @@
-
 -- Functional wrapper mapping keys
-
 function map(mode, lhs, rhs, opts)
-    local options = { noremap = true, silent = true }
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
-    -- vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-    vim.keymap.set(mode, lhs, rhs, options)
+  local options = { noremap = true, silent = true }
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
+  -- vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  vim.keymap.set(mode, lhs, rhs, options)
 end
 
 --Remap space as leader key
 map('', '<Space>', '<Nop>')
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = '\\'
-
-
--- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
 --   visual_mode = "v",

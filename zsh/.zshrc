@@ -25,7 +25,7 @@ zcomet load ohmyzsh plugins/python
 zcomet load ohmyzsh plugins/rsync
 
 # Completions
-fpath+=~/.zfunc
+fpath+=${HOME}/.zfunc
 
 # Run compinit and compile its cache
 zcomet compinit
@@ -35,27 +35,23 @@ export EDITOR=nvim
 export VISUAL=${EDITOR}
 
 # PATH
-export PATH=~/.gem/rub/2.6/bin:${PATH}
-export PATH=~/.local/bin:${PATH}
-export PATH=~/.yarn/bin:${PATH}
-export PATH=~/.cargo/bin:${PATH}
-export PATH=/opt/homebrew/bin:${PATH}
-
-export GOPATH=$HOME/go
-export GOROOT="$(brew --prefix golang)/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
-export PATH="/opt/homebrew/sbin:$PATH"
+export PATH="${HOME}/.gem/rub/2.6/bin"${PATH:+:${PATH}}
+export PATH="${HOME}/.local/bin"${PATH:+:${PATH}}
+export PATH="${HOME}/.yarn/bin"${PATH:+:${PATH}}
+export PATH="${HOME}/.cargo/bin"${PATH:+:${PATH}}
 
 # Compiling/Linking/Finding packages
-export LDFLAGS="-L/opt/homebrew/lib"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/pkgconfig"
-export CPPFLAGS="-I/opt/homebrew/include"
+export PATH=/opt/homebrew/bin${PATH:+:${PATH}}
+export LDFLAGS="-L$(brew --prefix)/opt/lib"
+export PKG_CONFIG_PATH="$(brew --prefix)/opt/opt/pkgconfig"
+export CPPFLAGS="-I$(brew --prefix)/opt/include"
+export PATH="$(brew --prefix)/opt/python3/libexec/bin"${PATH:+:${PATH}}
 
 # TMUX Setup
-if [[ ! $PATH == *~/.tmux/plugins/tmuxifier/bin* ]]; then
-  export PATH=${PATH:+${PATH}:}~/.tmux/plugins/tmuxifier/bin
+if [[ ! $PATH == *${HOME}/.tmux/plugins/tmuxifier/bin* ]]; then
+  export PATH="${HOME}/.tmux/plugins/tmuxifier/bin"${PATH:+:${PATH}}
   # So we can add them to git
-  export TMUXIFIER_LAYOUT_PATH=~/.dotfiles/tmux/tmuxifier/layouts
+  export TMUXIFIER_LAYOUT_PATH="${HOME}/.dotfiles/tmux/tmuxifier/layouts"
   eval "$(tmuxifier init -)"
 fi
 
@@ -78,8 +74,8 @@ if [ ! -f $HOME/.zfunc/_docker-compose ]; then
 fi
 
 ####################################################
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/.fd.sh ] && source ~/.fd.sh
+[ -f ${HOME}/.fzf.zsh ] && source ${HOME}/.fzf.zsh
+[ -f ${HOME}/.fd.sh ] && source ${HOME}/.fd.sh
 
 # configure rust environment
 #
@@ -114,6 +110,6 @@ fi
 if ! cargo clippy --version &> /dev/null; then
   rustup component add clippy
 fi
-if ! ls ~/.cargo/bin | grep 'cargo-upgrade' &> /dev/null; then
+if ! ls "${HOME}/.cargo/bin" | grep 'cargo-upgrade' &> /dev/null; then
   cargo install cargo-edit
 fi
