@@ -48,5 +48,6 @@ __pycache__/
 packer_compiled.lua
 .DS_Store
 *.bk
+*.bak
 *.old
 .netrwhist

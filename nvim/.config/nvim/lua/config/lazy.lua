@@ -47,5 +47,4 @@ require("lazy").setup({
   { import = "plugins.finder" },
   { import = "plugins.lsp" },
   { import = "plugins.cmp" },
-  -- { import = "plugins.formatting" },
 }, opts)

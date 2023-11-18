@@ -8,24 +8,24 @@ return {
   config = function()
     local lspconfig = require 'lspconfig'
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
-    local fmt_augrp = vim.api.nvim_create_augroup("LspFormat", {})
-    local lsp_formatting = function(bufnr)
-      vim.lsp.buf.format({ bufnr = bufnr })
-    end
+    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
     -- Setting up on_attach
     local on_attach = function(client, bufnr)
       if client.supports_method("textDocument/formatting") then
-        vim.api.nvim_clear_autocmds({ group = fmt_augrp, buffer = bufnr })
+        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+
+        vim.api.nvim_buf_create_user_command(bufnr, 'Format', function()
+          vim.lsp.buf.format {}
+        end, { desc = "Format buffer" })
+
+        -- Auto format on save
         vim.api.nvim_create_autocmd("BufWritePre", {
           pattern = { "*.lua", "*.rs" },
-          group = fmt_augrp,
           callback = function()
-            lsp_formatting(bufnr)
-          end,
+            vim.lsp.buf.format {}
+          end
         })
-
-        vim.api.nvim_buf_create_user_command(bufnr, 'Format', lsp_formatting(bufnr), { desc = "Format buffer" })
       end
 
       local function opts(desc)
