@@ -17,12 +17,10 @@ zcomet load zsh-users/zsh-history-substring-search
 # From oh-my-zsh
 zcomet load ohmyzsh plugins/common-aliases
 zcomet load ohmyzsh plugins/gitfast
-zcomet load ohmyzsh plugins/fd
-zcomet load ohmyzsh plugins/fzf
 zcomet load ohmyzsh plugins/history
-zcomet load ohmyzsh plugins/pip
-zcomet load ohmyzsh plugins/python
-zcomet load ohmyzsh plugins/rsync
+
+zcomet load junegunn/fzf shell completion.zsh key-bindings.zsh
+(( ${+commands[fzf]} )) || ~[fzf]/install --bin
 
 # Completions
 fpath+=${HOME}/.zfunc
@@ -72,10 +70,6 @@ fi
 if [ ! -f $HOME/.zfunc/_docker-compose ]; then
   cp /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion $HOME/.zfunc/_docker-compose
 fi
-
-####################################################
-[ -f ${HOME}/.fzf.zsh ] && source ${HOME}/.fzf.zsh
-[ -f ${HOME}/.fd.sh ] && source ${HOME}/.fd.sh
 
 # configure rust environment
 #
