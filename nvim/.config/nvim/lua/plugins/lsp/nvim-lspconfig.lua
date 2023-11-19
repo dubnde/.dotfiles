@@ -4,10 +4,26 @@ return {
   dependencies = {
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'antosha417/nvim-lsp-file-operations', config = true },
+    { "folke/neoconf.nvim",                  cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+    { "folke/neodev.nvim",                   opts = {} },
+    { "mason.nvim" },
+    { "williamboman/mason-lspconfig.nvim" },
   },
   config = function()
     local lspconfig = require 'lspconfig'
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
+
+
+    -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
+    require('neodev').setup({
+      -- add any options here, or leave empty to use the default settings
+    })
+
+    -- IMPORTANT: make sure to setup neoconf BEFORE lspconfig
+    require("neoconf").setup({
+      -- override any of the default settings here
+    })
+
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
     -- Setting up on_attach
@@ -118,13 +134,19 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
+        ---@diagnostic disable-next-line: missing-fields
         Lua = {
+          ---@diagnostic disable-next-line: missing-fields
+          runtime = { version = "LuaJIT" },
+          ---@diagnostic disable-next-line: missing-fields
           completion = { callSnippet = 'Replace' },
+          ---@diagnostic disable-next-line: missing-fields
           workspace = { checkThirdParty = false },
         },
       },
     }
 
+    ---@diagnostic disable-next-line: missing-fields
     lspconfig.rust_analyzer.setup {
       capabilities = capabilities,
       on_attach = on_attach,
@@ -132,10 +154,9 @@ return {
     }
 
     -- Fix clangd offset encoding
+    ---@diagnostic disable-next-line: missing-fields
     lspconfig.clangd.setup {
-      capabilities = {
-        offsetEncoding = { 'utf-16' }
-      },
+      capabilities = { offsetEncoding = { 'utf-16' } },
       on_attach = on_attach,
     }
   end,

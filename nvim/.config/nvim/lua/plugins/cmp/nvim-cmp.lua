@@ -1,6 +1,6 @@
 return {
   "hrsh7th/nvim-cmp",
-  event = { 'BufReadPre', 'BufNewFile' },
+  event = "InsertEnter",
   dependencies = {
     -- autocompletion
     "hrsh7th/cmp-nvim-lsp",
@@ -13,6 +13,11 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "L3MON4D3/LuaSnip",
     "rafamadriz/friendly-snippets",
+    {
+      "Saecki/crates.nvim",
+      event = { "BufRead Cargo.toml" },
+      opts = { src = { cmp = { enabled = true } } },
+    },
   },
 
   config = function()
@@ -50,6 +55,7 @@ return {
         { name = "luasnip" },  -- snippets
         { name = "buffer" },   -- text within the current buffer
         { name = "path" },     -- file system paths
+        { name = "create" },   -- Rust crates
       },
     })
   end

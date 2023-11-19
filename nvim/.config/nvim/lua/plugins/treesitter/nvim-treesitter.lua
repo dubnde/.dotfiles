@@ -11,6 +11,17 @@ return {
 
     ---@diagnostic disable-next-line: missing-fields
     treesitter_config.setup {
+
+      auto_install = true,
+      highlight = { enable = true, additional_vim_regex_highlighting = true },
+      indent = { enable = true },
+      autopairs = { enable = true },
+      rainbow = {
+        enable = true,
+        extended_mode = true,
+        max_file_lines = nil,
+      },
+
       ensure_installed = {
         'bash',
         'c',
@@ -20,6 +31,7 @@ return {
         'json',
         'lua',
         'python',
+        'ron',
         'rust',
         'toml',
         'yaml',
@@ -35,15 +47,16 @@ return {
         },
       },
 
-      auto_install = true,
-      highlight = { enable = true,  additional_vim_regex_highlighting = true},
-      indent = { enable = true },
-      autopairs = { enable = true },
-      rainbow = {
-        enable = true,
-        extended_mode = true,
-        max_file_lines = nil,
+      textobjects = {
+        move = {
+          enable = true,
+          goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
+          goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
+          goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
+          goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
+        },
       },
+
     }
   end,
 }

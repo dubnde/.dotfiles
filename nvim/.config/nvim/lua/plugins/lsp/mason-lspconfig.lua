@@ -7,19 +7,17 @@ return {
 
   lazy = false,
 
-  config = function()
-    require('mason-lspconfig').setup({
-      ensure_installed = {
-        'bashls',
-        'clangd',
-        'cmake',
-        'lua_ls',
-        'pyright',
-        'rust_analyzer',
-        'taplo',
-        'yamlls',
-      },
-      automatic_installation = true,
-    })
-  end
+  opts = {
+    ensure_installed = {
+      'bashls',
+      'clangd',
+      'cmake',
+      'lua_ls',
+      'pyright',
+      'rust_analyzer',
+      'taplo',
+      'yamlls',
+    },
+    automatic_installation = true,
+  },
 }

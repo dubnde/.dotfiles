@@ -40,6 +40,7 @@ local opts = {
 require("lazy").setup({
   { import = "plugins.core" },
   { import = "plugins.theme" },
+  { import = "plugins.editor" },
   { import = "plugins.git" },
   { import = "plugins.mini" },
   { import = "plugins.treesitter" },
