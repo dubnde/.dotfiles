@@ -107,3 +107,12 @@ fi
 if ! ls "${HOME}/.cargo/bin" | grep 'cargo-upgrade' &> /dev/null; then
   cargo install cargo-edit
 fi
+
+# History handling
+# export HISTFILESIZE=
+# export HISTSIZE=
+# export HISTFILE=~/.zsh_history
+
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt INC_APPEND_HISTORY

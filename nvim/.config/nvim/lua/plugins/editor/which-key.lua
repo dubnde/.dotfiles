@@ -4,6 +4,7 @@ return {
   "folke/which-key.nvim",
   lazy = false,
   opts = {
+    highlight = { timer = 250 },
     plugins = { spelling = true },
     defaults = {
       mode = { "n", "v" },
@@ -15,6 +16,7 @@ return {
       ["<leader>="] = { name = "+format/align" },
       ["<leader>b"] = { name = "+buffer" },
       ["<leader>c"] = { name = "+code" },
+      ["<leader>e"] = { name = "+explorer" },
       ["<leader>f"] = { name = "+file/find" },
       ["<leader>g"] = { name = "+git" },
       ["<leader>l"] = { name = "+lsp" },
@@ -26,6 +28,7 @@ return {
       ["<leader>u"] = { name = "+ui" },
       ["<leader>w"] = { name = "+windows" },
       ["<leader>x"] = { name = "+diagnostics/quickfix" },
+      ["<leader>y"] = { name = "+yank/paste" },
     },
   },
   config = function(_, opts)

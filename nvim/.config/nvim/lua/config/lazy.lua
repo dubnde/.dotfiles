@@ -16,7 +16,11 @@ local opts = {
     lazy = true,
   },
   install = {
-    colorscheme = { "catppuccin-macchiato" },
+    colorscheme = {
+      "gruvbox-material",
+      "catppuccin-macchiato",
+      "tokyonight",
+    },
   },
   rtp = {
     disabled_plugins = {
@@ -48,4 +52,5 @@ lazy.setup({
   { import = "plugins.treesitter" },
   { import = "plugins.lsp" },
   { import = "plugins.cmp" },
+  { import = "plugins.lang" },
 }, opts)

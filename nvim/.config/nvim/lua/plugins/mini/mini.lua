@@ -1,5 +1,6 @@
 return {
   'echasnovski/mini.nvim',
+  version = "*",
   lazy = false,
   event = { "BufReadPre", "BufNewFile" },
   -- stylua: ignore
@@ -28,4 +29,3 @@ return {
     require('mini.tabline').setup()
   end,
 }
-
