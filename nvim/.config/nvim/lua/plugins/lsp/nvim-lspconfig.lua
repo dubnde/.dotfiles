@@ -8,11 +8,12 @@ return {
     { "folke/neodev.nvim",                   opts = {} },
     { "mason.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
+    { "SmiteshP/nvim-navic",                 lazy = false },
   },
   config = function()
     local lspconfig = require 'lspconfig'
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
-
+    local navic = require("nvim-navic")
 
     -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
     require('neodev').setup({
@@ -28,6 +29,10 @@ return {
 
     -- Setting up on_attach
     local on_attach = function(client, bufnr)
+      if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+      end
+
       if client.supports_method("textDocument/formatting") then
         vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 
@@ -73,7 +78,7 @@ return {
       vim.keymap.set('n', '<leader>lf', ':Format<CR>', opts 'Format buffer')
       vim.keymap.set('n', '<leader>l=', ':Format<CR>', opts 'Format buffer')
       vim.keymap.set('n', '<leader>==', ':Format<CR>', opts 'Format buffer')
-      vim.keymap.set('n', '<leader>xa', vim.lsp.buf.code_action, opts 'See available code actions')
+      vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts 'See available code actions')
       vim.keymap.set('n', '[x', vim.diagnostic.goto_prev, opts 'Go to previous diagnostic')
       vim.keymap.set('n', ']x', vim.diagnostic.goto_next, opts 'Go to next diagnostic')
       vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts 'Go to previous diagnostic')

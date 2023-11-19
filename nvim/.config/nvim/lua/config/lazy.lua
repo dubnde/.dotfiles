@@ -37,15 +37,15 @@ local opts = {
   },
 }
 
-require("lazy").setup({
+local lazy = require("lazy")
+
+lazy.setup({
   { import = "plugins.core" },
   { import = "plugins.theme" },
   { import = "plugins.editor" },
   { import = "plugins.git" },
   { import = "plugins.mini" },
   { import = "plugins.treesitter" },
-  { import = "plugins.explorer" },
-  { import = "plugins.finder" },
   { import = "plugins.lsp" },
   { import = "plugins.cmp" },
 }, opts)
