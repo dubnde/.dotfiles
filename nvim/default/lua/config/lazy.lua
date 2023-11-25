@@ -45,12 +45,5 @@ local lazy = require("lazy")
 
 lazy.setup({
   { import = "plugins.core" },
-  { import = "plugins.theme" },
-  { import = "plugins.editor" },
-  { import = "plugins.git" },
-  { import = "plugins.mini" },
-  { import = "plugins.treesitter" },
   { import = "plugins.lsp" },
-  { import = "plugins.cmp" },
-  { import = "plugins.lang" },
 }, opts)

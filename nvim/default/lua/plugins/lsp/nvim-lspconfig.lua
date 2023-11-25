@@ -2,36 +2,20 @@ return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
-    { 'hrsh7th/cmp-nvim-lsp' },
-    { 'antosha417/nvim-lsp-file-operations', config = true },
-    { "folke/neoconf.nvim",                  cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+    { "folke/neoconf.nvim",                  opts = {} },
     { "folke/neodev.nvim",                   opts = {} },
+    { "hrsh7th/nvim-cmp" },
+    { 'hrsh7th/cmp-nvim-lsp' },
     { "mason.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
-    { "SmiteshP/nvim-navic",                 lazy = false },
   },
   config = function()
     local lspconfig = require 'lspconfig'
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
-    local navic = require("nvim-navic")
-
-    -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
-    require('neodev').setup({
-      -- add any options here, or leave empty to use the default settings
-    })
-
-    -- IMPORTANT: make sure to setup neoconf BEFORE lspconfig
-    require("neoconf").setup({
-      -- override any of the default settings here
-    })
-
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
     -- Setting up on_attach
     local on_attach = function(client, bufnr)
-      if client.server_capabilities.documentSymbolProvider then
-        navic.attach(client, bufnr)
-      end
 
       if client.supports_method("textDocument/formatting") then
         vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
