@@ -12,11 +12,11 @@ local function get_if_available(name, opts)
 		return name
 	end
 
-	return "default"
+	return 'default'
 end
 
 -- Uncomment the colorscheme to use
-local colorscheme = get_if_available("catppuccin")
+local colorscheme = get_if_available('catppuccin')
 -- local colorscheme = get_if_available('gruvbox')
 -- local colorscheme = get_if_available('rose-pine')
 -- local colorscheme = get_if_available('everforest')
