@@ -54,6 +54,7 @@ lazy.setup({
   { import = 'plugins.treesitter' },
   { import = 'plugins.explorer' },
   { import = 'plugins.lsp' },
+  { import = 'plugins.git' },
 }, opts)
 
 local colorscheme = prequire('helpers.colorscheme')
