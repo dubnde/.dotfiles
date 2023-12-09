@@ -11,10 +11,27 @@ return {
     config = function()
       require('nvim-treesitter.configs').setup({
         -- Add languages to be installed here that you want installed for treesitter
-        ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'vimdoc', 'vim' },
-
-        highlight = { enable = true },
-        indent = { enable = true },
+        ensure_installed = {
+          'c',
+          'cpp',
+          'lua',
+          'python',
+          'rust',
+          'toml',
+          'vimdoc',
+          'vim'
+        },
+        auto_install = true,
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+        ident = { enable = true },
+        rainbow = {
+          enable = true,
+          extended_mode = true,
+          max_file_lines = nil,
+        },
         incremental_selection = {
           enable = true,
           keymaps = {

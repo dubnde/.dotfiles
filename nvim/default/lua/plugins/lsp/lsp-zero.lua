@@ -9,9 +9,19 @@ return {
     },
     { 'williamboman/mason-lspconfig.nvim' },
     { 'neovim/nvim-lspconfig' },
-    { 'hrsh7th/cmp-nvim-lsp' },
-    { 'hrsh7th/nvim-cmp' },
     { 'L3MON4D3/LuaSnip' },
+
+    -- Useful completion sources:
+    { 'hrsh7th/cmp-nvim-lsp' },
+    { 'hrsh7th/cmp-nvim-lua' },
+    { 'hrsh7th/cmp-nvim-lsp-signature-help' },
+    { 'hrsh7th/cmp-vsnip' },
+    { 'hrsh7th/cmp-path' },
+    { 'hrsh7th/cmp-buffer' },
+    { 'hrsh7th/vim-vsnip' },
+    { 'hrsh7th/nvim-cmp' },
+
+    -- Noevim Development
     { 'folke/neodev.nvim' },
     { "folke/neoconf.nvim" },
   },
@@ -69,7 +79,11 @@ return {
     -- to learn how to use mason.nvim with lsp-zero
     require('mason').setup({})
     require('mason-lspconfig').setup({
-      ensure_installed = { 'clangd', 'lua_ls', 'rust_analyzer' },
+      ensure_installed = {
+        'clangd',
+        'lua_ls',
+        'rust_analyzer'
+      },
       handlers = {
         lsp_zero.default_setup,
       }
