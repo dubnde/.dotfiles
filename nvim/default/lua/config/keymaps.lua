@@ -1,97 +1,69 @@
--- Functional wrapper mapping keys
-function map(mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true }
-  if opts then
-    options = vim.tbl_extend("force", options, opts)
-  end
-  -- vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-  vim.keymap.set(mode, lhs, rhs, options)
-end
+local keys = require('helpers.keys')
 
---   normal_mode = "n",
---   insert_mode = "i",
---   visual_mode = "v",
---   visual_block_mode = "x",
---   term_mode = "t",
---   command_mode = "c",
+local map = keys.map
 
--- Normal --
+-- Blazingly fast way out of insert mode
+map('i', 'jk', '<esc>')
+map('i', 'kj', '<esc>')
+
+-- Quick access to some common actions
+map('n', '<leader>fw', '<cmd>w<cr>', 'Write')
+map('n', '<leader>fs', '<cmd>w<cr>', 'Write')
+map('n', '<leader>fa', '<cmd>wa<cr>', 'Write all')
+map('n', '<leader>fS', '<cmd>wa<cr>', 'Write all')
+map('n', '<leader>qq', '<cmd>q<cr>', 'Quit')
+map('n', '<leader>qa', '<cmd>qa!<cr>', 'Quit all')
+
+-- Diagnostic keymaps
+map('n', 'gx', vim.diagnostic.open_float, 'Show diagnostics under cursor')
+
+-- Easier access to beginning and end of lines
+map('n', '<M-h>', '^', 'Go to beginning of line')
+map('n', '<M-l>', '$', 'Go to end of line')
+
 -- Better window navigation
-map('n', '<C-h>', '<C-w>h', { desc = 'Left Window' })
-map('n', '<C-j>', '<C-w>j', { desc = 'Lower Window' })
-map('n', '<C-k>', '<C-w>k', { desc = 'Upper Window' })
-map('n', '<C-l>', '<C-w>l', { desc = 'Right Window' })
+map('n', '<C-h>', '<C-w><C-h>', 'Navigate windows to the left')
+map('n', '<C-j>', '<C-w><C-j>', 'Navigate windows down')
+map('n', '<C-k>', '<C-w><C-k>', 'Navigate windows up')
+map('n', '<C-l>', '<C-w><C-l>', 'Navigate windows to the right')
+
+-- Move with shift-arrows
+map('n', '<S-Left>', '<C-w><S-h>', 'Move window to the left')
+map('n', '<S-Down>', '<C-w><S-j>', 'Move window down')
+map('n', '<S-Up>', '<C-w><S-k>', 'Move window up')
+map('n', '<S-Right>', '<C-w><S-l>', 'Move window to the right')
 
 -- Resize with arrows
-map('n', '<C-Up>', ':resize -2<CR>')
-map('n', '<C-Down>', ':resize +2<CR>')
-map('n', '<C-Left>', ':vertical resize -2<CR>')
-map('n', '<C-Right>', ':vertical resize +2<CR>')
+map('n', '<C-Up>', ':resize +2<CR>')
+map('n', '<C-Down>', ':resize -2<CR>')
+map('n', '<C-Left>', ':vertical resize +2<CR>')
+map('n', '<C-Right>', ':vertical resize -2<CR>')
+
+-- Deleting buffers
+local buffers = require('helpers.buffers')
+map('n', '<leader>bd', buffers.delete_this, 'Current buffer')
+map('n', '<leader>bD', buffers.delete_all, 'All buffers')
+map('n', '<leader>bo', buffers.delete_others, 'Other buffers')
 
 -- Navigate buffers
-map('n', '<S-l>', ':bnext<CR>', { desc = 'Next Buffer' })
-map('n', '<S-h>', ':bprevious<CR>', { desc = 'Previous Buffer' })
-map('n', '<TAB>', ':bnext<CR>', { desc = 'Next Buffer' })
-map('n', '<S-TAB>', ':bprevious<CR>', { desc = 'Previous Buffer' })
+map('n', '<S-l>', ':bnext<CR>', 'Next Buffer')
+map('n', '<S-h>', ':bprevious<CR>', 'Previous Buffer')
+map('n', '<TAB>', ':bnext<CR>', 'Next Buffer')
+map('n', '<S-TAB>', ':bprevious<CR>', 'Previous Buffer')
 
--- Clear highlights
-map('n', '<leader>nh', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlights' })
-
--- delete single character without copying into register
-map("n", "x", '"_x')
-
--- Write file
-map('n', '<leader>fs', '<cmd>write<CR>', { desc = 'Write File' })
-map('n', '<leader>fw', '<cmd>write<CR>', { desc = 'Write File' })
-map('n', '<leader>fS', '<cmd>wa<CR>', { desc = 'Write all files' })
-map('n', '<leader>fW', '<cmd>wa<CR>', { desc = 'Write all files' })
-
-map('n', '<Leader>qq', '<CMD>quitall<CR>', { desc = 'Safe quit current file' })
-map('n', '<Leader>Q', '<CMD>quitall!<CR>', { desc = 'Force Quit' })
-
--- Better paste
-map('v', 'p', '"_dP')
-
--- Insert --
--- Press jk fast to enter
-map({ 'i', 'v', 'x', 't' }, 'jk', '<ESC>', { desc = 'Escape' })
-map({ 'i', 'v', 'x', 't' }, 'kj', '<ESC>', { desc = 'Escape' })
-
--- Visual --
 -- Stay in indent mode
-map('v', '<', '<gv', { desc = 'Shift left visual' })
-map('v', '>', '>gv', { desc = 'Shift right visual' })
+map('v', '<', '<gv')
+map('v', '>', '>gv')
 
--- Search will center on the line it's found in
-map('n', 'n', 'nzzzv')
-map('n', 'N', 'Nzzzv')
-map('n', '#', '#zz')
-map('n', '*', '*zz')
+-- Switch between light and dark modes
+map('n', '<leader>ut', function()
+  if vim.o.background == 'dark' then
+    vim.o.background = 'light'
+  else
+    vim.o.background = 'dark'
+  end
+end, 'Toggle between light and dark themes')
 
--- increment/decrement numbers
-map('n', '<leader>+', '<C-a>', { desc = 'increment' })
-map('n', '<leader>-', '<C-x>', { desc = 'decrement' })
-
--- window management
-map('n', '<leader>w=', '<Cmd>wincmd =<CR>', { desc = 'Equalise' })
-map('n', '<leader>w|', '<Cmd>wincmd v<CR>', { desc = 'split vertically' })
-map('n', '<leader>w-', '<Cmd>wincmd s<CR>', { desc = 'split horizontally' })
-map('n', '<leader>wv', '<Cmd>wincmd v<CR>', { desc = 'split vertically' })
-map('n', '<leader>wh', '<Cmd>wincmd s<CR>', { desc = 'split horizontally' })
-map('n', '<leader>wc', '<Cmd>wincmd c<CR>', { desc = 'close window' })
-map('n', '<leader>wd', '<Cmd>wincmd c<CR>', { desc = 'close window' })
-map('n', '<leader>wn', '<Cmd>wincmd n<CR>', { desc = 'New window' })
-map('n', '<leader>wo', '<Cmd>wincmd o<CR>', { desc = 'Only window' })
-map('n', '<leader>wm', '<Cmd>wincmd o<CR>', { desc = 'Only window' })
-map('n', '<leader>wp', '<Cmd>wincmd p<CR>', { desc = 'Previous window' })
-map('n', '<leader>wq', '<Cmd>wincmd q<CR>', { desc = 'Quit' })
-map('n', '<leader>wr', '<Cmd>wincmd r<CR>', { desc = 'Rotate down/right' })
-map('n', '<leader>wR', '<Cmd>wincmd R<CR>', { desc = 'Rotate up/left' })
-map('n', '<leader>ww', '<Cmd>wincmd p<CR>', { desc = 'Previous window' })
-map('n', '<leader>wt', '<Cmd>wincmd T<CR>', { desc = 'Move to tab' })
-map('n', '<leader>wx', '<Cmd>wincmd X<CR>', { desc = 'Exchange window' })
-
-map('n', '<leader>to', ':tabnew<CR>', { desc = 'New tab' })
-map('n', '<leader>tx', ':tabclose<CR>', { desc = 'Close tab' })
-map('n', '<leader>tn', ':tabnext<CR>', { desc = 'Next tab' })
-map('n', '<leader>tp', ':tabprevious<CR>', { desc = 'Previous tab' })
+-- Clear after search
+map('n', '<leader>ur', '<cmd>nohl<cr>', 'Clear highlights')
+map('n', '<leader>nh', '<cmd>nohl<cr>', 'Clear highlights')

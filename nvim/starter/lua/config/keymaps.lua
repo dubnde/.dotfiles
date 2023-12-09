@@ -8,9 +8,12 @@ map('i', 'kj', '<esc>')
 
 -- Quick access to some common actions
 map('n', '<leader>fw', '<cmd>w<cr>', 'Write')
+map('n', '<leader>fs', '<cmd>w<cr>', 'Write')
 map('n', '<leader>fa', '<cmd>wa<cr>', 'Write all')
+map('n', '<leader>fS', '<cmd>wa<cr>', 'Write all')
 map('n', '<leader>qq', '<cmd>q<cr>', 'Quit')
 map('n', '<leader>qa', '<cmd>qa!<cr>', 'Quit all')
+map('n', '<leader>Q', '<cmd>qa!<cr>', 'Quit all')
 map('n', '<leader>dw', '<cmd>close<cr>', 'Window')
 
 -- Diagnostic keymaps
@@ -45,8 +48,10 @@ map('n', '<leader>do', buffers.delete_others, 'Other buffers')
 map('n', '<leader>da', buffers.delete_all, 'All buffers')
 
 -- Navigate buffers
-map('n', '<S-l>', ':bnext<CR>')
-map('n', '<S-h>', ':bprevious<CR>')
+map('n', '<S-l>', ':bnext<CR>', 'Next Buffer')
+map('n', '<S-h>', ':bprevious<CR>', 'Previous Buffer')
+map('n', '<TAB>', ':bnext<CR>', 'Next Buffer')
+map('n', '<S-TAB>', ':bprevious<CR>', 'Previous Buffer')
 
 -- Stay in indent mode
 map('v', '<', '<gv')
@@ -63,3 +68,4 @@ end, 'Toggle between light and dark themes')
 
 -- Clear after search
 map('n', '<leader>ur', '<cmd>nohl<cr>', 'Clear highlights')
+map('n', '<leader>nh', '<cmd>nohl<cr>', 'Clear highlights')

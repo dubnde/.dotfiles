@@ -30,7 +30,6 @@ opt.scrolloff = 10
 opt.completeopt = "menuone,noinsert,noselect"
 
 -- History
-opt.undodir = vim.fn.expand('~/.vim/undodir')
 opt.undofile = true
 
 -- Behaviour
@@ -88,3 +87,9 @@ opt.wildignore = {
 wo.foldlevel = 20
 wo.foldmethod = 'expr'
 -- wo.foldcolumn = "auto"
+
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+

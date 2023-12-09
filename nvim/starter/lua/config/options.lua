@@ -4,7 +4,7 @@ local wo = vim.wo
 -- Tab / Indentation
 opt.tabstop = 2
 opt.shiftwidth = 2
--- opt.softtabstop = 2
+opt.softtabstop = 2
 opt.smarttab = true
 opt.expandtab = true
 opt.smartindent = true
@@ -23,11 +23,11 @@ opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
 opt.termguicolors = true
-opt.colorcolumn = '100'
-opt.signcolumn = 'yes'
+opt.colorcolumn = "100"
+opt.signcolumn = "yes"
 opt.cmdheight = 1
 opt.scrolloff = 10
-opt.completeopt = 'menuone,noinsert,noselect'
+opt.completeopt = "menuone,noinsert,noselect"
 
 -- History
 opt.undofile = true
@@ -41,15 +41,15 @@ opt.hidden = true
 opt.errorbells = false
 opt.swapfile = false
 opt.backup = false
-opt.backspace = 'indent,eol,start'
+opt.backspace = "indent,eol,start"
 opt.splitright = true
 opt.splitbelow = true
 opt.autochdir = false
-opt.iskeyword:append('-')
-opt.mouse:append('a')
-opt.clipboard:append('unnamedplus')
+opt.iskeyword:append("-")
+opt.mouse:append("a")
+opt.clipboard:append("unnamedplus")
 opt.modifiable = true
-opt.encoding = 'UTF-8'
+opt.encoding = "UTF-8"
 opt.showmode = false
 opt.listchars = { eol = '↵', trail = '~', tab = '>~' }
 opt.list = true
@@ -80,10 +80,11 @@ opt.wildignore = {
   '*/.venv/*',
   '*/target/*',
   '*/build_*/*',
-  '*/CMakeFiles/*',
+  '*/CMakeFiles/*'
 }
 
 -- folds
 wo.foldlevel = 20
 wo.foldmethod = 'expr'
 -- wo.foldcolumn = "auto"
+

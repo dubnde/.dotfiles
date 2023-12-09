@@ -33,6 +33,7 @@ export EDITOR=nvim
 export VISUAL=${EDITOR}
 
 # PATH
+export PATH="${HOME}/bin"${PATH:+:${PATH}}
 export PATH="${HOME}/.gem/rub/2.6/bin"${PATH:+:${PATH}}
 export PATH="${HOME}/.local/bin"${PATH:+:${PATH}}
 export PATH="${HOME}/.yarn/bin"${PATH:+:${PATH}}
@@ -40,10 +41,13 @@ export PATH="${HOME}/.cargo/bin"${PATH:+:${PATH}}
 
 # Compiling/Linking/Finding packages
 export PATH=/opt/homebrew/bin${PATH:+:${PATH}}
-export LDFLAGS="-L$(brew --prefix)/opt/lib"
-export PKG_CONFIG_PATH="$(brew --prefix)/opt/opt/pkgconfig"
-export CPPFLAGS="-I$(brew --prefix)/opt/include"
+export LDFLAGS="-L$(brew --prefix)/opt/lib"${LDFLAGS:+:${LDFLAGS}}
+export LDFLAGS="-L$(brew --prefix)/llvm/lib"${LDFLAGS:+:${LDFLAGS}}
+export PKG_CONFIG_PATH="$(brew --prefix)/opt/opt/pkgconfig"${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}
+export CPPFLAGS="-I$(brew --prefix)/opt/include"${CPPFLAGS:+:${CPPFLAGS}}
+export CPPFLAGS="-I$(brew --prefix)/llvm/include"${CPPFLAGS:+:${CPPFLAGS}}
 export PATH="$(brew --prefix)/opt/python3/libexec/bin"${PATH:+:${PATH}}
+export PATH="$(brew --prefix)/opt/llvm/bin"${PATH:+:${PATH}}
 
 # TMUX Setup
 if [[ ! $PATH == *${HOME}/.tmux/plugins/tmuxifier/bin* ]]; then
