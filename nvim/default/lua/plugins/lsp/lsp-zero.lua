@@ -1,7 +1,12 @@
 return {
   'VonHeikemen/lsp-zero.nvim',
   dependencies = {
-    { 'williamboman/mason.nvim' },
+    {
+      'williamboman/mason.nvim',
+      keys = {
+        { "<leader>mm", "<cmd>Mason<cr>", desc = "Mason" },
+      },
+    },
     { 'williamboman/mason-lspconfig.nvim' },
     { 'neovim/nvim-lspconfig' },
     { 'hrsh7th/cmp-nvim-lsp' },
@@ -12,10 +17,6 @@ return {
   },
   config = function()
     local keys = require('helpers.keys')
-
-    -- Quick access via keymap
-    keys.map('n', '<leader>mm', '<cmd>Mason<cr>', 'Mason')
-
 
     -- Neodev setup before LSP config
     require('neodev').setup()

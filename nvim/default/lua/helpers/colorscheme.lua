@@ -1,8 +1,8 @@
 -- Fetch and setup colorscheme if available, otherwise just return 'default'
 -- This should prevent Neovim from complaining about missing colorschemes on first boot
 local function get_if_available(name, opts)
-  local lua_ok, colorscheme = pcall(require, name)
-  if lua_ok then
+  local colorscheme = prequire(name)
+  if colorscheme then
     colorscheme.setup(opts)
     return name
   end

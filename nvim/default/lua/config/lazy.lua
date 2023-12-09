@@ -13,8 +13,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Use a protected call so we don't error out on first use
-local ok, lazy = pcall(require, 'lazy')
-if not ok then
+local lazy = prequire('lazy')
+if not lazy then
   return
 end
 
@@ -56,12 +56,12 @@ lazy.setup({
   { import = 'plugins.lsp' },
 }, opts)
 
-local ok, colorscheme = pcall(require, 'helpers.colorscheme')
-if ok then
+local colorscheme = prequire('helpers.colorscheme')
+if colorscheme then
   vim.cmd.colorscheme(colorscheme)
 end
 
-local ok, keys = pcall(require, 'helpers.keys')
-if ok then
+local keys = prequire('helpers.keys')
+if keys then
   keys.map('n', '<leader>L', lazy.show, 'Lazy')
 end
