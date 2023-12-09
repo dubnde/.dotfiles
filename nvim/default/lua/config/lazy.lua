@@ -65,4 +65,3 @@ local ok, keys = pcall(require, 'helpers.keys')
 if ok then
   keys.map('n', '<leader>L', lazy.show, 'Lazy')
 end
-

@@ -4,15 +4,9 @@ return {
 
   'ellisonleao/gruvbox.nvim',
 
-  {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-  },
+  { 'catppuccin/nvim', name = 'catppuccin', },
 
-  {
-    'rose-pine/nvim',
-    name = 'rose-pine',
-  },
+  { 'rose-pine/nvim',  name = 'rose-pine', },
 
   'sainnhe/everforest',
 

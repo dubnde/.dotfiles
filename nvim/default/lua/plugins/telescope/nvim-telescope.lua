@@ -1,4 +1,3 @@
-
 -- Telescope fuzzy finding (all the things)
 return {
   {

@@ -8,37 +8,41 @@ return {
     { 'hrsh7th/nvim-cmp' },
     { 'L3MON4D3/LuaSnip' },
     { 'folke/neodev.nvim' },
+    { "folke/neoconf.nvim" },
   },
   config = function()
+    local keys = require('helpers.keys')
+
+    -- Quick access via keymap
+    keys.map('n', '<leader>mm', '<cmd>Mason<cr>', 'Mason')
+
+
     -- Neodev setup before LSP config
     require('neodev').setup()
+    require("neoconf").setup()
 
     local lsp_zero = require('lsp-zero')
 
+    ---@diagnostic disable-next-line: unused-local
     lsp_zero.on_attach(function(client, bufnr)
       -- see :help lsp-zero-keybindings
       -- to learn the available actions
       lsp_zero.default_keymaps({ buffer = bufnr })
 
-      local keys = require('helpers.keys')
-
-      -- Quick access via keymap
-      keys.map('n', '<leader>mm', '<cmd>Mason<cr>', 'Mason')
-
       local lsp_map = keys.lsp_map
-      local telescope_builtin = require('telescope.builtin')
 
       lsp_map('<leader>lr', vim.lsp.buf.rename, bufnr, 'Rename symbol')
       lsp_map('<leader>la', vim.lsp.buf.code_action, bufnr, 'Code action')
       lsp_map('<leader>ca', vim.lsp.buf.code_action, bufnr, 'Code action')
       lsp_map('<leader>ld', vim.lsp.buf.type_definition, bufnr, 'Type definition')
-      lsp_map('<leader>ls', telescope_builtin.lsp_document_symbols, bufnr, 'Document symbols')
-
       lsp_map('gd', vim.lsp.buf.definition, bufnr, 'Goto Definition')
-      lsp_map('gr', telescope_builtin.lsp_references, bufnr, 'Goto References')
-      lsp_map('gI', vim.lsp.buf.implementation, bufnr, 'Goto Implementation')
-      lsp_map('K', vim.lsp.buf.hover, bufnr, 'Hover Documentation')
       lsp_map('gD', vim.lsp.buf.declaration, bufnr, 'Goto Declaration')
+      lsp_map('gI', vim.lsp.buf.implementation, bufnr, 'Goto Implementation')
+      lsp_map('gr', vim.lsp.buf.references, bufnr, 'Goto References')
+      lsp_map('K', vim.lsp.buf.hover, bufnr, 'Hover Documentation')
+      lsp_map('gl', vim.diagnostic.open_float, bufnr, 'Show diagnostic')
+      lsp_map('[d', vim.diagnostic.goto_prev, bufnr, 'Previous diagnostic')
+      lsp_map(']d', vim.diagnostic.goto_next, bufnr, 'Next diagnostic')
 
       -- Create a command `:Format` local to the LSP buffer
       vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
