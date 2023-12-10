@@ -6,6 +6,7 @@ return {
       prequire('nvim-treesitter.install').update({ with_sync = true })
     end,
     dependencies = {
+      "HiPhish/nvim-ts-rainbow2",
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     config = function()
@@ -30,6 +31,8 @@ return {
         rainbow = {
           enable = true,
           extended_mode = true,
+          query = "rainbow-parens",
+          strategy = require("ts-rainbow").strategy.global,
           max_file_lines = nil,
         },
         incremental_selection = {

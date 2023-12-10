@@ -12,6 +12,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require("helpers.utils")
+
 -- Use a protected call so we don't error out on first use
 local lazy = prequire('lazy')
 if not lazy then
@@ -55,6 +57,7 @@ lazy.setup({
   { import = 'plugins.explorer' },
   { import = 'plugins.lsp' },
   { import = 'plugins.git' },
+  { import = 'plugins.tmux' },
 }, opts)
 
 local colorscheme = prequire('helpers.colorscheme')
