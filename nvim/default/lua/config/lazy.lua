@@ -52,12 +52,13 @@ local opts = {
 lazy.setup({
   { import = 'plugins.core' },
   { import = 'plugins.themes' },
+  { import = 'plugins.git' },
+  { import = 'plugins.tmux' },
   { import = 'plugins.telescope' },
   { import = 'plugins.treesitter' },
   { import = 'plugins.explorer' },
+  { import = 'plugins.cmp' },
   { import = 'plugins.lsp' },
-  { import = 'plugins.git' },
-  { import = 'plugins.tmux' },
 }, opts)
 
 local colorscheme = prequire('helpers.colorscheme')
