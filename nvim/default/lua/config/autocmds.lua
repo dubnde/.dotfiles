@@ -7,12 +7,12 @@ local function augroup(name)
 end
 
 -- Remove trailing whitespaces
-autocmd('BufWritePre', {
-  pattern = { '*.lua', '*.rs' },
-  callback = function()
-    vim.cmd('%s/\\s\\+$//e')
-  end,
-})
+-- autocmd('BufWritePre', {
+--   pattern = { '*.lua', '*.rs' },
+--   callback = function()
+--     vim.cmd('%s/\\s\\+$//e')
+--   end,
+-- })
 
 -- Highlight text on yank
 augroup('YankHighlight')

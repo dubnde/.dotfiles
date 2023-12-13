@@ -32,6 +32,12 @@ return {
         },
       }
     },
+    update_focused_file = {
+      enable = true,
+    },
+    diagnostics = {
+      enable = true,
+    }
   },
   config = function(_, opts)
     require("nvim-tree").setup(opts)
