@@ -48,6 +48,11 @@ export CPPFLAGS="-I$(brew --prefix)/opt/include"${CPPFLAGS:+:${CPPFLAGS}}
 export CPPFLAGS="-I$(brew --prefix)/llvm/include"${CPPFLAGS:+:${CPPFLAGS}}
 export PATH="$(brew --prefix)/opt/python3/libexec/bin"${PATH:+:${PATH}}
 export PATH="$(brew --prefix)/opt/llvm/bin"${PATH:+:${PATH}}
+export LIBTORCH="$(brew --prefix)/Cellar/pytorch/2.1.0_1"
+# LIBTORCH_INCLUDE must contain `include` directory.
+export LIBTORCH_INCLUDE=${LIBTORCH}/include
+# LIBTORCH_LIB must contain `lib` directory.
+export LIBTORCH_LIB=${LIBTORCH}/lib
 
 # TMUX Setup
 if [[ ! $PATH == *${HOME}/.tmux/plugins/tmuxifier/bin* ]]; then

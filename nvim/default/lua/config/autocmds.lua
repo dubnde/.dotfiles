@@ -15,7 +15,7 @@ autocmd('BufWritePre', {
 })
 
 -- Highlight text on yank
-augroup('YankHighlight', { clear = true })
+augroup('YankHighlight')
 autocmd('TextYankPost', {
   group = 'YankHighlight',
   callback = function()

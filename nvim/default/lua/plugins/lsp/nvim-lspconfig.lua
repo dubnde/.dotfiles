@@ -22,7 +22,13 @@ return {
     require("neoconf").setup()
 
     local lspconfig = require('lspconfig')
-    local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
+
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = { '*.lua', '*.rs' },
+      callback = function()
+        vim.lsp.buf.format()
+      end,
+    })
 
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(event)
@@ -45,22 +51,15 @@ return {
         lsp_map('[d', vim.diagnostic.goto_prev, bufnr, 'Previous diagnostic')
         lsp_map(']d', vim.diagnostic.goto_next, bufnr, 'Next diagnostic')
 
-        local formatCallback = function()
+        local lsp_format_buffer = function()
           vim.lsp.buf.format({ bufnr = bufnr, async = false })
         end
 
         -- Create a command `:Format` local to the LSP buffer
-        vim.api.nvim_buf_create_user_command(bufnr, 'Format', formatCallback, { desc = 'Format current buffer with LSP' })
+        vim.api.nvim_buf_create_user_command(bufnr, 'Format', lsp_format_buffer, { desc = 'Format buffer' })
 
         lsp_map('gq', '<cmd>Format<cr>', bufnr, 'Format')
         lsp_map('<leader>f=', '<cmd>Format<cr>', bufnr, 'Format')
-
-        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          pattern = { "*.lua", ".rs" },
-          group = augroup,
-          callback = formatCallback,
-        })
       end
     })
 

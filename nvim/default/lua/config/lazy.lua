@@ -49,17 +49,19 @@ local opts = {
   },
 }
 
-lazy.setup({
+local plugins = {
   { import = 'plugins.core' },
   { import = 'plugins.themes' },
+  { import = 'plugins.treesitter' },
   { import = 'plugins.git' },
   { import = 'plugins.tmux' },
-  { import = 'plugins.telescope' },
-  { import = 'plugins.treesitter' },
+  { import = 'plugins.finder' },
   { import = 'plugins.explorer' },
   { import = 'plugins.cmp' },
   { import = 'plugins.lsp' },
-}, opts)
+}
+
+lazy.setup(plugins, opts)
 
 local colorscheme = prequire('helpers.colorscheme')
 if colorscheme then
