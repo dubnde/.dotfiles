@@ -59,6 +59,8 @@ local plugins = {
   { import = 'plugins.explorer' },
   { import = 'plugins.cmp' },
   { import = 'plugins.lsp' },
+  { import = 'plugins.lang' },
+  { import = 'plugins.terminal' },
 }
 
 lazy.setup(plugins, opts)

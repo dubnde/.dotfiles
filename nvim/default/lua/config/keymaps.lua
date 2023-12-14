@@ -116,3 +116,17 @@ map('n', '<leader>to', ':tabnew<CR>', 'New tab')
 map('n', '<leader>tx', ':tabclose<CR>', 'Close tab')
 map('n', '<leader>tn', ':tabnext<CR>', 'Next tab')
 map('n', '<leader>tp', ':tabprevious<CR>', 'Previous tab')
+
+function _G.set_terminal_keymaps()
+  local term_map = keys.term_map
+
+  term_map('<esc>', [[<C-\><C-n>]], "Term escape")
+  term_map('jk', [[<C-\><C-n>]], "Term escape")
+  term_map('<C-h>', [[<Cmd>wincmd h<CR>]], "Term left")
+  term_map('<C-j>', [[<Cmd>wincmd j<CR>]], "Term down")
+  term_map('<C-k>', [[<Cmd>wincmd k<CR>]], "Term up")
+  term_map('<C-l>', [[<Cmd>wincmd l<CR>]], "Term right")
+  term_map('<C-w>', [[<C-\><C-n><C-w>]], "Term escape")
+end
+
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')

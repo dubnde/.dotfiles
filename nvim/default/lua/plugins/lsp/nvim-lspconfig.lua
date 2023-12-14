@@ -2,6 +2,7 @@ return {
   'neovim/nvim-lspconfig',
   dependencies = {
     {
+      'folke/which-key.nvim',
       'williamboman/mason.nvim',
       keys = {
         { "<leader>mm", "<cmd>Mason<cr>", desc = "Mason" }
@@ -12,7 +13,12 @@ return {
 
     -- Noevim Development
     { 'folke/neodev.nvim' },
-    { "folke/neoconf.nvim" },
+    {
+      "folke/neoconf.nvim",
+      cmd = "Neoconf",
+      config = false,
+      dependencies = { "nvim-lspconfig" }
+    },
   },
   config = function()
     local keys = require('helpers.keys')
@@ -35,6 +41,13 @@ return {
         local bufnr = event.buf
         local lsp_map = keys.lsp_map
 
+        local lsp_format_buffer = function()
+          vim.lsp.buf.format({ bufnr = bufnr, async = false })
+        end
+
+        -- Create a command `:Format` local to the LSP buffer
+        vim.api.nvim_buf_create_user_command(bufnr, 'Format', lsp_format_buffer, { desc = 'Format buffer' })
+
         lsp_map('<leader>lr', vim.lsp.buf.rename, bufnr, 'Rename symbol')
         lsp_map('<leader>la', vim.lsp.buf.code_action, bufnr, 'Code action')
         lsp_map('<leader>ca', vim.lsp.buf.code_action, bufnr, 'Code action')
@@ -51,14 +64,8 @@ return {
         lsp_map('[d', vim.diagnostic.goto_prev, bufnr, 'Previous diagnostic')
         lsp_map(']d', vim.diagnostic.goto_next, bufnr, 'Next diagnostic')
 
-        local lsp_format_buffer = function()
-          vim.lsp.buf.format({ bufnr = bufnr, async = false })
-        end
-
-        -- Create a command `:Format` local to the LSP buffer
-        vim.api.nvim_buf_create_user_command(bufnr, 'Format', lsp_format_buffer, { desc = 'Format buffer' })
-
         lsp_map('gq', '<cmd>Format<cr>', bufnr, 'Format')
+        lsp_map('<leader>==', '<cmd>Format<cr>', bufnr, 'Format')
         lsp_map('<leader>f=', '<cmd>Format<cr>', bufnr, 'Format')
       end
     })

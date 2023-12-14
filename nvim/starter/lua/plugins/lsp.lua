@@ -17,15 +17,15 @@ return {
     config = function()
       -- Set up Mason before anything else
       require('mason').setup()
-      require('mason-lspconfig').setup({
+      require('mason-lspconfig').setup {
         ensure_installed = {
           'lua_ls',
           'pylsp',
         },
         automatic_installation = true,
-      })
+      }
 
-      local keys = require('helpers.keys')
+      local keys = require 'helpers.keys'
 
       -- Quick access via keymap
       keys.map('n', '<leader>mm', '<cmd>Mason<cr>', 'Mason')
@@ -66,7 +66,7 @@ return {
       -- This function gets run when an LSP connects to a particular buffer.
       local on_attach = function(client, bufnr)
         local lsp_map = keys.lsp_map
-        local telescope_builtin = require('telescope.builtin')
+        local telescope_builtin = require 'telescope.builtin'
 
         lsp_map('<leader>lr', vim.lsp.buf.rename, bufnr, 'Rename symbol')
         lsp_map('<leader>la', vim.lsp.buf.code_action, bufnr, 'Code action')
@@ -81,9 +81,12 @@ return {
         lsp_map('gD', vim.lsp.buf.declaration, bufnr, 'Goto Declaration')
 
         -- Create a command `:Format` local to the LSP buffer
-        vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-          vim.lsp.buf.format()
-        end, { desc = 'Format current buffer with LSP' })
+        vim.api.nvim_buf_create_user_command(
+          bufnr,
+          'Format',
+          function(_) vim.lsp.buf.format() end,
+          { desc = 'Format current buffer with LSP' }
+        )
 
         lsp_map('<leader>==', '<cmd>Format<cr>', bufnr, 'Format')
         lsp_map('<leader>f=', '<cmd>Format<cr>', bufnr, 'Format')
@@ -96,10 +99,10 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-      local lspconfig = require('lspconfig')
+      local lspconfig = require 'lspconfig'
 
       -- Lua
-      lspconfig['lua_ls'].setup({
+      lspconfig['lua_ls'].setup {
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
@@ -112,16 +115,16 @@ return {
             },
             workspace = {
               library = {
-                [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                [vim.fn.stdpath('config') .. '/lua'] = true,
+                [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+                [vim.fn.stdpath 'config' .. '/lua'] = true,
               },
             },
           },
         },
-      })
+      }
 
       -- Python
-      lspconfig['pylsp'].setup({
+      lspconfig['pylsp'].setup {
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
@@ -148,7 +151,7 @@ return {
             },
           },
         },
-      })
+      }
     end,
   },
 }

@@ -16,6 +16,10 @@ M.lsp_map = function(lhs, rhs, bufnr, desc)
   M.keymap('n', lhs, rhs, { buffer = bufnr, desc = desc })
 end
 
+M.term_map = function(lhs, rhs, desc)
+  M.keymap('t', lhs, rhs, { buffer = 0, desc = desc })
+end
+
 M.dap_map = function(mode, lhs, rhs, desc)
   M.map(mode, lhs, rhs, desc)
 end

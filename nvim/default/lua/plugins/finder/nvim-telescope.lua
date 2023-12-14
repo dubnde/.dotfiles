@@ -8,11 +8,27 @@ return {
       -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', cond = vim.fn.executable('make') == 1 },
     },
+    keys = {
+      { '<C-p>',           '<CMD>Telescope keymaps<CR>',                   desc = 'Search keymaps' },
+      { '<leader>*',       '<CMD>Telescope grep_string<CR>',               desc = 'Current word' },
+      { '<leader>/',       '<CMD>Telescope live_grep<CR>',                 desc = 'Grep' },
+      { '<leader>:',       '<CMD>Telescope commands<CR>',                  desc = 'Commands' },
+      { '<leader><space>', '<CMD>Telescope buffers<CR>',                   desc = 'Open buffers' },
+      { '<leader>fb',      '<CMD>Telescope buffers<CR>',                   desc = 'Open buffers' },
+      { '<leader>fd',      '<CMD>Telescope diagnostics<CR>',               desc = 'Diagnostics' },
+      { '<leader>ff',      '<CMD>Telescope find_files<CR>',                desc = 'Files' },
+      { '<leader>fh',      '<CMD>Telescope help_tags<CR>',                 desc = 'Help' },
+      { '<leader>fk',      '<CMD>Telescope keymaps<CR>',                   desc = 'Keymaps' },
+      { '<leader>fr',      '<CMD>Telescope oldfiles<CR>',                  desc = 'Recently opened' },
+      { '<leader>ss',      '<CMD>Telescope current_buffer_fuzzy_find<CR>', desc = 'Fuzzy find in buffer' },
+      { '<leader>sr',      '<CMD>Telescope resume<CR>',                    desc = 'Resume' },
+    },
     config = function()
       require('telescope').setup({
         defaults = {
           mappings = {
             i = {
+              ["<C-h>"] = "which_key",
               ['<C-u>'] = false,
               ['<C-d>'] = false,
             },
@@ -22,25 +38,6 @@ return {
 
       -- Enable telescope fzf native, if installed
       prequire('telescope').load_extension('fzf')
-
-      local map = require('helpers.keys').map
-      map('n', '<leader>fr', require('telescope.builtin').oldfiles, 'Recently opened')
-      map('n', '<leader><space>', require('telescope.builtin').buffers, 'Open buffers')
-      map('n', '<leader>/', function()
-        -- You can pass additional configuration to telescope to change theme, layout, etc.
-        require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
-          winblend = 10,
-          previewer = false,
-        }))
-      end, 'Search in current buffer')
-
-      map('n', '<leader>ff', require('telescope.builtin').find_files, 'Files')
-      map('n', '<leader>fh', require('telescope.builtin').help_tags, 'Help')
-      map('n', '<leader>*', require('telescope.builtin').grep_string, 'Current word')
-      map('n', '<leader>/', require('telescope.builtin').live_grep, 'Grep')
-      map('n', '<leader>dd', require('telescope.builtin').diagnostics, 'Diagnostics')
-
-      map('n', '<C-p>', require('telescope.builtin').keymaps, 'Search keymaps')
     end,
   },
 }
