@@ -1,6 +1,8 @@
 return {
   'hrsh7th/nvim-cmp',
   dependencies = {
+    { 'hrsh7th/cmp-nvim-lua' },
+    { 'hrsh7th/cmp-nvim-lsp-signature-help' },
     { 'hrsh7th/cmp-buffer' },
     { 'hrsh7th/cmp-path' },
     { 'hrsh7th/cmp-cmdline' },
@@ -11,6 +13,9 @@ return {
 
     -- Useful snippets
     { "rafamadriz/friendly-snippets" },
+
+    -- Rust crates
+    { "Saecki/crates.nvim" },
   },
   config = function()
     -- load VSCode-like snippets from plugins (e.g., friendly-snippets)
@@ -43,13 +48,16 @@ return {
           if cmp.visible() then cmp.select_prev_item() end
         end, { "i", "s" }),
         ['<C-Space>'] = cmp.mapping.complete(),
-      }),                      -- sources for autocompletion
+      }),                                     -- sources for autocompletion
       sources = cmp.config.sources({
-        { name = "nvim_lsp" }, -- LSP
-        { name = "luasnip" },  -- snippets
-        { name = "buffer" },   -- text within the current buffer
-        { name = "path" },     -- file system paths
-        { name = 'cmdline' }
+        { name = "path" },                    -- file system paths
+        { name = "nvim_lsp" },                -- LSP
+        { name = 'nvim_lsp_signature_help' }, -- display function signatures with current parameter emphasized
+        { name = 'nvim_lua' },                -- complete neovim's Lua runtime API such vim.lsp.*
+        { name = "luasnip" },                 -- snippets
+        { name = "buffer" },                  -- text within the current buffer
+        { name = 'cmdline' },
+        { name = 'crates' }
       }),
     })
   end

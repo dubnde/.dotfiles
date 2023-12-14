@@ -14,13 +14,24 @@ return {
         -- Add languages to be installed here that you want installed for treesitter
         ensure_installed = {
           'c',
+          'cmake',
           'cpp',
+          'dockerfile',
+          "json",
+          "json5",
+          "jsonc",
           'lua',
+          "markdown",
+          "markdown_inline",
           'python',
+          "ninja",
+          'ron',
+          "rst",
           'rust',
           'toml',
           'vimdoc',
-          'vim'
+          'vim',
+          'yaml',
         },
         auto_install = true,
         highlight = {
