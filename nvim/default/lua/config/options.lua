@@ -1,3 +1,4 @@
+local g = vim.g
 local opt = vim.opt
 local wo = vim.wo
 
@@ -89,5 +90,14 @@ wo.foldmethod = 'expr'
 -- wo.foldcolumn = "auto"
 
 -- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+
+if g.neovide then
+  opt.linespace = 0
+  g.neovide_scale_factor = 1.0
+  g.neovide_padding_top = 0
+  g.neovide_padding_bottom = 0
+  g.neovide_padding_right = 0
+  g.neovide_padding_left = 0
+end

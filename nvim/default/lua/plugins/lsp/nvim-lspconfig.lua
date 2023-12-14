@@ -1,8 +1,8 @@
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
+    'folke/which-key.nvim',
     {
-      'folke/which-key.nvim',
       'williamboman/mason.nvim',
       keys = {
         { "<leader>mm", "<cmd>Mason<cr>", desc = "Mason" }
