@@ -12,7 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("helpers.utils")
+require('helpers.utils')
 
 -- Use a protected call so we don't error out on first use
 local lazy = prequire('lazy')
@@ -23,7 +23,7 @@ end
 -- Load plugins from specifications
 local opts = {
   install = {
-    colorscheme = { "catppuccin" },
+    colorscheme = { 'catppuccin' },
   },
   performance = {
     cache = {
@@ -59,6 +59,8 @@ local plugins = {
   { import = 'plugins.explorer' },
   { import = 'plugins.cmp' },
   { import = 'plugins.lsp' },
+  { import = 'plugins.lint' },
+  { import = 'plugins.format' },
   { import = 'plugins.lang' },
   { import = 'plugins.terminal' },
 }

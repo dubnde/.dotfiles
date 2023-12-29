@@ -5,8 +5,8 @@ return {
     {
       'williamboman/mason.nvim',
       keys = {
-        { "<leader>mm", "<cmd>Mason<cr>", desc = "Mason" }
-      }
+        { '<leader>mm', '<cmd>Mason<cr>', desc = 'Mason' },
+      },
     },
     { 'williamboman/mason-lspconfig.nvim' },
     { 'hrsh7th/cmp-nvim-lsp' },
@@ -14,10 +14,10 @@ return {
     -- Noevim Development
     { 'folke/neodev.nvim' },
     {
-      "folke/neoconf.nvim",
-      cmd = "Neoconf",
+      'folke/neoconf.nvim',
+      cmd = 'Neoconf',
       config = false,
-      dependencies = { "nvim-lspconfig" }
+      dependencies = { 'nvim-lspconfig' },
     },
   },
   config = function()
@@ -25,28 +25,14 @@ return {
 
     -- Neodev setup before LSP config
     require('neodev').setup()
-    require("neoconf").setup()
+    require('neoconf').setup()
 
     local lspconfig = require('lspconfig')
-
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      pattern = { '*.lua', '*.rs' },
-      callback = function()
-        vim.lsp.buf.format()
-      end,
-    })
 
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(event)
         local bufnr = event.buf
         local lsp_map = keys.lsp_map
-
-        local lsp_format_buffer = function()
-          vim.lsp.buf.format({ bufnr = bufnr, async = false })
-        end
-
-        -- Create a command `:Format` local to the LSP buffer
-        vim.api.nvim_buf_create_user_command(bufnr, 'Format', lsp_format_buffer, { desc = 'Format buffer' })
 
         lsp_map('<leader>lr', vim.lsp.buf.rename, bufnr, 'Rename symbol')
         lsp_map('<leader>la', vim.lsp.buf.code_action, bufnr, 'Code action')
@@ -63,11 +49,7 @@ return {
         lsp_map('gl', vim.diagnostic.open_float, bufnr, 'Show diagnostic')
         lsp_map('[d', vim.diagnostic.goto_prev, bufnr, 'Previous diagnostic')
         lsp_map(']d', vim.diagnostic.goto_next, bufnr, 'Next diagnostic')
-
-        lsp_map('gq', '<cmd>Format<cr>', bufnr, 'Format')
-        lsp_map('<leader>==', '<cmd>Format<cr>', bufnr, 'Format')
-        lsp_map('<leader>f=', '<cmd>Format<cr>', bufnr, 'Format')
-      end
+      end,
     })
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -83,12 +65,17 @@ return {
     require('mason').setup({})
     require('mason-lspconfig').setup({
       ensure_installed = {
+        'bashls',
         'clangd',
+        'dockerls',
+        'jsonls',
         'lua_ls',
-        "marksman",
-        'rust_analyzer'
+        'marksman',
+        'rust_analyzer',
+        'taplo',
+        'yamlls',
       },
-      handlers = { default_setup }
+      handlers = { default_setup },
     })
-  end
+  end,
 }
